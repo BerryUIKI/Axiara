@@ -1,8 +1,9 @@
 <p align="center">
-  <img src="assets/axiara-logo.svg" alt="Axiara" width="120" />
+  <picture>
+    <source media="(prefers-color-scheme: dark)" srcset="assets/axiara-lockup-dark.svg" />
+    <img src="assets/axiara-lockup.svg" alt="Axiara" width="240" />
+  </picture>
 </p>
-
-<h1 align="center">Axiara — 에이전트 견적 코어</h1>
 
 <p align="center">
   <strong>멀티 에이전트 견적 코어</strong> — 자동화된 원가 계산과 실시간 시장 가격 인텔리전스. LangGraph 기반.

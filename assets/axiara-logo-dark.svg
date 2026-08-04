@@ -3,12 +3,12 @@
   <desc id="axiaraDesc">An ascending market-price curve behind a diamond-shaped valuation core, surrounded by four agent nodes.</desc>
   <defs>
     <linearGradient id="ax-core" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" stop-color="#4F46E5"/>
-      <stop offset="100%" stop-color="#7C3AED"/>
+      <stop offset="0%" stop-color="#818CF8"/>
+      <stop offset="100%" stop-color="#A78BFA"/>
     </linearGradient>
     <linearGradient id="ax-line" x1="0%" y1="100%" x2="100%" y2="0%">
-      <stop offset="0%" stop-color="#14B8A6"/>
-      <stop offset="100%" stop-color="#6366F1"/>
+      <stop offset="0%" stop-color="#2DD4BF"/>
+      <stop offset="100%" stop-color="#818CF8"/>
     </linearGradient>
   </defs>
 
@@ -22,7 +22,7 @@
         fill="url(#ax-core)" transform="rotate(45 60 60)"/>
 
   <!-- Four agent nodes: archive / query / quote / review -->
-  <g fill="#4338CA">
+  <g fill="#A5B4FC">
     <circle cx="60" cy="10" r="5"/>
     <circle cx="110" cy="60" r="5"/>
     <circle cx="60" cy="110" r="5"/>

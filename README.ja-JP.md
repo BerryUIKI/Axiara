@@ -1,8 +1,9 @@
 <p align="center">
-  <img src="assets/axiara-logo.svg" alt="Axiara" width="120" />
+  <picture>
+    <source media="(prefers-color-scheme: dark)" srcset="assets/axiara-lockup-dark.svg" />
+    <img src="assets/axiara-lockup.svg" alt="Axiara" width="240" />
+  </picture>
 </p>
-
-<h1 align="center">Axiara — エージェント見積もりコア</h1>
 
 <p align="center">
   <strong>マルチエージェント見積もりコア</strong> — 自動コスト計算とリアルタイム市場価格インテリジェンス。LangGraph で構築。

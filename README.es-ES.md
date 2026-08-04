@@ -1,8 +1,9 @@
 <p align="center">
-  <img src="assets/axiara-logo.svg" alt="Axiara" width="120" />
+  <picture>
+    <source media="(prefers-color-scheme: dark)" srcset="assets/axiara-lockup-dark.svg" />
+    <img src="assets/axiara-lockup.svg" alt="Axiara" width="240" />
+  </picture>
 </p>
-
-<h1 align="center">Axiara — Núcleo de cotización para agentes</h1>
 
 <p align="center">
   <strong>Núcleo de valoración multiagente</strong> — cálculo automatizado de costos e inteligencia de precios de mercado en tiempo real, construido con LangGraph.
