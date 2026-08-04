@@ -39,36 +39,6 @@ Axiara 是一个**面向估值的 Agent 工作区**。它为 AI Agent 提供四�
 - **💾 适配任何场景的存储——无需服务器** — 个人：SQLite；团队：CSV 文件 + git 同步（`store/`，Agent 自动维护本地 SQLite 缓存加速查询），或 SQL 服务器（MySQL / MariaDB / PostgreSQL）。
 - **🕐 按需爬取** — 行情在你需要时才刷新，不做盲目定时。
 
-## 🏗️ 架构
-
-```
-                    ┌─────────────────────────────────────────────┐
-                    │                  Axiara                     │
-                    │         AgentWorkspace (LangGraph)          │
-                    └─────────────────────────────────────────────┘
-                                     │
-                ┌────────────────────┼────────────────────┐
-                ▼                    ▼                    ▼
-         ┌───────────┐        ┌───────────┐        ┌───────────┐
-         │  main_db  │        │ learn_db  │        │ market_db │
-         │  官方基准  │        │  学习参考  │        │  行情库   │
-         │ （仅人工  │        │ （AI 训练）│        │（爬虫采集  │
-         │  编辑可写）│        │           │        │  入库前需  │
-         └───────────┘        └───────────┘        │  确认）   │
-                                                   └───────────┘
-```
-
-## 🧰 技术栈
-
-| 层 | 选型 |
-| --- | --- |
-| 语言 | Python 3.12 |
-| API 框架 | FastAPI |
-| Agent 框架 | LangGraph |
-| 调度器 | APScheduler（预留） |
-| 依赖管理 | [uv](https://docs.astral.sh/uv/) |
-| 存储 | 个人：SQLite · 团队：CSV + git 同步（SQLite 缓存）或 SQL 服务器 |
-
 ## 🚀 从这里开始 — 不需要任何技术
 
 你不需要会编程、不用碰命令行、不用懂任何技术。选一种你顺手的方式。
@@ -82,8 +52,8 @@ Axiara 是一个**面向估值的 Agent 工作区**。它为 AI Agent 提供四�
 复制下面代码框里的内容，粘贴给你的 AI 助手（WorkBuddy、Claude、ChatGPT 等）：
 
 ```text
-请帮我使用 Axiara 这个项目：
-1. 通过 git clone https://github.com/BerryUIKI/Axiara.git 获取仓库，然后阅读 AGENTS.md，严格按 docs/init.md 的流程完成初始化——请用简体中文引导我完成设置（存储方式、数据来源）。
+请帮我使用 Axiara 这个项目：git clone https://github.com/BerryUIKI/Axiara.git
+1. 通过 git clone 获取仓库，阅读 AGENTS.md，并严格按 docs/init.md 的流程初始化——请用简体中文引导我完成设置（存储方式、数据来源）。
 2. 初始化完成后，告诉我可以让你做什么。
 ```
 
@@ -103,6 +73,24 @@ Axiara 是一个**面向估值的 Agent 工作区**。它为 AI Agent 提供四�
 ```
 
 无论哪种方式，初始化完成后你都可以直接说："帮我对 XX 出一份报价"——剩下的交给 Agent。
+
+## 🏗️ 架构
+
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="assets/axiara-architecture-dark.svg" />
+  <img src="assets/axiara-architecture.svg" alt="Axiara architecture" width="680" />
+</picture>
+
+## 🧰 技术栈
+
+| 层 | 选型 |
+| --- | --- |
+| 语言 | Python 3.12 |
+| API 框架 | FastAPI |
+| Agent 框架 | LangGraph |
+| 调度器 | APScheduler（预留） |
+| 依赖管理 | [uv](https://docs.astral.sh/uv/) |
+| 存储 | 个人：SQLite · 团队：CSV + git 同步（SQLite 缓存）或 SQL 服务器 |
 
 ## 🧑‍💻 开发者快速开始
 
