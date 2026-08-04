@@ -1,7 +1,7 @@
 <p align="center">
   <picture>
     <source media="(prefers-color-scheme: dark)" srcset="assets/axiara-lockup-dark.svg" />
-    <img src="assets/axiara-lockup.svg" alt="Axiara" width="240" />
+    <img src="assets/axiara-lockup.svg" alt="Axiara" width="320" />
   </picture>
 </p>
 
