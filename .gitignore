@@ -52,3 +52,6 @@ data/tmp/
 
 # Agent workspace runtime (never pushed)
 .workbuddy/
+
+# Axiara runtime data (never committed; the skeleton lives in .data.template/)
+.data/
