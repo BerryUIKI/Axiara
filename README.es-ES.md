@@ -68,9 +68,30 @@ Axiara es un **espacio de trabajo de agentes para valoración**. Ofrece a los ag
 | Framework de agentes | LangGraph |
 | Programador | APScheduler (reservado) |
 | Gestión de dependencias | [uv](https://docs.astral.sh/uv/) |
-| Almacenamiento | SQLite / PostgreSQL / MongoDB (conectable) + CSV |
+| Almacenamiento | Personal: SQLite · Equipo: CSV + sincronización git (caché SQLite) o servidor SQL |
 
-## 🚀 Inicio rápido
+## 🚀 Empieza aquí — no necesitas conocimientos técnicos
+
+No necesitas leer código, tocar un terminal ni entender nada técnico. Elige el método que te resulte más fácil:
+
+### Método 1 — Dale el enlace a tu asistente de IA (lo más fácil)
+Copia este mensaje y pégalo en tu asistente de IA (WorkBuddy, Claude, ChatGPT, ...) :
+
+> Configura este proyecto para mí: https://github.com/BerryUIKI/Axiara
+> 1. Obtén el código e inicialízalo — guíame en español (idioma, almacenamiento, fuente de datos).
+> 2. Cuando esté listo, dime qué puedo pedirte.
+
+Solo tienes que responder a sus preguntas. Eso es todo.
+
+### Método 2 — Descarga los archivos y luego usa un asistente de IA
+1. En esta página, haz clic en el botón verde **Code** → **Download ZIP** (o descarga un archivo de release si está disponible).
+2. Descomprime la carpeta en cualquier lugar de tu ordenador.
+3. Abre esa carpeta en tu asistente de IA y di: *"Configura este proyecto y guíame."*
+4. Responde a sus preguntas — listo.
+
+Con cualquier método, una vez terminada la inicialización puedes empezar diciendo: *"Hazme una cotización de [artículo]."* — el agente hace el resto.
+
+## 🧑‍💻 Inicio rápido para desarrolladores
 
 > Andamiaje en curso — los siguientes comandos son la experiencia objetivo.
 

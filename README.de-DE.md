@@ -68,9 +68,30 @@ Axiara ist ein **Agenten-Arbeitsbereich für Bewertungen**. Es gibt KI-Agenten v
 | Agenten-Framework | LangGraph |
 | Scheduler | APScheduler (reserviert) |
 | Abhängigkeitsverwaltung | [uv](https://docs.astral.sh/uv/) |
-| Speicherung | SQLite / PostgreSQL / MongoDB (plugable) + CSV |
+| Speicherung | Persönlich: SQLite · Team: CSV + git-Sync (SQLite-Cache) oder SQL-Server |
 
-## 🚀 Schnellstart
+## 🚀 Hier starten — keine technischen Kenntnisse nötig
+
+Sie müssen keinen Code lesen, kein Terminal benutzen und nichts Technisches verstehen. Wählen Sie die Methode, die Ihnen leichter fällt:
+
+### Methode 1 — Den Link an Ihren KI-Assistenten geben (am einfachsten)
+Kopieren Sie diese Nachricht und fügen Sie sie in Ihren KI-Assistenten ein (WorkBuddy, Claude, ChatGPT, ...) :
+
+> Richten Sie dieses Projekt bitte für mich ein: https://github.com/BerryUIKI/Axiara
+> 1. Holen Sie den Code und initialisieren Sie ihn — führen Sie mich auf Deutsch durch die Einrichtung (Sprache, Speicherung, Datenquelle).
+> 2. Wenn es fertig ist, sagen Sie mir, was ich Sie fragen kann.
+
+Danach beantworten Sie einfach die Fragen. Das war's.
+
+### Methode 2 — Dateien herunterladen und dann einen KI-Assistenten nutzen
+1. Klicken Sie auf dieser Seite auf den grünen **Code**-Button → **Download ZIP** (oder laden Sie ein Release-Archiv herunter, falls verfügbar).
+2. Entpacken Sie den Ordner irgendwo auf Ihrem Computer.
+3. Öffnen Sie den Ordner in Ihrem KI-Assistenten und sagen Sie: *"Richten Sie dieses Projekt ein und führen Sie mich durch die Einrichtung."*
+4. Beantworten Sie die Fragen — fertig.
+
+Egal welche Methode: Sobald die Einrichtung abgeschlossen ist, können Sie z. B. sagen: *"Erstellen Sie mir ein Angebot für [Artikel]."* — den Rest erledigt der Agent.
+
+## 🧑‍💻 Schnellstart für Entwickler
 
 > Gerüstbau im Gange — die folgenden Befehle sind die Zielerfahrung.
 
