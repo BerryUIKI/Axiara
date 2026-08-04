@@ -37,4 +37,4 @@ jobs:
             --title "Axiara v${{ steps.ver.outputs.version }}" \
             --notes "Automated release from main (${{ github.sha }})
 
-GitHub automatically attaches source archives (zip / tar.gz) to this release."
+          GitHub automatically attaches source archives (zip / tar.gz) to this release."
