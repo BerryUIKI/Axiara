@@ -80,9 +80,10 @@ Axiara 是一个**面向估值的 Agent 工作区**。它为 AI Agent 提供四�
 复制下面代码框里的内容，粘贴给你的 AI 助手（WorkBuddy、Claude、ChatGPT 等）：
 
 ```text
-请帮我使用 Axiara 这个项目：https://github.com/BerryUIKI/Axiara
-1. 获取代码，阅读 AGENTS.md，并严格按 docs/init.md 的流程初始化——请用简体中文引导我完成设置（存储方式、数据来源）。
-2. 初始化完成后，告诉我可以让你做什么。
+请帮我使用 Axiara 这个项目：
+1. 先安装 Git（如果环境里还没有），然后执行 git clone https://github.com/BerryUIKI/Axiara.git 获取代码。
+2. 阅读 AGENTS.md，严格按 docs/init.md 的流程完成初始化——请用简体中文引导我完成设置（存储方式、数据来源）。
+3. 初始化完成后，告诉我可以让你做什么。
 ```
 
 然后按它的问题回答即可，就这么简单。
