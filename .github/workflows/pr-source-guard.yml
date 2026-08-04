@@ -1,0 +1,29 @@
+name: pr-source-guard
+
+on:
+  pull_request:
+    types: [opened, synchronize, reopened]
+    branches: [main]
+  workflow_dispatch:
+
+jobs:
+  pr-source-guard:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Verify PR source branch
+        env:
+          HEAD: ${{ github.head_ref }}
+        run: |
+          if [ -z "$HEAD" ]; then
+            echo "OK: workflow_dispatch run (no PR context), skipping guard"
+            exit 0
+          fi
+          case "$HEAD" in
+            dev|hotfix/*)
+              echo "OK: PR source branch '$HEAD' is allowed (dev or hotfix/*)"
+              ;;
+            *)
+              echo "::error::PRs to main must come from dev or hotfix/*, got '$HEAD'"
+              exit 1
+              ;;
+          esac
