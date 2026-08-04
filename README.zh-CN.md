@@ -77,13 +77,14 @@ Axiara 是一个**面向估值的 Agent 工作区**。它为 AI Agent 提供四�
 > 把 Axiara 相关的所有文件都放在这个文件夹里，避免文件乱放丢失。
 
 ### 方式一、把链接交给 AI Agents（最简单）
+> 💡 前提：需要设备上装有 **Git**（免费软件，[点击这里下载安装](https://git-scm.com/downloads)）。不想装 Git 的话，请用下面的**方式二**。
+
 复制下面代码框里的内容，粘贴给你的 AI 助手（WorkBuddy、Claude、ChatGPT 等）：
 
 ```text
 请帮我使用 Axiara 这个项目：
-1. 先安装 Git（如果环境里还没有），然后执行 git clone https://github.com/BerryUIKI/Axiara.git 获取代码。
-2. 阅读 AGENTS.md，严格按 docs/init.md 的流程完成初始化——请用简体中文引导我完成设置（存储方式、数据来源）。
-3. 初始化完成后，告诉我可以让你做什么。
+1. 通过 git clone https://github.com/BerryUIKI/Axiara.git 获取仓库，然后阅读 AGENTS.md，严格按 docs/init.md 的流程完成初始化——请用简体中文引导我完成设置（存储方式、数据来源）。
+2. 初始化完成后，告诉我可以让你做什么。
 ```
 
 然后按它的问题回答即可，就这么简单。
