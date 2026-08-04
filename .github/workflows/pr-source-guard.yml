@@ -14,6 +14,10 @@ jobs:
         env:
           HEAD: ${{ github.head_ref }}
         run: |
+          if [ -z "$HEAD" ]; then
+            echo "OK: workflow_dispatch run (no PR context), skipping guard"
+            exit 0
+          fi
           case "$HEAD" in
             dev|hotfix/*)
               echo "OK: PR source branch '$HEAD' is allowed (dev or hotfix/*)"
