@@ -16,6 +16,7 @@ You are operating in **Axiara**, a multi-agent valuation workspace: a costing en
 | Do | Don't |
 | --- | --- |
 | Read `data/main/` as the authoritative baseline | Never write or overwrite `data/main/` — human-only |
+| Ensure `.data/` is initialized (ask the user per `docs/init.md`, then run `scripts/init-data.sh` with their answers) before any business operation | Never start quoting / querying before initialization is complete |
 | Detect official-baseline changes (checksum manifest + git status); recover from git/snapshots; audit in `ledger/` | Never silently continue after an unexpected baseline change — report the diff and confirm with the user |
 | Write to `data/learn/` / `data/market/` per the permission model | Never hand-edit `store/` — it is git-managed |
 | Wipe `cache/` freely | Never delete `local_config/` or commit its contents |

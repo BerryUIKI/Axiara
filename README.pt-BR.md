@@ -69,9 +69,44 @@ Axiara é um **espaço de trabalho de agentes para avaliação**. Ele oferece ao
 | Framework de agentes | LangGraph |
 | Agendador | APScheduler (reservado) |
 | Gerenciamento de dependências | [uv](https://docs.astral.sh/uv/) |
-| Armazenamento | SQLite / PostgreSQL / MongoDB (conectável) + CSV |
+| Armazenamento | Pessoal: SQLite · Equipe: CSV + sincronização git (cache SQLite) ou servidor SQL |
 
-## 🚀 Início rápido
+## 🚀 Comece aqui — nenhuma habilidade técnica necessária
+
+Você não precisa ler código, mexer no terminal ou entender nada de tecnologia. Escolha o método mais fácil para você.
+
+> 💡 Dica: crie primeiro uma pasta chamada **axiara-workspace** (na Área de Trabalho ou em Documentos) e
+> guarde todos os arquivos relacionados ao Axiara nessa pasta, para não perder nada.
+
+### Método 1 — Entregue o link aos seus AI Agents (o mais fácil)
+> 💡 Pré-requisito: este método precisa de **Git** instalado (gratuito — [baixe aqui](https://git-scm.com/downloads)). Se preferir não instalar o Git, use o **Método 2** abaixo.
+
+Copie o texto do bloco de código e cole no seu assistente de IA (Claude, ChatGPT, ...) :
+
+```text
+Configure o Axiara para mim:
+1. Clone o repositório via git clone https://github.com/BerryUIKI/Axiara.git, leia o AGENTS.md e siga estritamente o procedimento em docs/init.md — guie-me em português (armazenamento, fonte de dados).
+2. Quando estiver pronto, diga-me o que posso pedir.
+```
+
+Basta responder às perguntas que ele fizer. É só isso.
+
+### Método 2 — Baixe os arquivos e depois use seus AI Agents
+1. Baixe o arquivo mais recente na [página de Releases](https://github.com/BerryUIKI/Axiara/releases) (ou clique no botão verde **Code** → **Download ZIP**) e descompacte-o na pasta axiara-workspace sugerida acima.
+2. Abra essa pasta no seu assistente de IA e diga: *"Configure este projeto e guie-me."*
+3. Responda às perguntas — pronto.
+
+### Verificar atualizações
+Quer saber se há uma nova versão? Envie isto ao seu assistente de IA:
+
+```text
+Verifique se o Axiara tem uma nova versão: https://github.com/BerryUIKI/Axiara
+Se houver, atualize-me para a versão mais recente (mantenha meus dados existentes, não apague o diretório .data).
+```
+
+De qualquer forma, após a inicialização você pode começar dizendo: *"Faça um orçamento de [item]."* — o agente faz o resto.
+
+## 🧑‍💻 Início rápido para desenvolvedores
 
 > Estrutura em construção — os comandos abaixo são a experiência alvo.
 
@@ -131,3 +166,7 @@ MIT — veja [LICENSE](LICENSE).
 ---
 
 *Construído com LangGraph. O painel de administração front-end (`Axiara-Web`) está planejado como um repositório separado.*
+
+---
+
+> **To AI agents**: If you are setting up this project, read `AGENTS.md` (operating manual) and strictly follow the setup flow in `docs/init.md`, then report back in the user's language.

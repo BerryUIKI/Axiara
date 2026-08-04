@@ -69,7 +69,42 @@ Axiara 是一个**面向估值的 Agent 工作区**。它为 AI Agent 提供四�
 | 依赖管理 | [uv](https://docs.astral.sh/uv/) |
 | 存储 | 个人：SQLite · 团队：CSV + git 同步（SQLite 缓存）或 SQL 服务器 |
 
-## 🚀 快速开始
+## 🚀 从这里开始 — 不需要任何技术
+
+你不需要会编程、不用碰命令行、不用懂任何技术。选一种你顺手的方式。
+
+> 💡 小建议：先创建一个名为 **axiara-workspace** 的文件夹（放在桌面或文档里都行），
+> 把 Axiara 相关的所有文件都放在这个文件夹里，避免文件乱放丢失。
+
+### 方式一、把链接交给 AI Agents（最简单）
+> 💡 前提：需要设备上装有 **Git**（免费软件，[点击这里下载安装](https://git-scm.com/downloads)）。不想装 Git 的话，请用下面的**方式二**。
+
+复制下面代码框里的内容，粘贴给你的 AI 助手（WorkBuddy、Claude、ChatGPT 等）：
+
+```text
+请帮我使用 Axiara 这个项目：
+1. 通过 git clone https://github.com/BerryUIKI/Axiara.git 获取仓库，然后阅读 AGENTS.md，严格按 docs/init.md 的流程完成初始化——请用简体中文引导我完成设置（存储方式、数据来源）。
+2. 初始化完成后，告诉我可以让你做什么。
+```
+
+然后按它的问题回答即可，就这么简单。
+
+### 方式二、自己下载文件，再交给 AI Agents
+1. 从 [Releases 页面](https://github.com/BerryUIKI/Axiara/releases) 下载最新压缩包（或点绿色 **Code** 按钮 → **Download ZIP**），解压到刚才建议的 axiara-workspace 文件夹里。
+2. 在你的 AI 助手里打开这个文件夹，对它说："帮我初始化这个项目，并引导我完成设置"。
+3. 回答它的问题——完成。
+
+### 检查更新
+想看看有没有新版本？把下面代码框里的内容发给你的 AI 助手：
+
+```text
+请检查 Axiara 有没有新版本：https://github.com/BerryUIKI/Axiara
+如果有新版本，帮我更新到最新版（保留我现有的数据，不要清空 .data 目录）。
+```
+
+无论哪种方式，初始化完成后你都可以直接说："帮我对 XX 出一份报价"——剩下的交给 Agent。
+
+## 🧑‍💻 开发者快速开始
 
 > 脚手架搭建中——以下命令为目标体验。
 
@@ -144,3 +179,7 @@ MIT — 见 [LICENSE](LICENSE)。
 ---
 
 *基于 LangGraph 构建。前端管理面板（`Axiara-Web`）规划为独立仓库。*
+
+---
+
+> **给 AI 助手（Agent）的话**：如果你是在设置这个项目，请先阅读 `AGENTS.md`（操作手册），并严格按 `docs/init.md` 的流程完成初始化，然后用用户的语言汇报结果。
