@@ -39,36 +39,6 @@ Axiara は、**見積もりに特化したエージェントワークスペー�
 - **💾 プラグ可能なストレージ** — SQLite / PostgreSQL / MongoDB バックエンド + CSV インポート/エクスポート。
 - **🕐 オンデマンドクロール** — 市場データは必要なときに更新。盲目的なスケジュールなし。
 
-## 🏗️ アーキテクチャ
-
-```
-                    ┌─────────────────────────────────────────────┐
-                    │                  Axiara                     │
-                    │         AgentWorkspace (LangGraph)          │
-                    └─────────────────────────────────────────────┘
-                                     │
-                ┌────────────────────┼────────────────────┐
-                ▼                    ▼                    ▼
-         ┌───────────┐        ┌───────────┐        ┌───────────┐
-         │  main_db  │        │ learn_db  │        │ market_db │
-         │  公式基準  │        │  学習参照  │        │  市況庫   │
-         │（手動編集  │        │（AI 学習） │        │（クローラ  │
-         │  のみ書込）│        │           │        │  取込前確認│
-         └───────────┘        └───────────┘        │  必要）   │
-                                                   └───────────┘
-```
-
-## 🧰 技術スタック
-
-| 層 | 選定 |
-| --- | --- |
-| 言語 | Python 3.12 |
-| API フレームワーク | FastAPI |
-| エージェントフレームワーク | LangGraph |
-| スケジューラー | APScheduler（予約） |
-| 依存管理 | [uv](https://docs.astral.sh/uv/) |
-| ストレージ | 個人：SQLite · チーム：CSV + git 同期（SQLite キャッシュ）または SQL サーバー |
-
 ## 🚀 ここから始める — 技術スキルは不要
 
 コードを読む必要も、ターミナルに触れる必要も、技術を理解する必要もありません。やりやすい方法を選んでください。
@@ -82,8 +52,8 @@ Axiara は、**見積もりに特化したエージェントワークスペー�
 下のコードブロックのテキストをコピーして、AI アシスタント（Claude、ChatGPT など）に貼り付けてください：
 
 ```text
-Axiara をセットアップしてください：
-1. git clone https://github.com/BerryUIKI/Axiara.git でリポジトリを取得し、AGENTS.md を読んで、docs/init.md の手順に従って初期化してください——日本語で設定（保存方法・データソース）を案内してください。
+Axiara を使い始めてください：git clone https://github.com/BerryUIKI/Axiara.git
+1. git clone でリポジトリを取得し、AGENTS.md を読んで、docs/init.md の手順に従って初期化してください——日本語で設定（保存方法・データソース）を案内してください。
 2. 準備ができたら、何ができるか教えてください。
 ```
 
@@ -103,6 +73,24 @@ Axiara に新しいバージョンがあるか確認してください：https:/
 ```
 
 どちらの方法でも、初期化が終われば「XX の見積もりを作って」のように直接頼めます——後はエージェントがやってくれます。
+
+## 🏗️ アーキテクチャ
+
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="assets/axiara-architecture-dark.svg" />
+  <img src="assets/axiara-architecture.svg" alt="Axiara architecture" width="680" />
+</picture>
+
+## 🧰 技術スタック
+
+| 層 | 選定 |
+| --- | --- |
+| 言語 | Python 3.12 |
+| API フレームワーク | FastAPI |
+| エージェントフレームワーク | LangGraph |
+| スケジューラー | APScheduler（予約） |
+| 依存管理 | [uv](https://docs.astral.sh/uv/) |
+| ストレージ | 個人：SQLite · チーム：CSV + git 同期（SQLite キャッシュ）または SQL サーバー |
 
 ## 🧑‍💻 開発者向けクイックスタート
 

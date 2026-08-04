@@ -38,38 +38,6 @@ Axiara is an **agent workspace for valuation**. It gives AI agents four well-def
 - **💾 Storage for any setup — no servers needed** — personal: SQLite; team: CSV files synced via git (`store/`, with an auto local SQLite cache for fast queries), or SQL server (MySQL / MariaDB / PostgreSQL).
 - **🕐 On-demand crawling** — market data refreshes when you ask, not on a blind schedule.
 
-## 🏗️ Architecture
-
-```
-                    ┌─────────────────────────────────────────────┐
-                    │                  Axiara                     │
-                    │         AgentWorkspace (LangGraph)          │
-                    └─────────────────────────────────────────────┘
-                                     │
-                ┌────────────────────┼────────────────────┐
-                ▼                    ▼                    ▼
-         ┌───────────┐        ┌───────────┐        ┌───────────┐
-         │  main_db  │        │ learn_db  │        │ market_db │
-         │  Official │        │  Learned  │        │  Crawled  │
-         │  Baseline │        │ Reference │        │   Prices  │
-         │ (manual   │        │ (AI       │        │ (crawler  │
-         │  edit     │        │  training)│        │  + confirm│
-         │  ONLY)    │        │           │        │   before  │
-         └───────────┘        └───────────┘        │   insert) │
-                                                   └───────────┘
-```
-
-## 🧰 Tech Stack
-
-| Layer | Choice |
-| --- | --- |
-| Language | Python 3.12 |
-| API Framework | FastAPI |
-| Agent Framework | LangGraph |
-| Scheduler | APScheduler (reserved) |
-| Dependency Management | [uv](https://docs.astral.sh/uv/) |
-| Storage | Personal: SQLite · Team: CSV + git sync (SQLite cache) or SQL server |
-
 ## 🚀 Start here — no tech skills needed
 
 You don't need to read code, touch a terminal, or understand anything technical. Pick whichever way is easier.
@@ -103,6 +71,24 @@ If there is one, update me to the latest version (keep my existing data, don't w
 ```
 
 Either way, once setup finishes you can start with something like: *"Make me a quotation for [item]."* — the agent does the rest.
+
+## 🏗️ Architecture
+
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="assets/axiara-architecture-dark.svg" />
+  <img src="assets/axiara-architecture.svg" alt="Axiara architecture" width="680" />
+</picture>
+
+## 🧰 Tech Stack
+
+| Layer | Choice |
+| --- | --- |
+| Language | Python 3.12 |
+| API Framework | FastAPI |
+| Agent Framework | LangGraph |
+| Scheduler | APScheduler (reserved) |
+| Dependency Management | [uv](https://docs.astral.sh/uv/) |
+| Storage | Personal: SQLite · Team: CSV + git sync (SQLite cache) or SQL server |
 
 ## 🧑‍💻 Developer Quick Start
 

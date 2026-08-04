@@ -39,38 +39,6 @@ Axiara é um **espaço de trabalho de agentes para avaliação**. Ele oferece ao
 - **💾 Armazenamento conectável** — backends SQLite / PostgreSQL / MongoDB, além de importação/exportação CSV.
 - **🕐 Rastreamento sob demanda** — os dados de mercado são atualizados quando você pede, não em um cronograma cego.
 
-## 🏗️ Arquitetura
-
-```
-                    ┌─────────────────────────────────────────────┐
-                    │                  Axiara                     │
-                    │         AgentWorkspace (LangGraph)          │
-                    └─────────────────────────────────────────────┘
-                                     │
-                ┌────────────────────┼────────────────────┐
-                ▼                    ▼                    ▼
-         ┌───────────┐        ┌───────────┐        ┌───────────┐
-         │  main_db  │        │ learn_db  │        │ market_db │
-         │  Base de  │        │ Referência│        │ Preços    │
-         │  preços   │        │ aprendida │        │ rastreados│
-         │  oficial  │        │ (IA)      │        │ (crawler +│
-         │ (só edição│        │           │        │  confirmar│
-         │  manual)  │        │           │        │  antes de │
-         └───────────┘        └───────────┘        │  inserir) │
-                                                   └───────────┘
-```
-
-## 🧰 Pilha tecnológica
-
-| Camada | Escolha |
-| --- | --- |
-| Linguagem | Python 3.12 |
-| Framework API | FastAPI |
-| Framework de agentes | LangGraph |
-| Agendador | APScheduler (reservado) |
-| Gerenciamento de dependências | [uv](https://docs.astral.sh/uv/) |
-| Armazenamento | Pessoal: SQLite · Equipe: CSV + sincronização git (cache SQLite) ou servidor SQL |
-
 ## 🚀 Comece aqui — nenhuma habilidade técnica necessária
 
 Você não precisa ler código, mexer no terminal ou entender nada de tecnologia. Escolha o método mais fácil para você.
@@ -84,8 +52,8 @@ Você não precisa ler código, mexer no terminal ou entender nada de tecnologia
 Copie o texto do bloco de código e cole no seu assistente de IA (Claude, ChatGPT, ...) :
 
 ```text
-Configure o Axiara para mim:
-1. Clone o repositório via git clone https://github.com/BerryUIKI/Axiara.git, leia o AGENTS.md e siga estritamente o procedimento em docs/init.md — guie-me em português (armazenamento, fonte de dados).
+Set up Axiara for me: git clone https://github.com/BerryUIKI/Axiara.git
+1. Clone the repo via git clone, leia o AGENTS.md e siga estritamente o procedimento em docs/init.md — guie-me em português (armazenamento, fonte de dados).
 2. Quando estiver pronto, diga-me o que posso pedir.
 ```
 
@@ -105,6 +73,24 @@ Se houver, atualize-me para a versão mais recente (mantenha meus dados existent
 ```
 
 De qualquer forma, após a inicialização você pode começar dizendo: *"Faça um orçamento de [item]."* — o agente faz o resto.
+
+## 🏗️ Arquitetura
+
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="assets/axiara-architecture-dark.svg" />
+  <img src="assets/axiara-architecture.svg" alt="Axiara architecture" width="680" />
+</picture>
+
+## 🧰 Pilha tecnológica
+
+| Camada | Escolha |
+| --- | --- |
+| Linguagem | Python 3.12 |
+| Framework API | FastAPI |
+| Framework de agentes | LangGraph |
+| Agendador | APScheduler (reservado) |
+| Gerenciamento de dependências | [uv](https://docs.astral.sh/uv/) |
+| Armazenamento | Pessoal: SQLite · Equipe: CSV + sincronização git (cache SQLite) ou servidor SQL |
 
 ## 🧑‍💻 Início rápido para desenvolvedores
 

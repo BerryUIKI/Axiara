@@ -39,36 +39,6 @@ Axiara는 **견적 업무를 위한 에이전트 워크스페이스**입니다. 
 - **💾 플러그형 스토리지** — SQLite / PostgreSQL / MongoDB 백엔드 + CSV 가져오기/내보내기.
 - **🕐 온디맨드 크롤링** — 시장 데이터는 필요할 때 갱신. 무작정 스케줄링하지 않음.
 
-## 🏗️ 아키텍처
-
-```
-                    ┌─────────────────────────────────────────────┐
-                    │                  Axiara                     │
-                    │         AgentWorkspace (LangGraph)          │
-                    └─────────────────────────────────────────────┘
-                                     │
-                ┌────────────────────┼────────────────────┐
-                ▼                    ▼                    ▼
-         ┌───────────┐        ┌───────────┐        ┌───────────┐
-         │  main_db  │        │ learn_db  │        │ market_db │
-         │  공식 기준 │        │  학습 참조 │        │  시세 DB  │
-         │(수동 편집  │        │ (AI 학습) │        │(크롤러 수집│
-         │ 만 쓰기)  │        │           │        │  후 확인   │
-         └───────────┘        └───────────┘        │  필요)    │
-                                                   └───────────┘
-```
-
-## 🧰 기술 스택
-
-| 계층 | 선택 |
-| --- | --- |
-| 언어 | Python 3.12 |
-| API 프레임워크 | FastAPI |
-| 에이전트 프레임워크 | LangGraph |
-| 스케줄러 | APScheduler(예약) |
-| 의존성 관리 | [uv](https://docs.astral.sh/uv/) |
-| 스토리지 | 개인: SQLite · 팀: CSV + git 동기화(SQLite 캐시) 또는 SQL 서버 |
-
 ## 🚀 여기서 시작 — 기술 스킬 불필요
 
 코드를 읽을 필요도, 터미널을 만질 필요도, 기술을 이해할 필요도 없습니다. 편한 방법을 선택하세요.
@@ -82,8 +52,8 @@ Axiara는 **견적 업무를 위한 에이전트 워크스페이스**입니다. 
 아래 코드 블록의 텍스트를 복사해서 AI 어시스턴트(Claude, ChatGPT 등)에 붙여넣으세요:
 
 ```text
-Axiara를 설정해 주세요:
-1. git clone https://github.com/BerryUIKI/Axiara.git 으로 저장소를 가져온 다음, AGENTS.md를 읽고 docs/init.md의 절차에 따라 초기화하세요 — 한국어로 설정(저장 방식, 데이터 소스)을 안내해 주세요.
+Axiara를 설정해 주세요: git clone https://github.com/BerryUIKI/Axiara.git
+1. git clone으로 저장소를 가져온 다음, AGENTS.md를 읽고 docs/init.md의 절차에 따라 초기화하세요 — 한국어로 설정(저장 방식, 데이터 소스)을 안내해 주세요.
 2. 준비가 끝나면 무엇을 할 수 있는지 알려주세요.
 ```
 
@@ -103,6 +73,24 @@ Axiara에 새 버전이 있는지 확인해 주세요: https://github.com/BerryU
 ```
 
 어느 방법이든 초기화가 끝나면 "XX에 대한 견적을 만들어 줘"라고 바로 말할 수 있습니다 — 나머지는 에이전트가 처리합니다.
+
+## 🏗️ 아키텍처
+
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="assets/axiara-architecture-dark.svg" />
+  <img src="assets/axiara-architecture.svg" alt="Axiara architecture" width="680" />
+</picture>
+
+## 🧰 기술 스택
+
+| 계층 | 선택 |
+| --- | --- |
+| 언어 | Python 3.12 |
+| API 프레임워크 | FastAPI |
+| 에이전트 프레임워크 | LangGraph |
+| 스케줄러 | APScheduler(예약) |
+| 의존성 관리 | [uv](https://docs.astral.sh/uv/) |
+| 스토리지 | 개인: SQLite · 팀: CSV + git 동기화(SQLite 캐시) 또는 SQL 서버 |
 
 ## 🧑‍💻 개발자 빠른 시작
 
