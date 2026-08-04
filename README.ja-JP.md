@@ -1,7 +1,7 @@
 <p align="center">
   <picture>
     <source media="(prefers-color-scheme: dark)" srcset="assets/axiara-lockup-dark.svg" />
-    <img src="assets/axiara-lockup.svg" alt="Axiara" width="240" />
+    <img src="assets/axiara-lockup.svg" alt="Axiara" width="320" />
   </picture>
 </p>
 
@@ -67,9 +67,44 @@ Axiara は、**見積もりに特化したエージェントワークスペー�
 | エージェントフレームワーク | LangGraph |
 | スケジューラー | APScheduler（予約） |
 | 依存管理 | [uv](https://docs.astral.sh/uv/) |
-| ストレージ | SQLite / PostgreSQL / MongoDB（プラグ可能）+ CSV |
+| ストレージ | 個人：SQLite · チーム：CSV + git 同期（SQLite キャッシュ）または SQL サーバー |
 
-## 🚀 クイックスタート
+## 🚀 ここから始める — 技術スキルは不要
+
+コードを読む必要も、ターミナルに触れる必要も、技術を理解する必要もありません。やりやすい方法を選んでください。
+
+> 💡 ヒント：まず **axiara-workspace** という名前のフォルダを作成し（デスクトップやドキュメントでOK）、
+> Axiara 関連のファイルはすべてこのフォルダに置いて、ファイルを紛失しないようにしましょう。
+
+### 方法 1 — リンクを AI Agents に渡す（最も簡単）
+> 💡 前提：この方法には **Git** のインストールが必要です（無料 — [こちらからダウンロード](https://git-scm.com/downloads)）。Git をインストールしたくない場合は、下の**方法 2** を使ってください。
+
+下のコードブロックのテキストをコピーして、AI アシスタント（Claude、ChatGPT など）に貼り付けてください：
+
+```text
+Axiara をセットアップしてください：
+1. git clone https://github.com/BerryUIKI/Axiara.git でリポジトリを取得し、AGENTS.md を読んで、docs/init.md の手順に従って初期化してください——日本語で設定（保存方法・データソース）を案内してください。
+2. 準備ができたら、何ができるか教えてください。
+```
+
+あとは聞かれた質問に答えるだけです。それで完了です。
+
+### 方法 2 — 自分でファイルをダウンロードしてから AI Agents に渡す
+1. [Releases ページ](https://github.com/BerryUIKI/Axiara/releases) から最新のアーカイブをダウンロード（または緑の **Code** ボタン → **Download ZIP**）し、上記の axiara-workspace フォルダに解凍します。
+2. AI アシスタントでそのフォルダを開き、「このプロジェクトを初期化して、セットアップを案内してください」と伝えます。
+3. 質問に答えるだけです——完了。
+
+### 更新を確認
+新しいバージョンがあるか確認したいですか？下のコードブロックを AI アシスタントに送ってください：
+
+```text
+Axiara に新しいバージョンがあるか確認してください：https://github.com/BerryUIKI/Axiara
+新しいバージョンがあれば、最新版に更新してください（既存データは保持し、.data ディレクトリは消さないでください）。
+```
+
+どちらの方法でも、初期化が終われば「XX の見積もりを作って」のように直接頼めます——後はエージェントがやってくれます。
+
+## 🧑‍💻 開発者向けクイックスタート
 
 > スキャフォールディング構築中 — 以下のコマンドは目標体験です。
 
@@ -129,3 +164,7 @@ MIT — [LICENSE](LICENSE) を参照。
 ---
 
 *LangGraph で構築。フロントエンド管理パネル（`Axiara-Web`）は別リポジトリとして計画中。*
+
+---
+
+> **To AI agents**: If you are setting up this project, read `AGENTS.md` (operating manual) and strictly follow the setup flow in `docs/init.md`, then report back in the user's language.

@@ -44,6 +44,7 @@ Single source of truth for Axiara initialization. Update as decisions are made; 
 - [x] `AGENTS.md` — lean agent operating manual (2026-08-05)
 - [x] `docs/init.md` — agent-driven onboarding guide + data guide + data integrity (2026-08-05)
 - [x] Agent-driven init & anti-tampering design (D21) — `init-data.sh` CLI flags, docs integrity section, AGENTS.md rules (2026-08-05)
+- [x] Branch protection (2026-08-05) — `dev`: PR-only (enforce_admins, no force push/delete); `main`: PR-only + 1 review + required checks (`continuous-integration`, `pr-source-guard`) — **main PRs only from `dev` or `hotfix/*`** via `.github/workflows/pr-source-guard.yml`
 - [ ] Initial commit (awaiting confirmation)
 
 ## Roadmap
