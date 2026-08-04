@@ -1,8 +1,9 @@
 <p align="center">
-  <img src="assets/axiara-logo.svg" alt="Axiara" width="120" />
+  <picture>
+    <source media="(prefers-color-scheme: dark)" srcset="assets/axiara-lockup-dark.svg" />
+    <img src="assets/axiara-lockup.svg" alt="Axiara" width="240" />
+  </picture>
 </p>
-
-<h1 align="center">Axiara — 智能体报价核心</h1>
 
 <p align="center">
   <strong>多智能体估值核心</strong> — 自动化成本核算与实时市场价格情报，基于 LangGraph 构建。
@@ -35,7 +36,7 @@ Axiara 是一个**面向估值的 Agent 工作区**。它为 AI Agent 提供四�
 - **📊 批量报价（模式三）** — Excel/物料清单回填并自动识别列位，附智能报价：约束协商（默认约束 + 项目约束），无约束时给出低/中/高三档方案。
 - **✅ 复核（模式四）** — 用官方基准与市场数据交叉校验用户报价表，标记异常并给出调整建议。
 - **🧩 模板自适应报价** — 内置默认报价单模板，遇到用户自有模板时动态适配（开源 / Fork 友好）。
-- **💾 可插拔存储** — SQLite / PostgreSQL / MongoDB 后端，外加 CSV 导入导出。
+- **💾 适配任何场景的存储——无需服务器** — 个人：SQLite；团队：CSV 文件 + git 同步（`store/`，Agent 自动维护本地 SQLite 缓存加速查询），或 SQL 服务器（MySQL / MariaDB / PostgreSQL）。
 - **🕐 按需爬取** — 行情在你需要时才刷新，不做盲目定时。
 
 ## 🏗️ 架构
@@ -66,7 +67,7 @@ Axiara 是一个**面向估值的 Agent 工作区**。它为 AI Agent 提供四�
 | Agent 框架 | LangGraph |
 | 调度器 | APScheduler（预留） |
 | 依赖管理 | [uv](https://docs.astral.sh/uv/) |
-| 存储 | SQLite / PostgreSQL / MongoDB（可插拔）+ CSV |
+| 存储 | 个人：SQLite · 团队：CSV + git 同步（SQLite 缓存）或 SQL 服务器 |
 
 ## 🚀 快速开始
 
@@ -76,12 +77,25 @@ Axiara 是一个**面向估值的 Agent 工作区**。它为 AI Agent 提供四�
 # 安装依赖
 uv sync
 
+# 初始化运行时数据目录（.data/ — store、cache、ledger、db_dump、local_config）
+bash scripts/init-data.sh
+
 # 启动工作区（交互式 Agent 壳）
 uv run axiara
 
 # 启动 REST API
 uv run uvicorn axiara.api.main:app --reload
 ```
+
+### 首次使用（运行时数据目录）
+
+`.data/` 已被 gitignore，clone 下来后不存在，先初始化一次即可——或者直接启动应用，启动时会自动补齐：
+
+```bash
+bash scripts/init-data.sh
+```
+
+该命令创建五个运行时目录并播种私有配置（`.data/local_config/config`，之后不再覆盖）；在该配置里填 `data_repo.url` 可同步团队数据仓库到 `store/`。完整指南见 [`docs/init.md`](docs/init.md)。
 
 ## 📁 仓库结构
 
@@ -96,6 +110,8 @@ Axiara/
 ├── skills/          # Agent 技能包（归档/查询/报价/复核）
 ├── output/          # 产物输出（报价单、复核报告）
 ├── docs/            # 设计与架构文档
+├── scripts/         # 运维脚本（init-data.sh）
+├── .data.template/  # 运行时数据骨架 → 生成 .data/（gitignore，见其 README）
 └── src/             # 核心库
 ```
 
@@ -108,7 +124,7 @@ Axiara/
 
 - [x] 工作区初始化与设计决策
 - [ ] 包脚手架（`uv init`、`src/` 布局）
-- [ ] 存储层（可插拔后端 + CSV）
+- [ ] 存储层（文件优先：CSV + git 同步、SQLite 缓存、SQL 选项）
 - [ ] 成本核算引擎（多维成本模型）
 - [ ] 价格抓取 Agent（LangGraph 爬取 + 规范化）
 - [ ] 任务调度器（APScheduler，按需）

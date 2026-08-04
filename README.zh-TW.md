@@ -1,8 +1,9 @@
 <p align="center">
-  <img src="assets/axiara-logo.svg" alt="Axiara" width="120" />
+  <picture>
+    <source media="(prefers-color-scheme: dark)" srcset="assets/axiara-lockup-dark.svg" />
+    <img src="assets/axiara-lockup.svg" alt="Axiara" width="240" />
+  </picture>
 </p>
-
-<h1 align="center">Axiara — 智能體報價核心</h1>
 
 <p align="center">
   <strong>多智能體估值核心</strong> — 自動化成本核算與即時市場價格情報，基於 LangGraph 建構。

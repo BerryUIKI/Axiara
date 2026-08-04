@@ -1,8 +1,9 @@
 <p align="center">
-  <img src="assets/axiara-logo.svg" alt="Axiara" width="120" />
+  <picture>
+    <source media="(prefers-color-scheme: dark)" srcset="assets/axiara-lockup-dark.svg" />
+    <img src="assets/axiara-lockup.svg" alt="Axiara" width="240" />
+  </picture>
 </p>
-
-<h1 align="center">Axiara — Агентное ядро котировок</h1>
 
 <p align="center">
   <strong>Мультиагентное ядро оценки</strong> — автоматизированный расчёт себестоимости и аналитика рыночных цен в реальном времени, построено на LangGraph.

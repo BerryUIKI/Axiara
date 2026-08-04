@@ -1,8 +1,9 @@
 <p align="center">
-  <img src="assets/axiara-logo.svg" alt="Axiara" width="120" />
+  <picture>
+    <source media="(prefers-color-scheme: dark)" srcset="assets/axiara-lockup-dark.svg" />
+    <img src="assets/axiara-lockup.svg" alt="Axiara" width="240" />
+  </picture>
 </p>
-
-<h1 align="center">Axiara — Agent Quotation Core</h1>
 
 <p align="center">
   <strong>Multi-agent valuation core</strong> — automated cost calculation and real-time market price intelligence, built on LangGraph.
@@ -34,7 +35,7 @@ Axiara is an **agent workspace for valuation**. It gives AI agents four well-def
 - **📊 Batch quote (Mode 3)** — Excel/BOM backfill with auto column detection, plus smart quotation with constraint negotiation (default + project constraints; three-tier low/mid/high options when none given).
 - **✅ Review (Mode 4)** — cross-validate user quote tables against the official baseline and market data; flag anomalies and suggest adjustments.
 - **🧩 Template-adaptive quoting** — ships a default quote template, adapts on the fly to user-provided templates (open-source / fork-friendly).
-- **💾 Pluggable storage** — SQLite / PostgreSQL / MongoDB backends, plus CSV import/export.
+- **💾 Storage for any setup — no servers needed** — personal: SQLite; team: CSV files synced via git (`store/`, with an auto local SQLite cache for fast queries), or SQL server (MySQL / MariaDB / PostgreSQL).
 - **🕐 On-demand crawling** — market data refreshes when you ask, not on a blind schedule.
 
 ## 🏗️ Architecture
@@ -67,7 +68,7 @@ Axiara is an **agent workspace for valuation**. It gives AI agents four well-def
 | Agent Framework | LangGraph |
 | Scheduler | APScheduler (reserved) |
 | Dependency Management | [uv](https://docs.astral.sh/uv/) |
-| Storage | SQLite / PostgreSQL / MongoDB (pluggable) + CSV |
+| Storage | Personal: SQLite · Team: CSV + git sync (SQLite cache) or SQL server |
 
 ## 🚀 Quick Start
 
@@ -77,12 +78,25 @@ Axiara is an **agent workspace for valuation**. It gives AI agents four well-def
 # Install dependencies
 uv sync
 
+# Bootstrap the runtime data dir (.data/ — store, cache, ledger, db_dump, local_config)
+bash scripts/init-data.sh
+
 # Run the workspace (interactive agent shell)
 uv run axiara
 
 # Start the REST API
 uv run uvicorn axiara.api.main:app --reload
 ```
+
+### First-time setup (runtime data)
+
+`.data/` is gitignored, so it does not exist right after cloning. Bootstrap it once — or just start the app, which auto-creates it:
+
+```bash
+bash scripts/init-data.sh
+```
+
+Creates the five runtime dirs and seeds your private config (`.data/local_config/config`, never overwritten); set `data_repo.url` there to sync the team data repo into `store/`. Full guide: [`docs/init.md`](docs/init.md).
 
 ## 📁 Repository Layout
 
@@ -97,6 +111,8 @@ Axiara/
 ├── skills/          # Agent skill packs (archive/query/quote/review)
 ├── output/          # Generated deliverables (quotes, review reports)
 ├── docs/            # Design & architecture docs
+├── scripts/         # Ops scripts (init-data.sh)
+├── .data.template/  # Runtime data skeleton → .data/ (gitignored, see its README)
 └── src/             # Core library
 ```
 
@@ -109,7 +125,7 @@ Axiara/
 
 - [x] Workspace initialization & design decisions
 - [ ] Package scaffolding (`uv init`, `src/` layout)
-- [ ] Storage layer (pluggable backends + CSV)
+- [ ] Storage layer (file-first: CSV + git sync, SQLite cache, SQL option)
 - [ ] Costing engine (multi-dimensional cost model)
 - [ ] Price fetch agent (LangGraph crawl + normalize)
 - [ ] Task scheduler (APScheduler, on-demand)
