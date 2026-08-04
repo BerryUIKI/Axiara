@@ -1,0 +1,10 @@
+# Axiara price list template — official baseline (data/main/)
+# Copy this file to price-list.csv and fill it in with Excel / WPS / Numbers.
+# Then hand it to the Agent: "import price-list.csv into data/main/"
+# Rules:
+#   - lines starting with # are comments, ignored on import
+#   - keep the header row exactly as-is (column names are recognized)
+#   - unit_price must be a number; currency uses ISO codes (CNY / USD / EUR / JPY ...)
+name,spec,unit,unit_price,currency,effective_date,note
+示例品名-铜线,1.5mm²,米,12.50,CNY,2026-08-01,示例行可删除
+示例品名-铝材,6061-T6,千克,23.80,CNY,2026-08-01,示例行可删除
