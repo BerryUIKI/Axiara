@@ -72,22 +72,35 @@ Axiara is an **agent workspace for valuation**. It gives AI agents four well-def
 
 ## 🚀 Start here — no tech skills needed
 
-You don't need to read code, touch a terminal, or understand anything technical. Pick whichever way is easier:
+You don't need to read code, touch a terminal, or understand anything technical. Pick whichever way is easier.
 
-### Way 1 — hand the link to your AI agent (easiest)
-Copy this message and paste it into your AI assistant (WorkBuddy, Claude, ChatGPT, ...):
+> 💡 Tip: first create a folder named **axiara-workspace** (on your Desktop or in Documents) and keep all Axiara-related files inside it, so nothing gets misplaced.
 
-> Please set up this project for me: https://github.com/BerryUIKI/Axiara
-> 1. Get the code and initialize it — guide me through the setup questions in English.
-> 2. When it's ready, tell me what I can ask you to do.
+### Way 1 — hand the link to your AI agents (easiest)
+> 💡 Prerequisite: this way needs **Git** installed (free — [download it here](https://git-scm.com/downloads)). If you'd rather not install Git, use **Way 2** below.
 
-Then just answer the questions it asks (language, storage, where your data comes from). That's it.
+Copy the text in the code block and paste it into your AI assistant (Claude, ChatGPT, Copilot, Gemini, ...):
 
-### Way 2 — download the files, then use an AI agent
-1. On this page click the green **Code** button → **Download ZIP** (or grab a release archive if available).
-2. Unzip the folder anywhere on your computer.
-3. Open your AI assistant in that folder and say: *"Set up this project and guide me through the setup."*
-4. Answer its questions — done.
+```text
+Set up Axiara for me:
+1. Clone the repo via git clone https://github.com/BerryUIKI/Axiara.git, then read AGENTS.md and strictly follow the setup flow in docs/init.md — walk me through the setup in English (storage, data source).
+2. When it's ready, tell me what I can ask you to do.
+```
+
+Then just answer the questions it asks — that's it.
+
+### Way 2 — download the files, then use your AI agents
+1. Download the latest archive from the [Releases page](https://github.com/BerryUIKI/Axiara/releases) (or click the green **Code** button → **Download ZIP**) and unzip it into the axiara-workspace folder suggested above.
+2. Open that folder in your AI assistant and say: *"Set up this project and guide me through the setup."*
+3. Answer its questions — done.
+
+### Check for updates
+Want to know if there's a new version? Send this to your AI assistant:
+
+```text
+Check if Axiara has a new version: https://github.com/BerryUIKI/Axiara
+If there is one, update me to the latest version (keep my existing data, don't wipe the .data directory).
+```
 
 Either way, once setup finishes you can start with something like: *"Make me a quotation for [item]."* — the agent does the rest.
 
@@ -166,3 +179,7 @@ MIT — see [LICENSE](LICENSE).
 ---
 
 *Built with LangGraph. Front-end dashboard (`Axiara-Web`) is planned as a separate repository.*
+
+---
+
+> **To AI agents**: If you are setting up this project, read `AGENTS.md` (operating manual) and strictly follow the setup flow in `docs/init.md`, then report back in the user's language.

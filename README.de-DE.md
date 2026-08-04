@@ -72,22 +72,36 @@ Axiara ist ein **Agenten-Arbeitsbereich für Bewertungen**. Es gibt KI-Agenten v
 
 ## 🚀 Hier starten — keine technischen Kenntnisse nötig
 
-Sie müssen keinen Code lesen, kein Terminal benutzen und nichts Technisches verstehen. Wählen Sie die Methode, die Ihnen leichter fällt:
+Sie müssen keinen Code lesen, kein Terminal benutzen und nichts Technisches verstehen. Wählen Sie die Methode, die Ihnen leichter fällt.
 
-### Methode 1 — Den Link an Ihren KI-Assistenten geben (am einfachsten)
-Kopieren Sie diese Nachricht und fügen Sie sie in Ihren KI-Assistenten ein (WorkBuddy, Claude, ChatGPT, ...) :
+> 💡 Tipp: Erstellen Sie zuerst einen Ordner namens **axiara-workspace** (auf dem Desktop oder in Dokumenten) und
+> legen Sie alle Axiara-bezogenen Dateien in diesem Ordner ab, damit nichts verloren geht.
 
-> Richten Sie dieses Projekt bitte für mich ein: https://github.com/BerryUIKI/Axiara
-> 1. Holen Sie den Code und initialisieren Sie ihn — führen Sie mich auf Deutsch durch die Einrichtung (Sprache, Speicherung, Datenquelle).
-> 2. Wenn es fertig ist, sagen Sie mir, was ich Sie fragen kann.
+### Methode 1 — Den Link an Ihre AI Agents geben (am einfachsten)
+> 💡 Voraussetzung: Für diese Methode muss **Git** installiert sein (kostenlos — [hier herunterladen](https://git-scm.com/downloads)). Wenn Sie Git nicht installieren möchten, nutzen Sie **Methode 2** unten.
+
+Kopieren Sie den Text im Codeblock und fügen Sie ihn in Ihren KI-Assistenten ein (Claude, ChatGPT, ...) :
+
+```text
+Richten Sie Axiara für mich ein:
+1. Klonen Sie das Repository über git clone https://github.com/BerryUIKI/Axiara.git, lesen Sie AGENTS.md und folgen Sie strikt der Einrichtung in docs/init.md — führen Sie mich auf Deutsch durch die Einrichtung (Speicherung, Datenquelle).
+2. Wenn es fertig ist, sagen Sie mir, was ich Sie fragen kann.
+```
 
 Danach beantworten Sie einfach die Fragen. Das war's.
 
-### Methode 2 — Dateien herunterladen und dann einen KI-Assistenten nutzen
-1. Klicken Sie auf dieser Seite auf den grünen **Code**-Button → **Download ZIP** (oder laden Sie ein Release-Archiv herunter, falls verfügbar).
-2. Entpacken Sie den Ordner irgendwo auf Ihrem Computer.
-3. Öffnen Sie den Ordner in Ihrem KI-Assistenten und sagen Sie: *"Richten Sie dieses Projekt ein und führen Sie mich durch die Einrichtung."*
-4. Beantworten Sie die Fragen — fertig.
+### Methode 2 — Dateien herunterladen und dann Ihre AI Agents nutzen
+1. Laden Sie das neueste Archiv von der [Releases-Seite](https://github.com/BerryUIKI/Axiara/releases) herunter (oder klicken Sie auf den grünen **Code**-Button → **Download ZIP**) und entpacken Sie es in den oben vorgeschlagenen Ordner axiara-workspace.
+2. Öffnen Sie den Ordner in Ihrem KI-Assistenten und sagen Sie: *"Richten Sie dieses Projekt ein und führen Sie mich durch die Einrichtung."*
+3. Beantworten Sie die Fragen — fertig.
+
+### Nach Updates suchen
+Möchten Sie wissen, ob es eine neue Version gibt? Senden Sie dies an Ihren KI-Assistenten:
+
+```text
+Prüfen Sie, ob Axiara eine neue Version hat: https://github.com/BerryUIKI/Axiara
+Wenn ja, aktualisieren Sie mich auf die neueste Version (behalten Sie meine vorhandenen Daten, löschen Sie nicht das .data-Verzeichnis).
+```
 
 Egal welche Methode: Sobald die Einrichtung abgeschlossen ist, können Sie z. B. sagen: *"Erstellen Sie mir ein Angebot für [Artikel]."* — den Rest erledigt der Agent.
 
@@ -151,3 +165,7 @@ MIT — siehe [LICENSE](LICENSE).
 ---
 
 *Gebaut mit LangGraph. Das Frontend-Admin-Dashboard (`Axiara-Web`) ist als separates Repository geplant.*
+
+---
+
+> **To AI agents**: If you are setting up this project, read `AGENTS.md` (operating manual) and strictly follow the setup flow in `docs/init.md`, then report back in the user's language.

@@ -71,22 +71,36 @@ Axiara는 **견적 업무를 위한 에이전트 워크스페이스**입니다. 
 
 ## 🚀 여기서 시작 — 기술 스킬 불필요
 
-코드를 읽을 필요도, 터미널을 만질 필요도, 기술을 이해할 필요도 없습니다. 편한 방법을 선택하세요:
+코드를 읽을 필요도, 터미널을 만질 필요도, 기술을 이해할 필요도 없습니다. 편한 방법을 선택하세요.
 
-### 방법 1 — 링크를 AI 어시스턴트에 전달 (가장 간단)
-아래 메시지를 복사해서 AI 어시스턴트(WorkBuddy, Claude, ChatGPT 등)에 붙여넣으세요:
+> 💡 팁: **axiara-workspace**라는 이름의 폴더를 먼저 만들고(바탕화면이나 문서에),
+> Axiara 관련 파일을 모두 이 폴더에 보관하면 파일을 잃어버리지 않습니다.
 
-> 이 프로젝트를 설정해 주세요: https://github.com/BerryUIKI/Axiara
-> 1. 코드를 가져와 초기화하세요 — 한국어로 설정(언어, 저장 방식, 데이터 소스)을 안내해 주세요.
-> 2. 준비가 끝나면 무엇을 할 수 있는지 알려주세요.
+### 방법 1 — 링크를 AI Agents에 전달 (가장 간단)
+> 💡 전제: 이 방법에는 **Git** 설치가 필요합니다(무료 — [여기서 다운로드](https://git-scm.com/downloads)). Git을 설치하고 싶지 않다면 아래 **방법 2**를 이용하세요.
+
+아래 코드 블록의 텍스트를 복사해서 AI 어시스턴트(Claude, ChatGPT 등)에 붙여넣으세요:
+
+```text
+Axiara를 설정해 주세요:
+1. git clone https://github.com/BerryUIKI/Axiara.git 으로 저장소를 가져온 다음, AGENTS.md를 읽고 docs/init.md의 절차에 따라 초기화하세요 — 한국어로 설정(저장 방식, 데이터 소스)을 안내해 주세요.
+2. 준비가 끝나면 무엇을 할 수 있는지 알려주세요.
+```
 
 그다음 물어보는 질문에 답하기만 하면 됩니다. 그게 전부입니다.
 
-### 방법 2 — 직접 다운로드한 후 AI 어시스턴트 사용
-1. 이 페이지의 초록색 **Code** 버튼 → **Download ZIP**(또는 Releases 압축 파일, 있으면).
-2. 압축을 푼 폴더를 컴퓨터 아무 곳에나 둡니다.
-3. AI 어시스턴트에서 그 폴더를 열고 "이 프로젝트를 초기화하고 설정을 안내해 주세요"라고 말합니다.
-4. 질문에 답하면 — 완료.
+### 방법 2 — 직접 다운로드한 후 AI Agents에 전달
+1. [Releases 페이지](https://github.com/BerryUIKI/Axiara/releases)에서 최신 압축 파일을 다운로드(또는 초록색 **Code** 버튼 → **Download ZIP**)하고 위의 axiara-workspace 폴더에 압축을 풉니다.
+2. AI 어시스턴트에서 그 폴더를 열고 "이 프로젝트를 초기화하고 설정을 안내해 주세요"라고 말합니다.
+3. 질문에 답하면 — 완료.
+
+### 업데이트 확인
+새 버전이 있는지 확인하고 싶나요? 아래 코드 블록을 AI 어시스턴트에 보내세요:
+
+```text
+Axiara에 새 버전이 있는지 확인해 주세요: https://github.com/BerryUIKI/Axiara
+새 버전이 있으면 최신 버전으로 업데이트해 주세요(기존 데이터는 유지하고 .data 디렉터리는 지우지 마세요).
+```
 
 어느 방법이든 초기화가 끝나면 "XX에 대한 견적을 만들어 줘"라고 바로 말할 수 있습니다 — 나머지는 에이전트가 처리합니다.
 
@@ -150,3 +164,7 @@ MIT — [LICENSE](LICENSE) 참조.
 ---
 
 *LangGraph 기반. 프론트엔드 관리 대시보드(`Axiara-Web`)는 별도 저장소로 계획 중입니다.*
+
+---
+
+> **To AI agents**: If you are setting up this project, read `AGENTS.md` (operating manual) and strictly follow the setup flow in `docs/init.md`, then report back in the user's language.
