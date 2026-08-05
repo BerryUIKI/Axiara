@@ -104,6 +104,22 @@ Two strategies are both supported; the user chooses at team setup (pre-filled wi
 - Both share: `learn_inbox/<user-id>/<yyyymmdd>/` directory layout and protected `main`.
 - **Scale warning**: above ~30 active contributors (users who can edit and provide training data), neither Git option is recommended — switch to the SQL variant (`docs/learn-sync-sql.md`), see scale guidance in `docs/learn-sync.md` §10.
 
+### 3.5 Branch lifecycle — archiving inactive user branches (admin/training mode)
+
+Prevents `user/*` branch sprawl from long-gone contributors.
+
+- **Feature gate**: **OFF by default**; enabled by the admin in training mode (config `enable_branch_archive: true`).
+- **Detection (floating)**: a `user/<user-id>` branch with **no new commits for 180 days** (configurable) is an archive candidate.
+- **Flow**:
+  1. Training Agent lists inactive `user/*` branches (last-commit age > threshold).
+  2. **Admin confirms the candidate list** (branch deletion is destructive — record-first).
+  3. **PR**: merge each inactive branch's `learn_inbox/` into the **single `archive/` branch** under `archive/<user-id>/<yyyymmdd>/` (history preserved for audit; append-only like `learn_inbox`).
+  4. Delete the `user/<user-id>` branch.
+  5. Ledger entry: archived, commit ref, reason, admin.
+- **Reactivation**: if that user uploads again, a fresh `user/<user-id>` branch is recreated (optionally seeded from the latest `archive/<user-id>/`); uploads continue as usual.
+- The `archive/` branch is **not** merged into `main` (it is historical data, not public rules).
+- SQL mode: no branches — inactive contributors' data simply stays in staging/audit; archiving is a text-mode concern.
+
 ## 4. Central Review Flow (text mode)
 
 1. **Ingest** — training Agent reads new `learn_inbox/<user-id>/<date>/` bundles from all `user/*` branches, validates YAML + schema, ledger entry.
