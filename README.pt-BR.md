@@ -130,23 +130,45 @@ Axiara/
 └── src/             # Biblioteca central
 ```
 
+## 🧩 Skills
+
+Pacotes de habilidades (fonte única em `skills/`, compatível com WorkBuddy/Codex/Claude):
+
+| Skill | Propósito |
+| --- | --- |
+| **axiara-onboarding** | Inicialização do workspace (criar/entrar) — inferência pré-preenchida (moeda por idioma, fuso por SO), modelos `workspace.config.yaml` |
+| **csv-data-import** | Validar e importar listas de preços para a base oficial; manifesto SHA-256, ledger, caminho de aprendizado |
+| **price-crawler** | Crawling de preços de mercado de commodities — protocolo robots, pipeline de 7 etapas, confirmação antes da inserção |
+
+## 👥 Aprendizado multiusuário (modelo hub)
+
+Cada instância do Axiara aprende com suas próprias cotações e correções em uma **biblioteca pessoal** (local). O envio é manual e confirmado pelo usuário: diga *"上传数据"* / *"重新上传"* / *"提交数据"*, e seu agente exporta um pacote datado para a **biblioteca central** (`learn_inbox/<user-id>/<yyyymmdd>/bundle.yaml`, enviado para sua própria branch `user/<user-id>`). Um **agente de treinamento central** revisa todos os envios e propõe mudanças nas regras públicas; um **admin confirma** antes da atualização de `learn_shared`. O monitoramento dinâmico de escala sugere melhorias de armazenamento conforme a equipe cresce. Ver [`docs/learn-sync.md`](docs/learn-sync.md).
+
 ## 📚 Documentação
 
 - [Modos de negócio e arquitetura](docs/business-modes.md) — modelo de permissões de dados, quatro modos, mapeamento LangGraph
 - [PLAN.md](PLAN.md) — fonte única de verdade para o roteiro
+- [docs/init.md](docs/init.md) — configuração inicial, guia de dados e integridade
+- [docs/workspace-config.md](docs/workspace-config.md) — criar/entrar, modelos de configuração
+- [docs/crawler-spec.md](docs/crawler-spec.md) · [docs/data-sources.md](docs/data-sources.md) — design do crawler e registro de fontes
+- [docs/learning-plan.md](docs/learning-plan.md) · [docs/training-scenarios.md](docs/training-scenarios.md) — plano de aprendizado e cenários de usuário
+- [docs/learn-sync.md](docs/learn-sync.md) · [docs/learn-sync-text.md](docs/learn-sync-text.md) · [docs/learn-sync-sql.md](docs/learn-sync-sql.md) — hub de aprendizado multiusuário
+- [docs/skill-requirements.md](docs/skill-requirements.md) — backlog de skills e decisões D-SK1–11
+- [docs/development-handoff.md](docs/development-handoff.md) — briefs de tarefas para agentes de codificação externos
 
 ## 🗺️ Roteiro
 
 - [x] Inicialização do espaço de trabalho e decisões de design
-- [ ] Estruturação do pacote (`uv init`, layout `src/`)
-- [ ] Camada de armazenamento (backends conectáveis + CSV)
+- [x] Estruturação do pacote (`uv init`, layout `src/`)
+- [x] Camada de armazenamento (arquivos primeiro: CSV + sync Git, cache SQLite, aplicação de permissões)
+- [x] Agente de captura de preços — mecanismo crawler (protocolo robots, pipeline de 7 etapas, porta de confirmação)
 - [ ] Mecanismo de cálculo de custos (modelo de custos multidimensional)
-- [ ] Agente de captura de preços (rastreamento LangGraph + normalização)
-- [ ] Agendador de tarefas (APScheduler, sob demanda)
 - [ ] Gerador de cotações (modelos padrão + usuário)
+- [ ] Agendador de tarefas (APScheduler, sob demanda)
 - [ ] Mecanismo de revisão (detecção de anomalias)
+- [ ] Hub de aprendizado multiusuário (fluxo de envio, revisão central, monitoramento, arquivamento)
 - [ ] API REST
-- [ ] Testes e CI
+- [ ] Testes e reforço de CI
 
 ## 🤝 Contribuições
 

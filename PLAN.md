@@ -35,6 +35,10 @@ Single source of truth for Axiara initialization. Update as decisions are made; 
 - **Sync triggers** — recommendation: pull on init / app startup / periodic (APScheduler); push only on explicit human action after editing. (Pending.)
 - **Conflict strategy** — recommendation: git text conflicts → Agent reports to human or auto-merges per rules. (Pending.)
 
+## Decisions D-SK1–11 (2026-08-05)
+
+Detailed skill/learning decisions live in `docs/skill-requirements.md` §5 (single source). Summary: platform scope & single-source skills (D-SK1/7) · crawler triggers & sources (D-SK2/3/4) · init create/join model (D-SK5) · training report + hub sync (D-SK6) · AI-friendly format (D-SK8) · upload flow & branch rules (D-SK9) · dynamic scale monitoring (D-SK10) · inactive-branch archiving (D-SK11).
+
 ## Repository State
 
 - [x] `git init` on `main` (2026-08-04)

@@ -7,7 +7,7 @@
 
 | Directory       | Purpose                                                              | Lifecycle            | Git |
 | --------------- | -------------------------------------------------------------------- | -------------------- | --- |
-| `store/`        | Team shared data — Agent keeps in sync with the `axiara-data` repo   | Persistent           | Never (cloned from remote) |
+| `store/`        | Team shared data — Agent keeps in sync with the `axiara-data` repo (incl. `learn_shared/` public rules + `learn_inbox/` uploads, see `docs/learn-sync-text.md`)   | Persistent           | Never (cloned from remote) |
 | `cache/`        | Temp caches, logs, intermediate computation outputs                  | Safe to wipe anytime | Never |
 | `ledger/`       | Local ledgers / journals                                             | Persistent           | Never |
 | `db_dump/`      | Database backups (`pg_dump` / `mongodump` / SQLite file copies)      | Persistent, rotate   | Never |

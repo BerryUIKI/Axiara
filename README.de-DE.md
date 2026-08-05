@@ -130,23 +130,45 @@ Axiara/
 └── src/             # Kernbibliothek
 ```
 
+## 🧩 Skills
+
+Agent-Fähigkeitspakete (einzige Quelle in `skills/`, kompatibel mit WorkBuddy/Codex/Claude):
+
+| Skill | Zweck |
+| --- | --- |
+| **axiara-onboarding** | Workspace-Init (Erstellen/Beitreten) — vorausgefüllte Inferenz (Währung nach Sprache, Zeitzone nach OS), `workspace.config.yaml`-Vorlagen |
+| **csv-data-import** | Preislisten validieren + in die offizielle Basis importieren; SHA-256-Manifest, Ledger, Lernpfad |
+| **price-crawler** | Rohstoff-Marktpreis-Crawling — Robots-Protokoll, 7-Schritte-Pipeline, Bestätigung vor dem Einfügen |
+
+## 👥 Multi-User-Lernen (Hub-Modell)
+
+Jede Axiara-Instanz lernt aus eigenen Angeboten und Korrekturen in eine **persönliche Bibliothek** (lokal). Das Hochladen erfolgt manuell und mit Benutzerbestätigung: Sage *"上传数据"* / *"重新上传"* / *"提交数据"*, und dein Agent exportiert ein datiertes Bündel in die **zentrale Bibliothek** (`learn_inbox/<user-id>/<yyyymmdd>/bundle.yaml`, gepusht auf deinen eigenen `user/<user-id>`-Branch). Ein **zentraler Trainings-Agent** prüft alle Uploads und schlägt Änderungen an den öffentlichen Regeln vor; ein **Admin bestätigt**, bevor `learn_shared` aktualisiert wird. Dynamisches Skalierungs-Monitoring schlägt Speicher-Upgrades vor, wenn das Team wächst. Siehe [`docs/learn-sync.md`](docs/learn-sync.md).
+
 ## 📚 Dokumentation
 
 - [Geschäftsmodelle & Architektur](docs/business-modes.md) — Datenberechtigungsmodell, vier Modi, LangGraph-Mapping
 - [PLAN.md](PLAN.md) — Single Source of Truth für die Roadmap
+- [docs/init.md](docs/init.md) — Ersteinrichtung, Datenratgeber & Datenintegrität
+- [docs/workspace-config.md](docs/workspace-config.md) — Erstellen/Beitreten, Konfigurationsvorlagen
+- [docs/crawler-spec.md](docs/crawler-spec.md) · [docs/data-sources.md](docs/data-sources.md) — Crawler-Design & Quellenregister
+- [docs/learning-plan.md](docs/learning-plan.md) · [docs/training-scenarios.md](docs/training-scenarios.md) — Lernplan & Nutzerszenarien
+- [docs/learn-sync.md](docs/learn-sync.md) · [docs/learn-sync-text.md](docs/learn-sync-text.md) · [docs/learn-sync-sql.md](docs/learn-sync-sql.md) — Multi-User-Lern-Hub
+- [docs/skill-requirements.md](docs/skill-requirements.md) — Skill-Backlog & Entscheidungen D-SK1–11
+- [docs/development-handoff.md](docs/development-handoff.md) — Aufgabenbriefe für externe Coding-Agents
 
 ## 🗺️ Roadmap
 
 - [x] Arbeitsbereich-Initialisierung und Designentscheidungen
-- [ ] Paket-Gerüst (`uv init`, `src/`-Layout)
-- [ ] Speicherebene (plugable Backends + CSV)
+- [x] Paket-Gerüst (`uv init`, `src/`-Layout)
+- [x] Speicherebene (Datei-first: CSV + Git-Sync, SQLite-Cache, Berechtigungs-Erzwingung)
+- [x] Preisabruf — Crawler-Engine (Robots-Protokoll, 7-Schritte-Pipeline, Bestätigungs-Gate)
 - [ ] Kostenberechnungs-Engine (mehrdimensionales Kostenmodell)
-- [ ] Preisabruf-Agent (LangGraph-Crawl + Normalisierung)
-- [ ] Aufgaben-Scheduler (APScheduler, On-Demand)
 - [ ] Angebotsgenerator (Standard + Benutzervorlagen)
+- [ ] Aufgaben-Scheduler (APScheduler, On-Demand)
 - [ ] Prüf-Engine (Anomalieerkennung)
+- [ ] Multi-User-Lern-Hub (Upload-Flow, zentrale Prüfung, Monitoring, Archivierung)
 - [ ] REST-API
-- [ ] Tests & CI
+- [ ] Tests & CI-Härtung
 
 ## 🤝 Beiträge
 

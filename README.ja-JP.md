@@ -130,23 +130,45 @@ Axiara/
 └── src/             # コアライブラリ
 ```
 
+## 🧩 スキル
+
+エージェントスキルパック（`skills/` に単一ソース、WorkBuddy/Codex/Claude 互換）：
+
+| スキル | 目的 |
+| --- | --- |
+| **axiara-onboarding** | ワークスペース初期化（作成/参加）— 事前入力された推論（言語から通貨、OS からタイムゾーン）、`workspace.config.yaml` テンプレート |
+| **csv-data-import** | 価格リストを検証して公式ベースへインポート；SHA-256 マニフェスト、台帳、学習パス |
+| **price-crawler** | 商品市場価格のクローリング — robots プロトコル、7 ステップパイプライン、挿入前の確認 |
+
+## 👥 マルチユーザー学習（ハブモデル）
+
+各 Axiara インスタンスは、自社の見積りと修正から**個人ライブラリ**（ローカル）に学習します。アップロードは手動・ユーザー確認付き：*"上传数据"* / *"重新上传"* / *"提交数据"* と言うと、エージェントが日付付きバンドルを**中央ライブラリ**（`learn_inbox/<user-id>/<yyyymmdd>/bundle.yaml`、自分の `user/<user-id>` ブランチへ push）にエクスポートします。**中央トレーニングエージェント**がすべてのアップロードをレビューし、公開ルールの変更を提案；`learn_shared` の更新前に**管理者が確認**します。動的スケール監視がチーム拡大に応じてストレージ改善を提案します。[`docs/learn-sync.md`](docs/learn-sync.md) 参照。
+
 ## 📚 ドキュメント
 
 - [業務モードとアーキテクチャ](docs/business-modes.md) — データ権限モデル、4モード、LangGraph 対応
 - [PLAN.md](PLAN.md) — ロードマップの単一情報源
+- [docs/init.md](docs/init.md) — 初回設定、データガイド＆データ整合性
+- [docs/workspace-config.md](docs/workspace-config.md) — 作成/参加、設定テンプレート
+- [docs/crawler-spec.md](docs/crawler-spec.md) · [docs/data-sources.md](docs/data-sources.md) — クローラー設計＆ソースレジストリ
+- [docs/learning-plan.md](docs/learning-plan.md) · [docs/training-scenarios.md](docs/training-scenarios.md) — 学習計画＆ユーザーシナリオ
+- [docs/learn-sync.md](docs/learn-sync.md) · [docs/learn-sync-text.md](docs/learn-sync-text.md) · [docs/learn-sync-sql.md](docs/learn-sync-sql.md) — マルチユーザー学習ハブ
+- [docs/skill-requirements.md](docs/skill-requirements.md) — スキルバックログ＆決定事項 D-SK1–11
+- [docs/development-handoff.md](docs/development-handoff.md) — 外部コーディングエージェント向けタスク概要
 
 ## 🗺️ ロードマップ
 
 - [x] ワークスペース初期化と設計決定
-- [ ] パッケージスキャフォールディング（`uv init`、`src/` レイアウト）
-- [ ] ストレージ層（プラグ可能バックエンド + CSV）
+- [x] パッケージスキャフォールディング（`uv init`、`src/` レイアウト）
+- [x] ストレージ層（ファイル優先：CSV + Git 同期、SQLite キャッシュ、権限制御）
+- [x] 価格取得 — クローラーエンジン（robots プロトコル、7 ステップパイプライン、確認ゲート）
 - [ ] コスト計算エンジン（多次元コストモデル）
-- [ ] 価格取得エージェント（LangGraph クロール + 正規化）
-- [ ] タスクスケジューラー（APScheduler、オンデマンド）
 - [ ] 見積もり生成器（デフォルト + ユーザーテンプレート）
+- [ ] タスクスケジューラー（APScheduler、オンデマンド）
 - [ ] レビューエンジン（異常検出）
+- [ ] マルチユーザー学習ハブ（アップロードフロー、中央レビュー、監視、アーカイブ）
 - [ ] REST API
-- [ ] テストと CI
+- [ ] テストと CI 強化
 
 ## 🤝 コントリビューション
 

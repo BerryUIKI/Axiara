@@ -24,6 +24,7 @@ Maintenance rule: **every PR merged into `dev` must add its entry under `Unrelea
 - Initialization model: **create vs join** — everything pre-filled from inference (currency by language, timezone by OS, date/quote formats), confirm-or-edit; `workspace.config.yaml` auto-exported.
 - Document discipline: **docs must be updated before push** (including README + 9 locales); changes tracked in `.workbuddy/doc-sync-todo.md`.
 - Learned-data format: **AI-friendly first** — YAML preferred, JSON only for machine exchange.
+- **Doc sync (2026-08-05)**: README + 9 locales updated (Skills, multi-user hub, docs index, roadmap); AGENTS.md hard rule "docs must be updated before push"; PLAN.md D-SK1–11 reference; `.data.template/README.md` store layout; `auto-release.yml` release notes now read from CHANGELOG version entries.
 
 ## [0.1.0] - 2026-08-04
 
