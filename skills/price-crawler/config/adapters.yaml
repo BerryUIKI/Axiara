@@ -1,0 +1,116 @@
+# Axiara Price Crawler - Site Adapter Selectors
+# Per-source CSS/XPath selectors and parser configurations
+# Version: v0.1
+# See: docs/crawler-spec.md §5
+
+# Template adapter structure (to be filled by coding agent)
+# Format: CSS selectors or XPath for each source
+
+# Domestic Sources (CN)
+
+smm:
+  # Shanghai Metals Market - www.smm.cn
+  selectors:
+    type: css  # css or xpath
+    row: ""    # e.g., "table.prices tbody tr" - fill during implementation
+    name: ""   # e.g., "td:nth-child(1)"
+    spec: ""   # e.g., "td:nth-child(2)"
+    unit_price: ""  # e.g., "td:nth-child(4)"
+    unit: ""   # e.g., "td:nth-child(3)"
+    effective_date: ""  # e.g., "td:nth-child(5)"
+    currency: CNY
+  parser: null  # null for selector-based, or named parser
+  post_process:
+    currency: CNY
+    confidence: high
+    notes: "Selectors to be filled during adapter implementation (C2)"
+
+mofcom-cif:
+  # MOFCOM CIF - cif.mofcom.gov.cn
+  selectors:
+    type: css
+    row: ""
+    name: ""
+    spec: ""
+    unit_price: ""
+    unit: ""
+    effective_date: ""
+    currency: CNY
+  parser: null
+  post_process:
+    currency: CNY
+    confidence: high
+    notes: "Official government source - high confidence; selectors TBD by coding agent"
+
+# Global Sources
+
+indexmundi:
+  # IndexMundi - www.indexmundi.com
+  selectors:
+    type: css
+    row: ""  # e.g., "table.table tbody tr"
+    name: ""  # e.g., "td:nth-child(1)"
+    unit_price: ""  # e.g., "td:nth-child(2)"
+    unit: ""  # e.g., "td:nth-child(3)"
+    currency: USD
+  parser: null
+  post_process:
+    currency: USD
+    confidence: high
+    notes: "Static HTML tables - ideal for selector-based parsing; selectors TBD"
+
+tradingeconomics:
+  # Trading Economics - tradingeconomics.com
+  selectors:
+    type: css
+    row: ""
+    name: ""
+    unit_price: ""
+    unit: ""
+  parser: null
+  post_process:
+    confidence: medium
+    notes: "May require JavaScript rendering or API access"
+
+# Named Parsers for Exotic Layouts
+
+named_parsers:
+  table-json-api:
+    description: "Parse JSON embedded in page or fetched from API endpoint"
+    type: json
+    usage: "Use when page loads data via AJAX/JSON API"
+    implementation: "To be defined by coding agent"
+
+  custom-html:
+    description: "Complex HTML requiring custom extraction logic"
+    type: custom
+    usage: "Use when selectors insufficient (nested tables, multi-row entries)"
+    implementation: "To be defined by coding agent"
+
+  pdf-table:
+    description: "Extract tabular data from PDF documents"
+    type: pdf
+    usage: "Use when source publishes PDF price lists"
+    implementation: "Requires pdfplumber or similar library"
+
+# Adapter Development Guidelines
+#
+# 1. Selector Priority:
+#    - Prefer CSS selectors over XPath (more maintainable)
+#    - Use stable class names or IDs (avoid auto-generated ones)
+#    - Test against multiple pages from same source
+#
+# 2. Parser Implementation:
+#    - Create named parser in this file if selectors insufficient
+#    - Document parser logic in implementation notes
+#    - Include example inputs/outputs for testing
+#
+# 3. Post-Processing:
+#    - Set currency based on source default
+#    - Set confidence level based on data quality
+#    - Add notes about any special handling
+#
+# 4. Maintenance:
+#    - Re-test adapters when source site layout changes
+#    - Log parse failures with URL and error details
+#    - Update selectors when site redesigns occur

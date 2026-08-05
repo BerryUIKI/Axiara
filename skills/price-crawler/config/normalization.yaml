@@ -1,0 +1,396 @@
+# Axiara Price Crawler - Normalization Dictionary
+# Maps aliases to canonical names/units for commodity price data
+# Version: v0.1 (initial draft)
+# See: docs/crawler-spec.md §2.2
+
+# Commodity/Material Name Aliases
+commodities:
+  # Copper variants
+  copper-wire:
+    aliases:
+      - 铜线
+      - copper wire
+      - copper
+      - 铜
+      - 红铜
+      - 紫铜
+      - 铜(线)
+    canonical: copper-wire
+    category: metals
+
+  copper-rod:
+    aliases:
+      - 铜杆
+      - copper rod
+      - 铜棒
+    canonical: copper-rod
+    category: metals
+
+  # Aluminum variants
+  aluminum:
+    aliases:
+      - 铝
+      - aluminium
+      - 铝锭
+      - aluminum ingot
+      - 铝(A00)
+    canonical: aluminum
+    category: metals
+
+  aluminum-alloy:
+    aliases:
+      - 铝合金
+      - aluminum alloy
+      - 铝合金锭
+    canonical: aluminum-alloy
+    category: metals
+
+  # Steel variants
+  steel-rebar:
+    aliases:
+      - 钢筋
+      - rebar
+      - 螺纹钢
+      - steel bar
+    canonical: steel-rebar
+    category: metals
+
+  steel-hr:
+    aliases:
+      - 热轧板
+      - hot rolled steel
+      - 热轧卷板
+      - HR steel
+    canonical: steel-hr
+    category: metals
+
+  steel-cr:
+    aliases:
+      - 冷轧板
+      - cold rolled steel
+      - 冷轧卷板
+      - CR steel
+    canonical: steel-cr
+    category: metals
+
+  # Zinc variants
+  zinc:
+    aliases:
+      - 锌
+      - zinc
+      - 锌锭
+      - zinc ingot
+      - 0#锌
+    canonical: zinc
+    category: metals
+
+  # Lead variants
+  lead:
+    aliases:
+      - 铅
+      - lead
+      - 铅锭
+      - lead ingot
+    canonical: lead
+    category: metals
+
+  # Nickel variants
+  nickel:
+    aliases:
+      - 镍
+      - nickel
+      - 镍板
+      - nickel plate
+    canonical: nickel
+    category: metals
+
+  # Tin variants
+  tin:
+    aliases:
+      - 锡
+      - tin
+      - 锡锭
+      - tin ingot
+    canonical: tin
+    category: metals
+
+  # Gold & Silver (precious metals)
+  gold:
+    aliases:
+      - 金
+      - gold
+      - 黄金
+      - Au
+    canonical: gold
+    category: precious-metals
+
+  silver:
+    aliases:
+      - 银
+      - silver
+      - 白银
+      - Ag
+    canonical: silver
+    category: precious-metals
+
+  # Oil & Energy
+  crude-oil:
+    aliases:
+      - 原油
+      - crude oil
+      - WTI原油
+      - Brent原油
+    canonical: crude-oil
+    category: energy
+
+  gasoline:
+    aliases:
+      - 汽油
+      - gasoline
+      - 汽油(92#)
+      - 92号汽油
+    canonical: gasoline
+    category: energy
+
+  diesel:
+    aliases:
+      - 柴油
+      - diesel
+      - 柴油(0#)
+      - 0号柴油
+    canonical: diesel
+    category: energy
+
+  # Agriculture products
+  soybean:
+    aliases:
+      - 大豆
+      - soybean
+      - 黄豆
+    canonical: soybean
+    category: agriculture
+
+  corn:
+    aliases:
+      - 玉米
+      - corn
+      - maize
+    canonical: corn
+    category: agriculture
+
+  wheat:
+    aliases:
+      - 小麦
+      - wheat
+    canonical: wheat
+    category: agriculture
+
+  cotton:
+    aliases:
+      - 棉花
+      - cotton
+    canonical: cotton
+    category: agriculture
+
+  rubber:
+    aliases:
+      - 橡胶
+      - rubber
+      - 天然橡胶
+      - NR
+    canonical: rubber
+    category: agriculture
+
+# Unit Aliases
+units:
+  # Weight units
+  kg:
+    aliases:
+      - 千克
+      - 公斤
+      - kg
+      - KG
+      - Kg
+      - 千克/公斤
+    canonical: kg
+    type: weight
+    metric: true
+
+  ton:
+    aliases:
+      - 吨
+      - ton
+      - T
+      - mt
+      - 公吨
+      - 吨(T)
+      - 吨/吨
+    canonical: ton
+    type: weight
+    metric: true
+
+  lb:
+    aliases:
+      - 磅
+      - lb
+      - pound
+      - lbs
+    canonical: lb
+    type: weight
+    metric: false
+
+  oz:
+    aliases:
+      - 盎司
+      - oz
+      - ounce
+    canonical: oz
+    type: weight
+    metric: false
+
+  # Length units
+  m:
+    aliases:
+      - 米
+      - m
+      - M
+      - 公尺
+    canonical: m
+    type: length
+    metric: true
+
+  mm:
+    aliases:
+      - 毫米
+      - mm
+      - MM
+    canonical: mm
+    type: length
+    metric: true
+
+  ft:
+    aliases:
+      - 英尺
+      - ft
+      - foot
+      - feet
+    canonical: ft
+    type: length
+    metric: false
+
+  # Area units
+  sqm:
+    aliases:
+      - 平方米
+      - m²
+      - m2
+      - sqm
+      - 平米
+    canonical: sqm
+    type: area
+    metric: true
+
+  # Volume units
+  l:
+    aliases:
+      - 升
+      - l
+      - L
+      - liter
+      - litre
+    canonical: l
+    type: volume
+    metric: true
+
+  gallon:
+    aliases:
+      - 加仑
+      - gallon
+      - gal
+    canonical: gallon
+    type: volume
+    metric: false
+
+  barrel:
+    aliases:
+      - 桶
+      - barrel
+      - bbl
+    canonical: barrel
+    type: volume
+    metric: false
+
+# Currency Normalization
+currencies:
+  CNY:
+    aliases:
+      - ¥
+      - CNY
+      - RMB
+      - 元
+      - 人民币
+      - 元/吨
+      - 元/千克
+      - 元/kg
+    canonical: CNY
+    symbol: ¥
+    name: Chinese Yuan
+
+  USD:
+    aliases:
+      - $
+      - USD
+      - 美元
+      - US$
+      - dollars
+    canonical: USD
+    symbol: $
+    name: US Dollar
+
+  EUR:
+    aliases:
+      - €
+      - EUR
+      - 欧元
+      - Euros
+    canonical: EUR
+    symbol: €
+    name: Euro
+
+  JPY:
+    aliases:
+      - ¥
+      - JPY
+      - 日元
+      - Japanese Yen
+      - 円
+    canonical: JPY
+    symbol: ¥
+    name: Japanese Yen
+
+  GBP:
+    aliases:
+      - £
+      - GBP
+      - 英镑
+      - British Pound
+    canonical: GBP
+    symbol: £
+    name: British Pound
+
+  KRW:
+    aliases:
+      - ₩
+      - KRW
+      - 韩元
+      - Korean Won
+    canonical: KRW
+    symbol: ₩
+    name: Korean Won
+
+# Unknown Alias Handling
+unknown_handling:
+  action: keep_raw_and_flag  # Never guess silently
+  confidence: low
+  requires_review: true
+  note: "Unknown aliases are kept raw and flagged in the confirmation diff. Never auto-guessed."
