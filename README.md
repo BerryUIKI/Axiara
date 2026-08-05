@@ -37,7 +37,7 @@ Axiara is an **agent workspace for valuation**. It gives AI agents four well-def
 - **🧩 Template-adaptive quoting** — ships a default quote template, adapts on the fly to user-provided templates (open-source / fork-friendly).
 - **💾 Storage for any setup — no servers needed** — personal: SQLite; team: CSV files synced via git (`store/`, with an auto local SQLite cache for fast queries), or SQL server (MySQL / MariaDB / PostgreSQL).
 - **🕐 On-demand crawling** — market data refreshes when you ask, not on a blind schedule.
-- **🔄 Multi-user learning hub** — every user tunes their own personal library (专属调教库); weekly upload to the central library, where a central training Agent reviews before public rules change (per-user branches, admin confirmation, dynamic scale monitoring).
+- **🔄 Multi-user learning hub** — every user tunes their own personalized tuning library; weekly upload to the central library, where a central training Agent reviews before public rules change (per-user branches, admin confirmation, dynamic scale monitoring).
 - **📝 AI-friendly learned data** — rules/bundles stored as YAML (readable, commentable, clean diffs); JSON reserved for machine-only exchange.
 
 ## 🚀 Start here — no tech skills needed
@@ -164,7 +164,7 @@ Agent skill packs (single source in `skills/`, WorkBuddy/Codex/Claude compatible
 
 ## 👥 Multi-user learning (hub model)
 
-Each user's Axiara learns from its own quotes and corrections into a **personal library** (local). Uploading is manual and user-confirmed: say *"上传数据"* / *"重新上传"* / *"提交数据"*, and your Agent exports a dated bundle to the **central library** (`learn_inbox/<user-id>/<yyyymmdd>/bundle.yaml`, pushed to your own `user/<user-id>` branch). A **central training Agent** reviews all uploads and proposes changes to the public rules; an **admin confirms** before `learn_shared` updates. Dynamic scale monitoring suggests storage upgrades as the team grows. See [`docs/learn-sync.md`](docs/learn-sync.md).
+Each user's Axiara learns from its own quotes and corrections into a **personal library** (local). Uploading is manual and user-confirmed: say *"upload my data"* / *"re-submit"* / *"submit my library"*, and your Agent exports a dated bundle to the **central library** (`learn_inbox/<user-id>/<yyyymmdd>/bundle.yaml`, pushed to your own `user/<user-id>` branch). A **central training Agent** reviews all uploads and proposes changes to the public rules; an **admin confirms** before `learn_shared` updates. Dynamic scale monitoring suggests storage upgrades as the team grows. See [`docs/learn-sync.md`](docs/learn-sync.md).
 
 ## 📚 Documentation
 
