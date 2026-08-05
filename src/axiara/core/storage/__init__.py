@@ -12,6 +12,35 @@ from enum import StrEnum
 from pathlib import Path
 from typing import Any, Protocol
 
+# Import new storage components
+from axiara.core.storage.cache import SQLiteCache, get_cache
+from axiara.core.storage.file_backend import FileStorage, create_file_storage
+from axiara.core.storage.git_sync import GitSyncManager, get_git_sync_manager
+from axiara.core.storage.manifest import ManifestManager, get_manifest_manager
+from axiara.core.storage.permissions import (
+    PermissionError,
+    PermissionManager,
+    get_permission_manager,
+)
+
+__all__ = [
+    "DataLayer",
+    "StorageBackend",
+    "LocalStorage",
+    "create_storage",
+    "FileStorage",
+    "create_file_storage",
+    "SQLiteCache",
+    "get_cache",
+    "ManifestManager",
+    "get_manifest_manager",
+    "PermissionManager",
+    "get_permission_manager",
+    "PermissionError",
+    "GitSyncManager",
+    "get_git_sync_manager",
+]
+
 
 class DataLayer(StrEnum):
     """The three data layers plus user uploads."""
