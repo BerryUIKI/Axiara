@@ -90,9 +90,19 @@ user: "上传数据" ──▶ export bundle (user-id + yyyymmdd)
       ──▶ users pull main (read-only)
 ```
 
-### 3.4 Fallback (if per-user branches ever get unwieldy)
+### 3.4 Branch strategy — two options, user picks (default: per-user)
 
-If branch count / management becomes a burden, switch to a **single shared upload branch** (`upload/`) with the same directory isolation (`learn_inbox/<user-id>/<yyyymmdd>/`). Cost: shared write point — users rely on directory discipline instead of branch isolation; per-user permission isolation is lost (acceptable since uploads exclude customer-sensitive data). `main` stays protected either way.
+Two strategies are both supported; the user chooses at team setup (pre-filled with the default, confirm-or-edit — same pattern as workspace config).
+
+| | **A. Per-user branches** `user/<user-id>` | **B. Single upload branch** `upload/` |
+| --- | --- | --- |
+| **Pros** | Full isolation (no cross-user conflicts); per-user permission & audit; clean traceability | One branch, simplest to manage; no branch sprawl; works for many users |
+| **Cons** | Branch per user (sprawl at scale); each user needs the discipline to stay on their branch | Shared write point — users rely on directory discipline; no per-user permission isolation |
+| **When** | Small teams, auditing matters | Large user base on git, or simple ops preferred |
+
+- **Default (agent-chosen, 2026-08-05): A — per-user branches.** Best isolation + audit; the anti-mess design (§3.3 rules 3–4: stable `user-id`, append-only) already removes the main failure modes. Revisit when branch count becomes a burden.
+- Both share: `learn_inbox/<user-id>/<yyyymmdd>/` directory layout and protected `main`.
+- **Scale warning**: above ~30 active contributors (users who can edit and provide training data), neither Git option is recommended — switch to the SQL variant (`docs/learn-sync-sql.md`), see scale guidance in `docs/learn-sync.md` §10.
 
 ## 4. Central Review Flow (text mode)
 

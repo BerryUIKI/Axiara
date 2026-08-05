@@ -95,3 +95,18 @@ Rule of thumb: personal/customer-specific → private; generic material/process/
 - **OQ-LS1** — Central library location: same git repo (`store/`) vs separate `axiara-learn` repo? Recommend inside `store/` (one clone) with `inbox/` + `learn_shared/` subdirs.
 - **OQ-LS4** — Who is "admin" for proposal confirmation? Team owner / designated reviewer / the central training Agent's proposals auto-approved for `trust: user_rule`? Recommend: all proposals confirmed by a human reviewer.
 - **OQ-LS5** — Upload cadence: strictly weekly, or on-demand anytime (weekly is the default reminder, manual anytime)? Recommend: on-demand allowed, weekly reminder default.
+
+## 10. Scale Guidance — Git vs SQL (decided default, 2026-08-05)
+
+Active contributors = users who can **edit data and provide training data**. Threshold recommendation:
+
+| Active contributors | Recommendation |
+| --- | --- |
+| **< 10** | Git (`learn-sync-text.md`), **strategy A: per-user branches** (default) |
+| **10–30** | Git still works; watch the review backlog — if weekly upload volume keeps the admin review queue piling up, start planning SQL |
+| **> 30** | **Git no longer recommended — switch to SQL** (`learn-sync-sql.md`): concurrent uploads, transactional applies, indexed queries, trigger-enforced audit |
+| **> 100** | SQL required |
+
+Rationale for the 30 threshold: ~30 contributors × weekly uploads ≈ 120 proposals/month ≈ 5–6 admin review decisions per working day (near the human-review ceiling); beyond that, per-user branch/file sprawl and conflict probability rise faster than git tooling handles comfortably, while SQL's concurrency/transaction/query model takes over cleanly.
+
+The branch-strategy choice (per-user vs single upload branch) is surfaced at team setup with **A (per-user branches) pre-selected** as default.
