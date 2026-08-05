@@ -58,9 +58,9 @@ Implement the 7-step pipeline from `docs/crawler-spec.md` §3, driven by the exi
 ## 5. Batch Status
 
 - **Batch 1 — DONE** (PR #25, merged): storage layer, init enhancements, crawler engine. 42 tests passing.
-- **Batch 2** (future): Costing engine (`core/costing/`) — multi-dimensional cost model; Quotation generator (`core/quote/`) — default + user templates (Mode 3.2 tiers).
-- **Batch 3** (future): LangGraph graph & nodes (`src/axiara/agents/`) incl. `crawl_agent` + `interrupt()` confirm; APScheduler jobs (`scheduler/`); FastAPI app (`api/`).
-- **Batch 4 — ACTIVE (this handoff)**: multi-user learning sync (hub model).
+- **Batch 2 — ACTIVE (this handoff)**: costing engine + quotation generator (§7).
+- **Batch 3 — ACTIVE (this handoff)**: LangGraph agents + REST API + scheduler (§8).
+- **Batch 4 — DONE** (PR #29, merged): multi-user learning sync hub (`core/learnsync/`). 112 tests passing.
 
 ## 6. Task 4 — Multi-user learning sync (hub model) [P0]
 
@@ -109,3 +109,52 @@ Implement the hub model from `docs/learn-sync.md` (+ `docs/learn-sync-text.md` f
 
 - Code on a new branch `feat/core-batch-4` (from latest `dev`), committed incrementally; **CHANGELOG `[Unreleased]` entry added** (doc-sync discipline).
 - `uv sync` passes; `pytest` passes; one PR into `dev` — **do not merge yourself**; the main agent reviews.
+
+## 8. Task 5 — Costing engine + Quotation generator (Batch 2) [P0]
+
+### 8.1 Costing engine (`src/axiara/core/costing/`)
+
+Multi-dimensional cost model aligned with the learn rules taxonomy (`material` / `process-cost` / `cost-breakdown` / `pricing-tiers`):
+
+- **Formula**: total cost = **material + labor + loss + processing** (component breakdown per `cost-breakdown` rules).
+- **Inputs**: bill of materials / user query · official baseline `data/main/` (**read-only**) · learn rules (`cost-breakdown`, `process-cost`) · optional market reference `data/market/`.
+- **Unit handling**: convert via the shared normalization dictionary (kg/ton/m…), never guess silently — unknown units raise a clear error.
+- **Output**: total cost + per-component breakdown + `confidence` + source refs (main/learn/market).
+- **Permissions**: read-only on all layers via the storage `PermissionManager`; no writes.
+- **Acceptance (unit tests)**: (a) material + process cost composition, (b) loss rate / yield applied, (c) unit conversion, (d) missing data → explicit error or graceful degradation with flagged `confidence`.
+
+### 8.2 Quotation generator (`src/axiara/core/quote/`)
+
+- **Mode 3 (batch)**: Excel/BOM backfill with auto column detection (openpyxl).
+- **Mode 3.2 (smart quote)**: default tier from learned `pricing-tiers` (low/mid/high) + constraint negotiation — when no constraints are given, present the three tiers (per `docs/business-modes.md`).
+- **Template-adaptive (D12)**: ship the default quote template; adapt on the fly to user-provided templates.
+- **Output**: quotation to `output/` (document/table) + chat summary (delivery per D-SK6 pattern).
+- **Feedback loop**: an approved/corrected quotation emits a **learning event** → routes into `learn_private` (Phase 4 hub, `core/learnsync/`).
+- **Acceptance (unit tests)**: (a) BOM → quotation, (b) three-tier defaults when no constraints, (c) constraint negotiation, (d) template adaptation, (e) approval event emitted for learning.
+
+## 9. Task 6 — LangGraph + REST API + Scheduler (Batch 3) [P1]
+
+### 9.1 LangGraph agents (`src/axiara/agents/`)
+
+- Four mode graphs per `docs/business-modes.md`: **archive** (Mode 1: manual import + learn + crawl) · **query** (Mode 2) · **quote** (Mode 3) · **review** (Mode 4).
+- **`crawl_agent`** integration: replace the CLI confirmation gate with LangGraph `interrupt()` (user-confirm before market writes) + checkpointer (resume long runs).
+- **`learnsync` integration**: upload / review / archive flows as graph nodes (reuse `core/learnsync/`).
+- Nodes reach DBs **only through the storage layer** (defense in depth, `business-modes.md` §3).
+- **Acceptance**: graph builds; interrupt/resume tested; permission enforcement at node level.
+
+### 9.2 REST API (`src/axiara/api/`)
+
+- FastAPI app exposing: four modes (archive/query/quote/review) + upload + review-confirm + health.
+- Storage layer injected; permission checks per endpoint; no business logic in handlers.
+- **Acceptance**: API integration tests (fastapi TestClient).
+
+### 9.3 Scheduler (`src/axiara/scheduler/`)
+
+- APScheduler jobs: **weekly upload reminder** (manual trigger only — never auto-push) · **optional weekly crawler refresh** (D-SK2: produces a proposed diff, confirm-gated) · **monthly scale health report** (D-SK10) · **archive detection** (D-SK11, admin-confirmed).
+- Jobs are registrations that call existing modules; no business logic duplicated.
+- **Acceptance**: job registration/trigger tests.
+
+## 10. Deliverables for this handoff (Batch 2 + 3)
+
+- **Two PRs, sequential**: `feat/core-batch-2` → `dev` (Batch 2 first — Batch 3 depends on it), then `feat/core-batch-3` → `dev`. Branches from latest `dev`; commit incrementally; **CHANGELOG `[Unreleased]` entry per PR** (doc-sync discipline).
+- `uv sync` passes; `pytest` passes (existing 112 + new); **do not merge yourself** — the main agent reviews each PR.
