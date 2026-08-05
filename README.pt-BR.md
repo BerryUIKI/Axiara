@@ -166,7 +166,7 @@ Cada instância do Axiara aprende com suas próprias cotações e correções em
 - [ ] Gerador de cotações (modelos padrão + usuário)
 - [ ] Agendador de tarefas (APScheduler, sob demanda)
 - [ ] Mecanismo de revisão (detecção de anomalias)
-- [ ] Hub de aprendizado multiusuário (fluxo de envio, revisão central, monitoramento, arquivamento)
+- [x] Hub de aprendizado multiusuário (fluxo de envio, revisão central, monitoramento, arquivamento)
 - [ ] API REST
 - [ ] Testes e reforço de CI
 
