@@ -1,6 +1,6 @@
-# Axiara — Development Handoff (Batch 1)
+# Axiara — Development Handoff
 
-Status: **v0.1** (2026-08-05) — task brief for the **external coding agent** (Codex / Claude Code). Branch: `feat/core-batch-1` (based on `dev`). Work per AGENTS.md: feature branch → PR into `dev`, commit-only (no auto-push/merge).
+Status: **v0.2** (2026-08-05) — task brief for the **external coding agent** (Codex / Claude Code). **Batch 1 completed** (storage layer, init enhancements, crawler engine — merged PR #25). **Batch 4 is the active handoff** (multi-user learning sync). Work per AGENTS.md: feature branch → PR into `dev`, commit-only (no auto-push/merge).
 
 ## 0. Before you start
 
@@ -55,14 +55,57 @@ Implement the 7-step pipeline from `docs/crawler-spec.md` §3, driven by the exi
 - **Acceptance**: a dry-run against one public HTTP source (e.g. `mofcom-cif` or `indexmundi`, both `legal: public_market_data`) produces a normalized JSON batch; a `robots.txt`-disallowed path is refused; a disabled source is refused up front.
 - Out of scope for Batch 1: browser-based sources (`method: browser`), weekly scheduler wiring (Batch 4).
 
-## 5. Batch 2+ (future handoffs, reference only)
+## 5. Batch Status
 
-- **Batch 2**: Costing engine (`core/costing/`) — multi-dimensional cost model; Quotation generator (`core/quote/`) — default + user templates (Mode 3.2 tiers).
-- **Batch 3**: LangGraph graph & nodes (`src/axiara/agents/`) incl. `crawl_agent` + `interrupt()` confirm; APScheduler jobs (`scheduler/`); FastAPI app (`api/`).
-- **Batch 4**: Tests & CI hardening (`tests/`, workflows); learn sync hub (`docs/learn-sync.md`) implementation.
+- **Batch 1 — DONE** (PR #25, merged): storage layer, init enhancements, crawler engine. 42 tests passing.
+- **Batch 2** (future): Costing engine (`core/costing/`) — multi-dimensional cost model; Quotation generator (`core/quote/`) — default + user templates (Mode 3.2 tiers).
+- **Batch 3** (future): LangGraph graph & nodes (`src/axiara/agents/`) incl. `crawl_agent` + `interrupt()` confirm; APScheduler jobs (`scheduler/`); FastAPI app (`api/`).
+- **Batch 4 — ACTIVE (this handoff)**: multi-user learning sync (hub model).
 
-## 6. Deliverables for this handoff
+## 6. Task 4 — Multi-user learning sync (hub model) [P0]
 
-- Code on branch `feat/core-batch-1` (from `dev`), committed incrementally.
-- `uv sync` passes; `pytest` passes for new storage/crawler tests.
-- One PR into `dev` when Batch 1 is complete — **do not merge yourself**; the main agent reviews.
+Implement the hub model from `docs/learn-sync.md` (+ `docs/learn-sync-text.md` for the text variant; `docs/learn-sync-sql.md` for the optional SQL variant). New package: `src/axiara/core/learnsync/`. Reuse the storage layer (`core/storage/`) and its `PermissionManager`.
+
+### 6.1 User identity & data-repo integration
+
+- Generate a **stable `user-id`** at onboarding, persist in `local_config` (`[app] user_id`); machine code as fallback.
+- Git integration for the central data repo (`store/`): list/create `user/<user-id>` branches, push uploads, fetch `refs/heads/user/*`, protected `main` (write rejected for users — reuse permission patterns).
+
+### 6.2 Upload flow (user: "上传数据" / "重新上传" / "提交数据")
+
+- Export incremental `learn_private` diff → `bundle.yaml` (provenance: user-id, timestamps, observation counts; customer-specific entries excluded by default).
+- Path: `learn_inbox/<user-id>/<yyyymmdd>/bundle.yaml`; commit message `upload <user-id> <yyyymmdd> [re-upload]`.
+- Commit + push to `user/<user-id>` — **only after user confirmation** (record-first). Re-upload = new dated dir; earlier pending dir flagged stale.
+- CLI/agent-level confirmation gate (LangGraph `interrupt()` comes in Batch 3 — use a CLI confirm now).
+
+### 6.3 Central review flow
+
+- Ingest bundles from all `user/*` branches → compare against `learn_shared/` rules (same `rule_id` → version/trust; new keys → candidates; contradicts official baseline → reject).
+- Produce proposals (`ADD` / `UPDATE` / `REJECT` + reason) → **admin confirms** → update `learn_shared/` + regenerate `stats/` + `manifest.json` → PR merge into `main` (data repo) → users pull.
+
+### 6.4 Dynamic scale monitoring (D-SK10)
+
+- Rolling-90-day metrics: active contributors, weekly upload volume, review backlog, branch/file sprawl, friction events.
+- Four tiers 🟢/🟡/🟠/🔴 (per `learn-sync.md` §10.1); produce a **scale health report** (chat summary + `output/` file). Migration proposals surfaced; migration itself requires human confirmation.
+
+### 6.5 Inactive-branch archiving (D-SK11)
+
+- Feature off by default (`enable_branch_archive`); idle > 180 days (configurable) → candidate list → **admin confirms** → PR merge into `archive/` branch (`archive/<user-id>/<date>/`) → delete `user/<user-id>` branch → ledger. Reactivation recreates the branch (optional seed from archive).
+
+### 6.6 Configuration
+
+- Config fields: `[app] user_id`, `enable_branch_archive`, `branch_strategy` (A = per-user branches default | B = single `upload/` branch), scale thresholds. Wired into `scripts/init-data.sh` + config schema.
+
+### 6.7 SQL variant (optional, later if team uses `sync_mode: sql`)
+
+- Tables `learn_staging` / `learn_rules` / `learn_reviews` / `learn_audit` / `learn_sync_markers`; transactional apply, optimistic locking, DB grant tiers, trigger audit (per `docs/learn-sync-sql.md`). Only if the team runs SQL — text mode first.
+
+### 6.8 Acceptance (text mode)
+
+- Unit tests prove: (a) upload exports a valid `bundle.yaml` at the right path and pushes to `user/<user-id>` (against a local bare remote), (b) re-upload creates a new dated dir and flags the previous pending one, (c) review produces proposals and a rejected proposal never reaches `learn_shared/`, (d) archiving: candidate detection → confirm → archive merge → branch delete, (e) scale metrics compute and tier correctly, (f) a user write to data-repo `main` is rejected.
+- `uv sync` passes; `pytest` passes (existing 42 + new).
+
+## 7. Deliverables for this handoff (Batch 4)
+
+- Code on a new branch `feat/core-batch-4` (from latest `dev`), committed incrementally; **CHANGELOG `[Unreleased]` entry added** (doc-sync discipline).
+- `uv sync` passes; `pytest` passes; one PR into `dev` — **do not merge yourself**; the main agent reviews.
