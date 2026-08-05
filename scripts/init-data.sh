@@ -18,7 +18,10 @@
 #       [--db-dsn postgresql://user:pass@host:5432/db] \
 #       [--data-source local_file|team_repo|none] \
 #       [--repo-url https://github.com/org/axiara-data.git] \
-#       [--default-currency CNY]
+#       [--default-currency CNY] \
+#       [--user-id AX-abcd-1234] \
+#       [--branch-strategy A|B] \
+#       [--enable-branch-archive true|false]
 #
 # With no flags: creates dirs; writes a default config only if none exists
 # (existing config is never touched). With flags: writes config (backing up
@@ -37,6 +40,7 @@ cfg_get() {
 # defaults
 LANG_CFG=en; SYNC_MODE=none; BACKEND=sqlite; DATA_SOURCE=none
 REPO_URL=""; REPO_BRANCH=main; GIT_USER=""; GIT_EMAIL=""; DB_DSN=""; DEFAULT_CURRENCY=""
+USER_ID=""; BRANCH_STRATEGY="A"; ENABLE_BRANCH_ARCHIVE="false"
 HAS_ARGS=0
 
 # Language to currency mapping (suggested defaults)
@@ -63,6 +67,9 @@ while [ $# -gt 0 ]; do
     --data-source)    DATA_SOURCE="$2"; HAS_ARGS=1; shift 2 ;;
     --repo-url)       REPO_URL="$2"; HAS_ARGS=1; shift 2 ;;
     --default-currency) DEFAULT_CURRENCY="$2"; HAS_ARGS=1; shift 2 ;;
+    --user-id)        USER_ID="$2"; HAS_ARGS=1; shift 2 ;;
+    --branch-strategy) BRANCH_STRATEGY="$2"; HAS_ARGS=1; shift 2 ;;
+    --enable-branch-archive) ENABLE_BRANCH_ARCHIVE="$2"; HAS_ARGS=1; shift 2 ;;
     --non-interactive) : ;;  # no-op — the script is always non-interactive
     *) echo "error: unknown option: $1 (see header for usage)"; exit 1 ;;
   esac
@@ -78,6 +85,9 @@ if [ -f "$CONFIG_FILE" ]; then
   DATA_SOURCE="${DATA_SOURCE:-$(cfg_get data_source)}"; DATA_SOURCE="${DATA_SOURCE:-none}"
   DB_DSN="${DB_DSN:-$(cfg_get db_dsn)}"
   DEFAULT_CURRENCY="${DEFAULT_CURRENCY:-$(cfg_get default_currency)}"
+  USER_ID="${USER_ID:-$(cfg_get user_id)}"
+  BRANCH_STRATEGY="${BRANCH_STRATEGY:-$(cfg_get branch_strategy)}"; BRANCH_STRATEGY="${BRANCH_STRATEGY:-A}"
+  ENABLE_BRANCH_ARCHIVE="${ENABLE_BRANCH_ARCHIVE:-$(cfg_get enable_branch_archive)}"; ENABLE_BRANCH_ARCHIVE="${ENABLE_BRANCH_ARCHIVE:-false}"
 fi
 
 # Infer default currency from language if not specified
@@ -103,6 +113,14 @@ case "$DATA_SOURCE" in
   local_file|team_repo|none) ;;
   *) echo "error: invalid --data-source: $DATA_SOURCE"; exit 1 ;;
 esac
+case "$BRANCH_STRATEGY" in
+  A|B) ;;
+  *) echo "error: invalid --branch-strategy: $BRANCH_STRATEGY (A|B)"; exit 1 ;;
+esac
+case "$ENABLE_BRANCH_ARCHIVE" in
+  true|false) ;;
+  *) echo "error: invalid --enable-branch-archive: $ENABLE_BRANCH_ARCHIVE (true|false)"; exit 1 ;;
+esac
 [ "$SYNC_MODE" = "sql" ] && [ -z "$DB_DSN" ] && echo "warning: sync_mode=sql but no --db-dsn provided"
 
 mkdir -p "$DATA_DIR"/store "$DATA_DIR"/cache "$DATA_DIR"/ledger "$DATA_DIR"/db_dump "$DATA_DIR"/local_config
@@ -127,6 +145,9 @@ app:
   backend: "${BACKEND}"
   data_source: "${DATA_SOURCE}"
   default_currency: "${DEFAULT_CURRENCY}"
+  user_id: "${USER_ID}"
+  branch_strategy: "${BRANCH_STRATEGY}"
+  enable_branch_archive: "${ENABLE_BRANCH_ARCHIVE}"
 
 storage:
   db_dsn: "${DB_DSN}"
@@ -160,6 +181,12 @@ write_config() {
     echo "data_source = ${DATA_SOURCE}"
     echo "# Default currency (ISO 4217): CNY | USD | EUR | JPY | GBP | KRW | etc."
     echo "default_currency = ${DEFAULT_CURRENCY}"
+    echo "# User ID (stable identifier for learn sync): AX-xxxx-yyyy"
+    echo "user_id = ${USER_ID}"
+    echo "# Branch strategy: A (per-user branches, default) | B (single upload branch)"
+    echo "branch_strategy = ${BRANCH_STRATEGY}"
+    echo "# Enable automatic archiving of inactive user branches"
+    echo "enable_branch_archive = ${ENABLE_BRANCH_ARCHIVE}"
     echo ""
     echo "[storage]"
     echo "# Connection string — only used when sync_mode = sql"
