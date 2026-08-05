@@ -278,6 +278,6 @@ class TestGraphExecution:
             "mode": "quote",
         }
 
-        result = await graph.ainvoke(initial_state)
+        result = await graph.ainvoke(initial_state, config={"configurable": {"thread_id": "default"}})
 
         assert "quotation" in result or "error" in result

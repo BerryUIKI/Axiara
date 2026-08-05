@@ -156,6 +156,7 @@ def register_jobs(scheduler: AsyncIOScheduler | None = None) -> None:
         scheduler: Scheduler instance (uses global if None)
     """
     scheduler = scheduler or get_scheduler()
+    scheduler.remove_all_jobs()  # idempotent: reset to the standard job set
 
     # Weekly upload reminder - Mondays at 09:00
     scheduler.add_job(

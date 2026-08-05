@@ -42,7 +42,7 @@ class TestSchedulerBasics:
         jobs = scheduler.get_jobs()
         assert len(jobs) == 4  # All four jobs
 
-    def test_start_stop_scheduler(self) -> None:
+    async def test_start_stop_scheduler(self) -> None:
         """Start and stop scheduler."""
         scheduler = get_scheduler()
         register_jobs(scheduler)
