@@ -48,16 +48,81 @@ data/learn/private/
 └── stats/                       # user-local aggregates
 ```
 
-## 3. Weekly Upload Protocol (text mode)
+## 3. Upload Trigger, Export & Branch Rules (text mode)
 
-- **Trigger**: user says "upload my library" or the weekly reminder fires — **manual, confirmed** (OQ-LS2).
-- **Packaging**: the Agent exports the incremental diff of `data/learn/private/` since the last upload into `bundle.yaml` (rules + provenance: contributor, timestamps, observation counts). Customer-specific entries excluded by default (user choice).
-- **Upload = git commit + push** of the bundle into `learn_inbox/<user>/<yyyymmdd>/`. Push happens only after the user confirms (matches record-first convention).
-- **Post-upload**: user's private library stays local (upload is a copy).
+### 3.1 Trigger
+
+User says **"上传数据" / "重新上传" / "提交数据"** (or English equivalents: *"upload my data" / "re-submit" / "submit my library"*) — or the weekly reminder fires. Always **manual, user-confirmed** (OQ-LS2): nothing auto-pushes.
+
+### 3.2 Export — date + user ID
+
+- **User identity**: a **stable `user-id`** generated once at onboarding and persisted in `local_config` (survives machine changes); the **unique machine code** (唯一机器码) is the default/fallback. Both sanitized to `[a-zA-Z0-9_-]` (e.g. `AX-3f8a-c2d1`). This is the `contributor` everywhere.
+- **Bundle location**: `learn_inbox/<user-id>/<yyyymmdd>/bundle.yaml` — **date and user id are in the path**; provenance (contributor, timestamps, observation counts) is inside the bundle.
+- **"重新上传" (re-upload)**: creates a *new* dated directory `.../<yyyymmdd>/` on the same user branch; the previous pending upload of that user is flagged stale during review (no silent overwrite).
+- Post-upload: the personal library stays local (upload is a copy).
+
+### 3.3 Branch rules (text data repo)
+
+The data repo behind `store/` is **separate from the Axiara code repo**. It follows its own branch rules (protected, PR-only — mirrors AGENTS.md):
+
+| Branch | Purpose | Writable by | Content |
+| --- | --- | --- | --- |
+| `main` | **Stable public library** — protected | Admin only (via PR, after review) | `learn_shared/` rules + manifest |
+| `user/<user-id>` | **Per-user upload branch** — one per user | That user only | `learn_inbox/<user-id>/<yyyymmdd>/` bundles |
+| `review/<yyyymmdd>` (optional) | Training-Agent proposals staging | Training Agent | proposals → PR into `main` |
+
+Rules:
+1. **Users never push to `main`** — it is protected; only admin merges after review (PR-only, same convention as the code repo).
+2. **One branch per user**: `user/<user-id>` — the user's only write point. Zero cross-user conflicts, natural isolation, full per-user audit. *(Confirmed 2026-08-05: per-user branches stay — see §3.4 for the fallback if they ever become hard to manage.)*
+3. **`user-id` is stable** — generated once at onboarding, persisted in `local_config` (survives machine changes; the machine code is only the default/fallback). A machine switch keeps the same `user-id` → no orphan branches.
+4. **Append-only**: a user branch only ever *adds* new dated directories (`learn_inbox/<user-id>/<yyyymmdd>/`); never edits or deletes history. Re-upload = new dated dir (the review step flags the earlier pending one stale).
+5. Upload commit message convention: `upload <user-id> <yyyymmdd> [re-upload]`.
+6. `main` updates happen **only via review PR**: training Agent aggregates all `user/*` branches (`git fetch origin 'refs/heads/user/*'`) → proposals → admin confirms → merge into `main`.
+7. Users pull `main` read-only; their local overrides always win.
+
+Flow:
+
+```
+user: "上传数据" ──▶ export bundle (user-id + yyyymmdd)
+      ──▶ commit+push → user/<user-id>/learn_inbox/<user-id>/<yyyymmdd>/bundle.yaml
+      ──▶ training Agent aggregates user/* branches ──▶ proposals (review/<date>)
+      ──▶ admin confirms ──▶ PR merge into main (learn_shared/ + manifest)
+      ──▶ users pull main (read-only)
+```
+
+### 3.4 Branch strategy — two options, user picks (default: per-user)
+
+Two strategies are both supported; the user chooses at team setup (pre-filled with the default, confirm-or-edit — same pattern as workspace config).
+
+| | **A. Per-user branches** `user/<user-id>` | **B. Single upload branch** `upload/` |
+| --- | --- | --- |
+| **Pros** | Full isolation (no cross-user conflicts); per-user permission & audit; clean traceability | One branch, simplest to manage; no branch sprawl; works for many users |
+| **Cons** | Branch per user (sprawl at scale); each user needs the discipline to stay on their branch | Shared write point — users rely on directory discipline; no per-user permission isolation |
+| **When** | Small teams, auditing matters | Large user base on git, or simple ops preferred |
+
+- **Default (agent-chosen, 2026-08-05): A — per-user branches.** Best isolation + audit; the anti-mess design (§3.3 rules 3–4: stable `user-id`, append-only) already removes the main failure modes. Revisit when branch count becomes a burden.
+- Both share: `learn_inbox/<user-id>/<yyyymmdd>/` directory layout and protected `main`.
+- **Scale warning**: above ~30 active contributors (users who can edit and provide training data), neither Git option is recommended — switch to the SQL variant (`docs/learn-sync-sql.md`), see scale guidance in `docs/learn-sync.md` §10.
+
+### 3.5 Branch lifecycle — archiving inactive user branches (admin/training mode)
+
+Prevents `user/*` branch sprawl from long-gone contributors.
+
+- **Feature gate**: **OFF by default**; enabled by the admin in training mode (config `enable_branch_archive: true`).
+- **Detection (floating)**: a `user/<user-id>` branch with **no new commits for 180 days** (configurable) is an archive candidate.
+- **Flow**:
+  1. Training Agent lists inactive `user/*` branches (last-commit age > threshold).
+  2. **Admin confirms the candidate list** (branch deletion is destructive — record-first).
+  3. **PR**: merge each inactive branch's `learn_inbox/` into the **single `archive/` branch** under `archive/<user-id>/<yyyymmdd>/` (history preserved for audit; append-only like `learn_inbox`).
+  4. Delete the `user/<user-id>` branch.
+  5. Ledger entry: archived, commit ref, reason, admin.
+- **Reactivation**: if that user uploads again, a fresh `user/<user-id>` branch is recreated (optionally seeded from the latest `archive/<user-id>/`); uploads continue as usual.
+- The `archive/` branch is **not** merged into `main` (it is historical data, not public rules).
+- SQL mode: no branches — inactive contributors' data simply stays in staging/audit; archiving is a text-mode concern.
 
 ## 4. Central Review Flow (text mode)
 
-1. **Ingest** — training Agent reads new `learn_inbox/<user>/<date>/` bundles, validates YAML + schema, ledger entry.
+1. **Ingest** — training Agent reads new `learn_inbox/<user-id>/<date>/` bundles from all `user/*` branches, validates YAML + schema, ledger entry.
 2. **Compare** — match bundle rules against `learn_shared/rules/*.yaml`:
    - same `rule_id` → version/trust comparison
    - new keys → new-rule candidates

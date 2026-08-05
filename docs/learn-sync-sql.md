@@ -61,10 +61,12 @@ before TEXT, after TEXT, action TEXT    -- before/after stored as YAML/JSON text
 
 ## 3. Weekly Upload Protocol (SQL mode)
 
-- **Trigger**: user says "upload my library" or the weekly reminder fires — **manual, confirmed** (OQ-LS2).
-- **Export**: the Agent exports the incremental diff of the personal library since the last upload marker (`learn_sync_markers`).
-- **Upload**: application-layer `INSERT` into `learn_staging` (or a validated dump import). Direct writes to `learn_rules` are **rejected** for users.
-- **Scoping**: customer-specific entries excluded by default (user choice); staging rows keep `contributor` for traceability.
+- **Trigger**: user says **"上传数据" / "重新上传" / "提交数据"** (or English: *"upload my data" / "re-submit" / "submit my library"*) or the weekly reminder fires — **manual, confirmed** (OQ-LS2).
+- **User identity**: unique machine code / user id (`contributor`), sanitized `[a-zA-Z0-9_-]`; every staging row carries it.
+- **Export**: the Agent exports the incremental diff of the personal library since the last upload marker (`learn_sync_markers`), tagged with `contributor` + date.
+- **Upload**: application-layer `INSERT` into `learn_staging` (or a validated dump import). Direct writes to `learn_rules` are **rejected** for users. No git branches — identity is a column, not a branch.
+- **Re-upload**: new staging rows with fresh `uploaded_at`; the earlier pending rows of that contributor are flagged stale (no silent overwrite).
+- **Scoping**: customer-specific entries excluded by default (user choice).
 
 ## 4. Central Review Flow (SQL mode)
 
