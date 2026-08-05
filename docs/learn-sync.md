@@ -96,9 +96,9 @@ Rule of thumb: personal/customer-specific → private; generic material/process/
 - **OQ-LS4** — Who is "admin" for proposal confirmation? Team owner / designated reviewer / the central training Agent's proposals auto-approved for `trust: user_rule`? Recommend: all proposals confirmed by a human reviewer.
 - **OQ-LS5** — Upload cadence: strictly weekly, or on-demand anytime (weekly is the default reminder, manual anytime)? Recommend: on-demand allowed, weekly reminder default.
 
-## 10. Scale Guidance — Git vs SQL (decided default, 2026-08-05)
+## 10. Scale Guidance — Git vs SQL + Dynamic Monitoring (decided 2026-08-05)
 
-Active contributors = users who can **edit data and provide training data**. Threshold recommendation:
+Active contributors = users who can **edit data and provide training data**. Static baseline (surfaces at team setup):
 
 | Active contributors | Recommendation |
 | --- | --- |
@@ -107,6 +107,32 @@ Active contributors = users who can **edit data and provide training data**. Thr
 | **> 30** | **Git no longer recommended — switch to SQL** (`learn-sync-sql.md`): concurrent uploads, transactional applies, indexed queries, trigger-enforced audit |
 | **> 100** | SQL required |
 
-Rationale for the 30 threshold: ~30 contributors × weekly uploads ≈ 120 proposals/month ≈ 5–6 admin review decisions per working day (near the human-review ceiling); beyond that, per-user branch/file sprawl and conflict probability rise faster than git tooling handles comfortably, while SQL's concurrency/transaction/query model takes over cleanly.
+Rationale for the 30 baseline: ~30 contributors × weekly uploads ≈ 120 proposals/month ≈ 5–6 admin review decisions per working day (near the human-review ceiling); beyond that, per-user branch/file sprawl and conflict probability rise faster than git tooling handles comfortably, while SQL's concurrency/transaction/query model takes over cleanly.
 
-The branch-strategy choice (per-user vs single upload branch) is surfaced at team setup with **A (per-user branches) pre-selected** as default.
+### 10.1 Dynamic (floating) monitoring
+
+Thresholds are a **baseline, not a cliff**. The central training Agent runs a **floating check** (weekly, alongside the review pass; monthly health report) and dynamically proposes storage/sharing improvements.
+
+**Metrics (rolling 90-day window):**
+- Active contributors (uploaded or edited in the window)
+- Weekly upload volume (bundle count + avg size)
+- Review backlog: pending proposals + longest wait
+- Branch/file sprawl: `user/*` branch count, `learn_inbox` file count
+- Friction events: stale-flag overrides, merge conflicts, tombstone rate
+
+**Status tiers (floating — any violated condition moves the tier):**
+
+| Tier | Condition | Suggested action |
+| --- | --- | --- |
+| 🟢 **Healthy** | <10 active, backlog < 1 week | Keep Git strategy A |
+| 🟡 **Watch** | 10–30 active, OR backlog > 1 week, OR upload volume ↑ trend | Prompt: review-process tuning (batch reviews / rotating admins); optionally consider strategy B |
+| 🟠 **Upgrade advised** | >30 active, OR backlog > 2 weeks, OR active ↑ trend with sprawl | Propose **Git → SQL migration plan** (see §10.2) |
+| 🔴 **Must migrate** | >100 active, OR backlog > 1 month | Migrate to SQL now |
+
+**Migration paths:**
+1. **Git A → Git B** (low risk): collapse `user/*` into a single `upload/` branch, keep the `learn_inbox/<user-id>/<date>/` layout — one repo operation, no data transformation.
+2. **Git → SQL**: export `learn_shared` rules → import into `learn_rules`; user uploads switch from branches to `learn_staging`; migrate audit history into `learn_audit`; flip `config` to `sync_mode: sql`. Optional rolling switch (dual-write period) if the team wants a safe overlap.
+
+**Output**: a **scale health report** (chat summary + `output/` file — same delivery mode as the training report, D-SK6). Suggestions are auto-surfaced, but **any migration requires explicit human confirmation** (record-first convention).
+
+The branch-strategy choice (per-user vs single upload branch) is surfaced at team setup with **A (per-user branches) pre-selected** as default; the floating check can suggest switching to B or to SQL later.
