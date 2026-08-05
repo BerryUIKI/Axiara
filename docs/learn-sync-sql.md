@@ -33,14 +33,16 @@ Key columns:
 ```sql
 -- learn_staging (upload area)
 id BIGINT PK, contributor TEXT, uploaded_at TIMESTAMPTZ,
-kind TEXT, rule_key JSONB, value JSONB, trust TEXT, version INT,
+kind TEXT, rule_key TEXT,        -- canonical key (YAML/JSON text) + extracted query cols
+value TEXT,                      -- YAML preferred (AI-readable, D-SK8); JSON allowed
+trust TEXT, version INT,
 status TEXT DEFAULT 'pending',          -- pending | reviewed
-payload_raw JSONB,                      -- original bundle row (audit)
+payload_raw TEXT,                -- original bundle row verbatim (YAML preferred; audit)
 
 -- learn_rules (public)
-rule_id TEXT PK, kind TEXT, rule_key JSONB UNIQUE, value JSONB,
+rule_id TEXT PK, kind TEXT, rule_key TEXT UNIQUE, value TEXT,  -- YAML preferred
 trust TEXT, contributor TEXT, version INT, updated_at TIMESTAMPTZ,
-superseded_by TEXT NULL                 -- tombstone (NULL = active)
+superseded_by TEXT NULL         -- tombstone (NULL = active)
 
 -- learn_reviews
 id BIGINT PK, staging_id BIGINT, action TEXT,  -- ADD | UPDATE | REJECT
@@ -48,8 +50,10 @@ reviewer TEXT, reason TEXT, decided_at TIMESTAMPTZ
 
 -- learn_audit
 id BIGINT PK, ts TIMESTAMPTZ, actor TEXT, table_name TEXT,
-before JSONB, after JSONB, action TEXT
+before TEXT, after TEXT, action TEXT    -- before/after stored as YAML/JSON text (readable audit)
 ```
+
+> **Format note (D-SK8):** store rule payloads as **YAML text** — the AI reviews them directly and diffs are readable. Use dedicated columns (`rule_key`, `trust`, `version`, ...) for indexed queries; use JSONB only when the DB must query *inside* the payload (PostgreSQL) — otherwise YAML text is preferred. `learn_audit.before/after` as text keeps the audit human/AI-readable.
 
 ### Personal library (local, never synced)
 

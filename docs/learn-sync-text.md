@@ -38,6 +38,8 @@ store/
             └── README.md        # human note (optional)
 ```
 
+> **Format note (D-SK8):** rules and upload bundles are **YAML** — AI/human-readable, commentable, clean diffs. JSON is used only where machines need it (`stats/` aggregates, `manifest.json` hash file). Personal tuning libraries support YAML or JSON (both), **YAML recommended**.
+
 Personal library (never committed, never leaves the machine unless uploaded):
 
 ```
