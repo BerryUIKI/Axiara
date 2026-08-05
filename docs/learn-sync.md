@@ -14,7 +14,7 @@ user C learn_private ─┘                                                    �
                                                                                     users pull updates (read-only merge)
 ```
 
-- **Spokes**: every user's `learn_private` — their own tuned data (quotes, corrections, customer/personal rules). Lives locally, never auto-shared.
+- **Spokes**: every user's `learn_private` — their own tuned data (quotes, corrections, customer/personal rules). Lives locally, never auto-shared. **These are living files: they grow and change on every approved/corrected quote** (background learning), and only a copy goes up in the weekly upload.
 - **Weekly upload**: the user (or their Agent, on explicit request) uploads their library to the central library's inbox. **Manual, human-triggered** — nothing auto-pushes (OQ-LS2 resolved: manual).
 - **Central training Agent**: examines uploaded data, compares against the public library, and produces **change proposals** (new rules / updates / rejections with reasons).
 - **Admin confirmation**: proposals are confirmed before the **public library (`learn_shared`)** is updated. Public updates are then pulled back by users (read-only merge; personal overrides stay local).
