@@ -78,7 +78,7 @@ Set up Axiara for me: git clone https://github.com/BerryUIKI/Axiara.git
 
 <picture>
   <source media="(prefers-color-scheme: dark)" srcset="assets/axiara-architecture-dark.svg" />
-  <img src="assets/axiara-architecture.svg" alt="Axiara architecture" width="680" />
+  <img src="assets/axiara-architecture.svg" alt="Axiara architecture" style="max-width: 100%; height: auto; width: 680px;" />
 </picture>
 
 ## 🧰 Технологический стек

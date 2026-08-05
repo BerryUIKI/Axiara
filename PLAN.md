@@ -38,14 +38,16 @@ Single source of truth for Axiara initialization. Update as decisions are made; 
 ## Repository State
 
 - [x] `git init` on `main` (2026-08-04)
-- [x] `README.md` — project overview
-- [x] `.gitignore` — Python / uv / FastAPI defaults
+- [x] `README.md` — project overview (+ 9 locales)
+- [x] `.gitignore` — Python / uv / FastAPI defaults (.workbuddy excluded)
+- [x] `LICENSE` — MIT (2026 Berry Wahlberg)
 - [x] Runtime data bootstrap — `.data.template/` skeleton (README + `local_config.example` + dirs), `scripts/init-data.sh`, `.data/` gitignored (2026-08-05)
 - [x] `AGENTS.md` — lean agent operating manual (2026-08-05)
 - [x] `docs/init.md` — agent-driven onboarding guide + data guide + data integrity (2026-08-05)
 - [x] Agent-driven init & anti-tampering design (D21) — `init-data.sh` CLI flags, docs integrity section, AGENTS.md rules (2026-08-05)
 - [x] Branch protection (2026-08-05) — `dev`: PR-only (enforce_admins, no force push/delete); `main`: PR-only + 1 review + required checks (`continuous-integration`, `pr-source-guard`) — **main PRs only from `dev` or `hotfix/*`** via `.github/workflows/pr-source-guard.yml`
-- [ ] Initial commit (awaiting confirmation)
+- [x] Initial commit `4542acb` (2026-08-04)
+- [x] Git remote — linked `https://github.com/BerryUIKI/Axiara.git`, `main` pushed (2026-08-05)
 
 ## Roadmap
 
@@ -60,7 +62,7 @@ Single source of truth for Axiara initialization. Update as decisions are made; 
 - [ ] **Quotation generator** — compose cost + price into quotations
 - [ ] **REST API** — FastAPI endpoints for external clients
 - [ ] **Tests & CI** — unit/integration tests, CI pipeline
-- [ ] **Git remote** — create remote repo, link, push per PR-only workflow
+- [ ] **Git remote** — create remote repo, link, push per PR-only workflow (remote not created yet)
 
 ## Execution Policy
 
