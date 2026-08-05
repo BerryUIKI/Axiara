@@ -66,9 +66,7 @@ bash scripts/init-data.sh \
   --data-source <local_file|team_repo|none> [--repo-url <url>] [--db-dsn <dsn>]
 ```
 
-- Omitted flags keep existing config; re-running with flags backs up to `config.bak` first.
-- **No-flags runs never touch an existing config** (safe for agents/CI).
-- `store/` sync failure is a warning, not fatal.
+(Omitted flags keep existing config; re-run backs up to `config.bak`; no-flags runs never touch existing config.)
 
 **Join**: clone/pull `store/` → read `store/workspace.config.yaml` → apply team values into
 `local_config/config`; ask only local-only items (paths, local cache). Then pull
@@ -81,6 +79,7 @@ bash scripts/init-data.sh \
 - `store/` synced (or the warning explained); `learn_shared` pulled on join.
 - Baseline SHA-256 manifest initialized in `db_dump/` (on first official-baseline import).
 
+<<<<<<< Updated upstream
 **Verification script:**
 
 ```bash
@@ -93,6 +92,12 @@ Checks: `.data/` structure ✓ · config file + required sections ✓ · store s
 
 - Official baseline `data/main/` is **human-edit only**; agents never write it.
 - Unexpected baseline change → **review mode**: show diff, ask "did you change this?", only continue after confirmation. Never silently continue.
+=======
+## Step 6 — Anti-tampering orientation
+
+- Official baseline `data/main/` is **human-edit only**; agents never write it.
+- Unexpected baseline change → **review mode**: show diff, ask "did you change this?", only continue after confirmation.
+>>>>>>> Stashed changes
 - Detect: manifest + `git status`; Recover: git history / `db_dump/` snapshots / SQLite cache; Audit: `ledger/` + git log.
 
 ## Examples
@@ -150,6 +155,7 @@ bash scripts/init-data.sh --language zh-CN
 | SQL connection fails | wrong `--db-dsn` — check host/port/credentials |
 | `.data/` partly deleted | safe to recreate; only `local_config/` can't be regenerated |
 
+<<<<<<< Updated upstream
 ## Common Mistakes
 
 | Mistake | Symptom | Fix |
@@ -167,3 +173,6 @@ bash scripts/init-data.sh --language zh-CN
 - **Initialization guide**: `docs/init.md`
 - **Data directory contract**: `.data.template/README.md`
 - **Full guide**: `docs/init.md`
+=======
+Full guide: `docs/init.md`. Config & templates: `docs/workspace-config.md`. Runtime layout: `.data.template/README.md`.
+>>>>>>> Stashed changes
