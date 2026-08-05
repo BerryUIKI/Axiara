@@ -122,6 +122,14 @@ Creates the five runtime dirs and seeds your private config (`.data/local_config
 
 ```
 Axiara/
+├── AGENTS.md        # Agent operating manual — workflow & hard rules
+├── assets/          # Brand assets (logo, lockup, architecture diagrams — light/dark)
+├── docs/            # Design & architecture docs (business-modes, init, templates/)
+├── scripts/         # Ops scripts (init-data.sh)
+├── .github/         # CI & release workflows (auto-release, PR source guard)
+├── .data.template/  # Runtime data skeleton → .data/ (gitignored, see its README)
+│
+# Planned — scaffolding in progress
 ├── agents/          # Agent definitions (LangGraph graphs)
 ├── data/            # Data layers
 │   ├── main/        #   official price baseline (manual-edit only)
@@ -130,9 +138,6 @@ Axiara/
 │   └── uploads/     #   user-provided tables / documents
 ├── skills/          # Agent skill packs (archive/query/quote/review)
 ├── output/          # Generated deliverables (quotes, review reports)
-├── docs/            # Design & architecture docs
-├── scripts/         # Ops scripts (init-data.sh)
-├── .data.template/  # Runtime data skeleton → .data/ (gitignored, see its README)
 └── src/             # Core library
 ```
 

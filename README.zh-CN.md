@@ -124,6 +124,14 @@ bash scripts/init-data.sh
 
 ```
 Axiara/
+├── AGENTS.md        # Agent 操作手册（工作流与硬性规则）
+├── assets/          # 品牌资产（LOGO、组合标识、架构图 — 亮/暗两套）
+├── docs/            # 设计与架构文档（business-modes、init、templates/）
+├── scripts/         # 运维脚本（init-data.sh）
+├── .github/         # CI 与发布工作流（auto-release、PR source guard）
+├── .data.template/  # 运行时数据骨架 → 生成 .data/（gitignore，见其 README）
+│
+# 待建 — 脚手架搭建中
 ├── agents/          # Agent 定义（LangGraph 图）
 ├── data/            # 数据层
 │   ├── main/        #   官方价格基准（仅人工编辑可写）
@@ -132,9 +140,6 @@ Axiara/
 │   └── uploads/     #   用户上传的表格/单据
 ├── skills/          # Agent 技能包（归档/查询/报价/复核）
 ├── output/          # 产物输出（报价单、复核报告）
-├── docs/            # 设计与架构文档
-├── scripts/         # 运维脚本（init-data.sh）
-├── .data.template/  # 运行时数据骨架 → 生成 .data/（gitignore，见其 README）
 └── src/             # 核心库
 ```
 

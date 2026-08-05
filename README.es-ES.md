@@ -111,6 +111,14 @@ uv run uvicorn axiara.api.main:app --reload
 
 ```
 Axiara/
+├── AGENTS.md        # Manual de operación de agentes — flujo de trabajo y reglas estrictas
+├── assets/          # Activos de marca (logo, logotipo combinado, diagramas de arquitectura — claro/oscuro)
+├── docs/            # Documentación de diseño y arquitectura (business-modes, init, templates/)
+├── scripts/         # Scripts de operación (init-data.sh)
+├── .github/         # Workflows de CI y release (auto-release, PR source guard)
+├── .data.template/  # Esqueleto de datos en tiempo de ejecución → .data/ (ignorado por git, ver su README)
+│
+# Planificado — scaffolding en curso
 ├── agents/          # Definiciones de agentes (grafos LangGraph)
 ├── data/            # Capas de datos
 │   ├── main/        #   base de precios oficial (solo edición manual)
@@ -119,7 +127,6 @@ Axiara/
 │   └── uploads/     #   tablas/documentos proporcionados por el usuario
 ├── skills/          # Paquetes de habilidades (archivo/consulta/cotización/revisión)
 ├── output/          # Entregables generados (cotizaciones, informes de revisión)
-├── docs/            # Documentación de diseño y arquitectura
 └── src/             # Biblioteca central
 ```
 

@@ -111,6 +111,14 @@ uv run uvicorn axiara.api.main:app --reload
 
 ```
 Axiara/
+├── AGENTS.md        # 에이전트 운영 매뉴얼 — 워크플로 및 하드 룰
+├── assets/          # 브랜드 자산 (로고, 록업, 아키텍처 다이어그램 — 라이트/다크)
+├── docs/            # 설계 및 아키텍처 문서 (business-modes, init, templates/)
+├── scripts/         # 운영 스크립트 (init-data.sh)
+├── .github/         # CI 및 릴리스 워크플로 (auto-release, PR source guard)
+├── .data.template/  # 런타임 데이터 스켈레톤 → .data/ 생성 (gitignore, 해당 README 참조)
+│
+# 계획 — 스캐폴딩 진행 중
 ├── agents/          # 에이전트 정의 (LangGraph 그래프)
 ├── data/            # 데이터 계층
 │   ├── main/        #   공식 가격 기준 (수동 편집만 쓰기 가능)
@@ -119,7 +127,6 @@ Axiara/
 │   └── uploads/     #   사용자 제공 표/문서
 ├── skills/          # 에이전트 스킬 팩 (아카이브/조회/견적/검토)
 ├── output/          # 생성 산출물 (견적서, 검토 보고서)
-├── docs/            # 설계 및 아키텍처 문서
 └── src/             # 핵심 라이브러리
 ```
 
