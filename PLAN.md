@@ -58,6 +58,7 @@ Single source of truth for Axiara initialization. Update as decisions are made; 
 - [ ] **Storage layer** — file-first (CSV / JSON / YAML) + git-synced `store/`; SQLite as optional local cache; write-permission enforcement at this layer
 - [ ] **Costing engine** — multi-dimensional cost model, rules, calculation pipeline
 - [ ] **Price fetch agent** — LangGraph agent: crawl + normalize real-time market prices
+- [ ] **Learning engine** — ingest historical quotes/invoices → clean → extract material/process/cost/pricing rules → `learn_db` (design: `docs/learning-plan.md`, phases 0–5)
 - [ ] **Task scheduler** — APScheduler jobs: periodic price fetch, scheduled quotation generation
 - [ ] **Quotation generator** — compose cost + price into quotations
 - [ ] **REST API** — FastAPI endpoints for external clients

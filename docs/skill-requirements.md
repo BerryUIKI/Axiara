@@ -11,10 +11,9 @@ Each capability below is authored once and deployed to one or more of these plat
 | Platform | Format | Install location | Primary owner |
 | --- | --- | --- | --- |
 | **WorkBuddy** | `SKILL.md` + frontmatter | `~/.workbuddy/skills/<name>/` (user-level) | WorkBuddy agent (this workspace) |
-| **Codex** (OpenAI) | `SKILL.md` + frontmatter | `.codex/skills/<name>/` (repo) or `~/.codex/skills/<name>/` | External coding agent (Codex CLI) |
-| **Claude** (Claude Code) | `SKILL.md` + frontmatter | `.claude/skills/<name>/` (repo) or `~/.claude/skills/<name>/` | External coding agent (Claude Code) |
+| **Codex / Claude** (format-compatible) | same `SKILL.md` + frontmatter | **single source in repo `skills/<name>/`**; users copy to platform home dirs when needed | External coding agent |
 
-Convention: skills live in the repo under `skills/<platform>/<name>/SKILL.md` (or the platform-native dot-dir when the user prefers), one source of truth, deployed to each platform root.
+Convention: skills live in the repo under `skills/<name>/SKILL.md` — **one source of truth, no platform dot-dirs in the repo** (`.codex/skills/` / `.claude/skills/` removed 2026-08-05, D-SK7). WorkBuddy installs to `~/.workbuddy/skills/`; Codex/Claude users copy from `skills/` as needed (formats are compatible).
 
 ## 2. Implementer Split (who writes what)
 
@@ -22,7 +21,7 @@ Convention: skills live in the repo under `skills/<platform>/<name>/SKILL.md` (o
 | --- | --- | --- |
 | W1 | Spec & template docs (`skill-requirements.md`, `crawler-spec.md`, `data-sources.md`) | **WorkBuddy agent** (done) |
 | W2 | WorkBuddy skills: SK-01/02/03 `SKILL.md` definitions + normalization dictionaries + adapter config templates | **WorkBuddy agent** |
-| W3 | Codex / Claude skill definitions (same content, platform-format) | **WorkBuddy agent** writes; deployed to repo dot-dirs |
+| W3 | Codex / Claude skill distribution — single source in `skills/`, users copy to platform home dirs | **WorkBuddy agent** writes source; no repo dot-dirs |
 | C1 | Storage layer module (`src/axiara/core/storage/`) — file-first + git `store/` + SQLite cache + write-permission enforcement | **External coding agent** (Codex / Claude Code) |
 | C2 | Crawler engine (`src/axiara/core/crawler/` or `agents/crawl_agent`) — httpx fetch/retry, robots check, adapters, normalization, dedup | **External coding agent** |
 | C3 | Costing engine (`core/costing/`), quotation generator (`core/quote/`) | **External coding agent** |
@@ -36,9 +35,9 @@ Rule of thumb: **workflows/specs/configs → WorkBuddy agent; Python code module
 
 | ID | Skill | Platform | Priority | Implementer | Status | Key contents |
 | --- | --- | --- | --- | --- | --- | --- |
-| SK-01 | axiara-onboarding | WorkBuddy + Codex + Claude | P0 | WorkBuddy (def), deploy 3 platforms | **Created** (2026-08-05) | Agent-driven init Q&A → `init-data.sh` flags → decision tree → anti-tampering orientation |
-| SK-02 | csv-data-import | WorkBuddy + Codex + Claude | P0 | WorkBuddy (def) | **Created** (2026-08-05) | price-list.csv → `data/main/`; invoice learning → `data/learn/`; SHA-256 manifest & diff |
-| SK-03 | price-crawler (commodity prices) | WorkBuddy + Codex + Claude | P1 | WorkBuddy (spec+skill def); **coding agent (engine, adapters)** | **Created** (2026-08-05); engine via coding agent | Compliance → fetch → parse → normalize → dedup → confirm → store; site adapters |
+| SK-01 | axiara-onboarding | skills/ single source (3 platforms) | P0 | WorkBuddy (def) | **Created** (2026-08-05) | Create/join dual-path init → pre-filled inference → `init-data.sh` flags → decision tree → anti-tampering |
+| SK-02 | csv-data-import | skills/ single source (3 platforms) | P0 | WorkBuddy (def) | **Created** (2026-08-05) | price-list.csv → `data/main/`; invoice learning → `data/learn/`; SHA-256 manifest & diff |
+| SK-03 | price-crawler (commodity prices) | skills/ single source (3 platforms) | P1 | WorkBuddy (spec+skill def); **coding agent (engine, adapters)** | **Created** (2026-08-05); engine via coding agent | Compliance → fetch → parse → normalize → dedup → confirm → store; site adapters |
 | SK-04 | storage-layer-playbook | Codex + Claude (primary) | P1 | Coding agent (impl) + WorkBuddy (playbook) | Deferred until storage layer built | file-first storage patterns, `store/` git-sync, SQLite cache, permission enforcement |
 | SK-05 | finance-quotes (reference) | WorkBuddy | P2 | n/a — existing | **Covered** | `westockdata` / `a-stock-data` / `westock-tool` already installed; not needed for commodity prices |
 | SK-06 | quote-export (reference) | WorkBuddy | P2 | n/a — existing | **Covered** | `tencent-docs` / local Office skills for `output/` deliverables |
@@ -49,9 +48,9 @@ Rule of thumb: **workflows/specs/configs → WorkBuddy agent; Python code module
 
 - **Purpose**: every fresh clone / reinstall runs the same agent-driven bootstrap.
 - **Trigger**: first use of a workspace; `.data/` wiped or corrupted; user changes language / storage-sync / data source.
-- **Content**: ① Q&A in user's language (language → team sync? → backend → data source → repo URL / DSN) ② map to `scripts/init-data.sh` flags ③ post-run verification (`.data/` layout, `store/` sync, `local_config/config`, manifest) ④ anti-tampering orientation (review mode).
+- **Content**: ① Q&A in user's language — **create vs join** path (`docs/workspace-config.md`): create = core questions + pre-filled inference review (currency/timezone/date_format/quote_*); join = apply team `workspace.config.yaml` + pull `learn_shared` ② map to `scripts/init-data.sh` flags ③ post-run verification (`.data/` layout, `store/` sync, `local_config/config`, manifest) ④ anti-tampering orientation (review mode).
 - **Acceptance**: a fresh clone reaches a working, verified state with no questions beyond the intended Q&A.
-- **Implementer**: WorkBuddy agent writes `SKILL.md`; deployed to WorkBuddy + `.codex/skills/` + `.claude/skills/`.
+- **Implementer**: WorkBuddy agent writes `SKILL.md` (single source in `skills/`); deployed to WorkBuddy home; Codex/Claude users copy from `skills/`.
 
 ### SK-02 — csv-data-import (P0)
 
@@ -85,16 +84,21 @@ Rule of thumb: **workflows/specs/configs → WorkBuddy agent; Python code module
 - **D-SK2** — Crawler trigger (OQ-1): **on-demand manual + optional weekly refresh**, refresh produces proposed diff only, never auto-insert (user confirmed).
 - **D-SK3** — Target sources (OQ-2): **Agent-defined** standard template + initial recommended list in `docs/data-sources.md`; all sources must respect robots protocol; enabled only after legal check (user delegated).
 - **D-SK4** — Fetch method (OQ-3): decided per source in `data-sources.md` (HTTP-first; browser only for JS-heavy B2B platforms) (user delegated).
+- **D-SK5** — Initialization model (open-source, 2026-08-05): **create** (guided; everything pre-filled from inference — currency by language, timezone by OS, date/quote formats — confirm-or-edit) vs **join** (apply team `workspace.config.yaml`, near-zero Q&A). Design: `docs/workspace-config.md`.
+- **D-SK6** — Training report output (OQ-S3, 2026-08-05): **chat + `output/` file**. Multi-user learned-data sync: hub model per `docs/learn-sync.md`.
+- **D-SK7** — Skill distribution (2026-08-05): repo keeps **only `skills/` single source**; `.codex/skills/` and `.claude/skills/` removed (user corrected). OQ-C3 (template export) = **automatic**; OQ-LS2 (learn push) = **manual weekly upload** (user confirmed).
 
 ## 6. Open Questions
 
 - **OQ-4** — Which specific sources to enable first (from `data-sources.md` initial list) — user picks after reviewing the list.
-- **OQ-5** — Skill install roots: repo dot-dirs (`.codex/skills/`, `.claude/skills/`) vs user-home roots — repo is recommended for team/CI consistency.
+- **OQ-5 — RESOLVED (2026-08-05)**: repo keeps only `skills/` single source; platform dot-dirs are user-side copies (D-SK7).
+- **OQ-6** — New config fields (`currency/timezone/date_format/quote_*`) + create/join logic in `scripts/init-data.sh`: coding-agent task once `docs/workspace-config.md` is confirmed.
 
 ## 7. Status Tracking
 
 - [x] 2026-08-05 — repo scan → v0.1 requirements + crawler spec
 - [x] 2026-08-05 — v0.2: platform scope (WorkBuddy/Codex/Claude), decisions D-SK1..4, implementer split, `docs/data-sources.md`
-- [x] 2026-08-05 — SK-01/02/03 created: source in `skills/<name>/SKILL.md`, deployed to `.codex/skills/`, `.claude/skills/`, and `~/.workbuddy/skills/` (WorkBuddy, local-only)
+- [x] 2026-08-05 — SK-01/02/03 created: single source in `skills/<name>/SKILL.md` (+ WorkBuddy home `~/.workbuddy/skills/`)
+- [x] 2026-08-05 — PR #20 merged: skill infrastructure (scripts/configs/references/assets); `.codex/.claude` dot-dirs removed (D-SK7)
 - [ ] SK-03 engine + adapters — external coding agent, after storage layer
 - [ ] SK-04 storage-layer-playbook — deferred to storage-layer implementation
