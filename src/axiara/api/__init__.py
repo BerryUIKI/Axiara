@@ -1,20 +1,16 @@
-"""FastAPI application — scaffold.
+"""FastAPI application for Axiara.
 
-RESTful API for external clients. Interactive client (REST session)
-is deferred until Axiara-Web.
+RESTful API exposing four modes via endpoints:
+- /archive/*: Mode 1 (manual edit, learn, crawl, review)
+- /query: Mode 2 (single-item query)
+- /quote: Mode 3 (batch fill, smart quotation)
+- /review: Mode 4 (user review)
+
+Interactive client (REST session) is deferred until Axiara-Web.
 """
 
 from __future__ import annotations
 
-from fastapi import FastAPI
+from axiara.api.main import app
 
-app = FastAPI(
-    title="Axiara",
-    description="Agent quotation core — REST API",
-    version="0.1.0",
-)
-
-
-@app.get("/health")
-def health() -> dict[str, str]:
-    return {"status": "ok"}
+__all__ = ["app"]
