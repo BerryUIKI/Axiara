@@ -123,6 +123,14 @@ uv run uvicorn axiara.api.main:app --reload
 
 ```
 Axiara/
+├── AGENTS.md        # エージェント運用マニュアル — ワークフローと厳格なルール
+├── assets/          # ブランド素材（ロゴ、ロックアップ、アーキテクチャ図 — ライト/ダーク）
+├── docs/            # 設計・アーキテクチャ文書（business-modes、init、templates/）
+├── scripts/         # 運用スクリプト（init-data.sh）
+├── .github/         # CI・リリースワークフロー（auto-release、PR source guard）
+├── .data.template/  # 実行時データの雛形 → .data/ を生成（gitignore、その README 参照）
+│
+# 予定 — スキャフォールディング進行中
 ├── agents/          # エージェント定義（LangGraph グラフ）
 ├── data/            # データ層
 │   ├── main/        #   公式価格基準（手動編集のみ書込可）
@@ -131,7 +139,6 @@ Axiara/
 │   └── uploads/     #   ユーザー提供の表/書類
 ├── skills/          # エージェントスキルパック（アーカイブ/照会/見積/レビュー）
 ├── output/          # 生成成果物（見積書、レビュー報告）
-├── docs/            # 設計・アーキテクチャ文書
 └── src/             # コアライブラリ
 ```
 

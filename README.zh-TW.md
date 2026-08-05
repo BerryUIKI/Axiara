@@ -123,6 +123,14 @@ uv run uvicorn axiara.api.main:app --reload
 
 ```
 Axiara/
+├── AGENTS.md        # Agent 操作手冊（工作流程與硬性規則）
+├── assets/          # 品牌資產（LOGO、組合識別、架構圖 — 亮/暗兩套）
+├── docs/            # 設計與架構文件（business-modes、init、templates/）
+├── scripts/         # 維運腳本（init-data.sh）
+├── .github/         # CI 與發佈工作流（auto-release、PR source guard）
+├── .data.template/  # 執行期資料骨架 → 產生 .data/（gitignore，見其 README）
+│
+# 待建 — 鷹架搭建中
 ├── agents/          # Agent 定義（LangGraph 圖）
 ├── data/            # 資料層
 │   ├── main/        #   官方價格基準（僅人工編輯可寫）
@@ -131,7 +139,6 @@ Axiara/
 │   └── uploads/     #   使用者上傳的表格/單據
 ├── skills/          # Agent 技能包（歸檔/查詢/報價/複核）
 ├── output/          # 產物輸出（報價單、複核報告）
-├── docs/            # 設計與架構文件
 └── src/             # 核心函式庫
 ```
 
