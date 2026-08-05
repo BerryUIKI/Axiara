@@ -59,7 +59,7 @@ class Preparer:
 
         if cache_file.exists():
             try:
-                with open(cache_file) as f:
+                with open(cache_file, encoding="utf-8") as f:
                     cached = json.load(f)
                 # Check if cache is still valid (24h TTL)
                 cached_time = datetime.fromisoformat(cached["timestamp"])

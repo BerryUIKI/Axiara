@@ -96,7 +96,7 @@ async def manual_edit(request: dict[str, Any]) -> dict[str, Any]:
     }
 
     graph = get_archive_graph()
-    result = await graph.ainvoke(initial_state)
+    result = await graph.ainvoke(initial_state, config={"configurable": {"thread_id": "default"}})
 
     if result.get("error"):
         raise HTTPException(status_code=400, detail=result["error"])
@@ -122,7 +122,7 @@ async def learn(request: dict[str, Any]) -> dict[str, Any]:
     }
 
     graph = get_archive_graph()
-    result = await graph.ainvoke(initial_state)
+    result = await graph.ainvoke(initial_state, config={"configurable": {"thread_id": "default"}})
 
     if result.get("error"):
         raise HTTPException(status_code=400, detail=result["error"])
@@ -152,7 +152,7 @@ async def crawl(request: CrawlRequest) -> dict[str, Any]:
     }
 
     graph = get_archive_graph()
-    result = await graph.ainvoke(initial_state)
+    result = await graph.ainvoke(initial_state, config={"configurable": {"thread_id": "default"}})
 
     if result.get("error"):
         raise HTTPException(status_code=400, detail=result["error"])
@@ -178,7 +178,7 @@ async def edit_review(request: dict[str, Any]) -> dict[str, Any]:
     }
 
     graph = get_archive_graph()
-    result = await graph.ainvoke(initial_state)
+    result = await graph.ainvoke(initial_state, config={"configurable": {"thread_id": "default"}})
 
     if result.get("error"):
         raise HTTPException(status_code=400, detail=result["error"])
@@ -210,7 +210,7 @@ async def query(request: QueryRequest) -> dict[str, Any]:
     }
 
     graph = get_query_graph()
-    result = await graph.ainvoke(initial_state)
+    result = await graph.ainvoke(initial_state, config={"configurable": {"thread_id": "default"}})
 
     if result.get("error"):
         raise HTTPException(status_code=400, detail=result["error"])
@@ -241,7 +241,7 @@ async def batch_fill(file: UploadFile) -> dict[str, Any]:
     }
 
     graph = get_quote_graph()
-    result = await graph.ainvoke(initial_state)
+    result = await graph.ainvoke(initial_state, config={"configurable": {"thread_id": "default"}})
 
     if result.get("error"):
         raise HTTPException(status_code=400, detail=result["error"])
@@ -272,7 +272,7 @@ async def generate_quote(request: QuotationRequest) -> dict[str, Any]:
     }
 
     graph = get_quote_graph()
-    result = await graph.ainvoke(initial_state)
+    result = await graph.ainvoke(initial_state, config={"configurable": {"thread_id": "default"}})
 
     if result.get("error"):
         raise HTTPException(status_code=400, detail=result["error"])
@@ -299,7 +299,7 @@ async def review(request: dict[str, Any]) -> dict[str, Any]:
     }
 
     graph = get_review_graph()
-    result = await graph.ainvoke(initial_state)
+    result = await graph.ainvoke(initial_state, config={"configurable": {"thread_id": "default"}})
 
     if result.get("error"):
         raise HTTPException(status_code=400, detail=result["error"])
