@@ -48,16 +48,50 @@ data/learn/private/
 └── stats/                       # user-local aggregates
 ```
 
-## 3. Weekly Upload Protocol (text mode)
+## 3. Upload Trigger, Export & Branch Rules (text mode)
 
-- **Trigger**: user says "upload my library" or the weekly reminder fires — **manual, confirmed** (OQ-LS2).
-- **Packaging**: the Agent exports the incremental diff of `data/learn/private/` since the last upload into `bundle.yaml` (rules + provenance: contributor, timestamps, observation counts). Customer-specific entries excluded by default (user choice).
-- **Upload = git commit + push** of the bundle into `learn_inbox/<user>/<yyyymmdd>/`. Push happens only after the user confirms (matches record-first convention).
-- **Post-upload**: user's private library stays local (upload is a copy).
+### 3.1 Trigger
+
+User says **"上传数据" / "重新上传" / "提交数据"** (or English equivalents: *"upload my data" / "re-submit" / "submit my library"*) — or the weekly reminder fires. Always **manual, user-confirmed** (OQ-LS2): nothing auto-pushes.
+
+### 3.2 Export — date + user ID
+
+- **User identity**: a **unique machine code / user id** (唯一机器码), sanitized to `[a-zA-Z0-9_-]` (e.g. `AX-3f8a-c2d1`). This is the `contributor` everywhere.
+- **Bundle location**: `learn_inbox/<machine-id>/<yyyymmdd>/bundle.yaml` — **date and user id are in the path**; provenance (contributor, timestamps, observation counts) is inside the bundle.
+- **"重新上传" (re-upload)**: creates a *new* dated directory `.../<yyyymmdd>/` on the same user branch; the previous pending upload of that user is flagged stale during review (no silent overwrite).
+- Post-upload: the personal library stays local (upload is a copy).
+
+### 3.3 Branch rules (text data repo)
+
+The data repo behind `store/` is **separate from the Axiara code repo**. It follows its own branch rules (protected, PR-only — mirrors AGENTS.md):
+
+| Branch | Purpose | Writable by | Content |
+| --- | --- | --- | --- |
+| `main` | **Stable public library** — protected | Admin only (via PR, after review) | `learn_shared/` rules + manifest |
+| `user/<machine-id>` | **Per-user upload branch** — one per user | That user only | `learn_inbox/<machine-id>/<yyyymmdd>/` bundles |
+| `review/<yyyymmdd>` (optional) | Training-Agent proposals staging | Training Agent | proposals → PR into `main` |
+
+Rules:
+1. **Users never push to `main`** — it is protected; only admin merges after review (PR-only, same convention as the code repo).
+2. **One branch per user**: `user/<machine-id>` — the user's only write point. Zero cross-user conflicts, natural isolation, full per-user audit.
+3. Upload commit message convention: `upload <machine-id> <yyyymmdd> [re-upload]`.
+4. Re-upload lands as a new dated directory on the same user branch; the review step marks the earlier pending dir stale.
+5. `main` updates happen **only via review PR**: training Agent aggregates `user/*` → proposals → admin confirms → merge into `main`.
+6. Users pull `main` read-only; their local overrides always win.
+
+Flow:
+
+```
+user: "上传数据" ──▶ export bundle (machine-id + yyyymmdd)
+      ──▶ commit+push → user/<machine-id>/learn_inbox/<machine-id>/<yyyymmdd>/bundle.yaml
+      ──▶ training Agent aggregates user/* branches ──▶ proposals (review/<date>)
+      ──▶ admin confirms ──▶ PR merge into main (learn_shared/ + manifest)
+      ──▶ users pull main (read-only)
+```
 
 ## 4. Central Review Flow (text mode)
 
-1. **Ingest** — training Agent reads new `learn_inbox/<user>/<date>/` bundles, validates YAML + schema, ledger entry.
+1. **Ingest** — training Agent reads new `learn_inbox/<machine-id>/<date>/` bundles from all `user/*` branches, validates YAML + schema, ledger entry.
 2. **Compare** — match bundle rules against `learn_shared/rules/*.yaml`:
    - same `rule_id` → version/trust comparison
    - new keys → new-rule candidates
