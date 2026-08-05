@@ -1,0 +1,13 @@
+name,spec,unit,unit_price,currency,effective_date,note
+copper-wire,1.5mm²,kg,68.50,CNY,2026-08-05,High conductivity grade
+copper-wire,2.5mm²,kg,65.20,CNY,2026-08-05,Standard grade
+copper-rod,8mm,ton,68500,CNY,2026-08-05,T2 grade
+aluminum,A00,ton,18500.00,CNY,2026-08-05,Spot price - Shanghai
+aluminum-alloy,ADC12,ton,19200,CNY,2026-08-05,Die-casting alloy
+steel-rebar,HRB400,ton,4200,CNY,2026-08-05,20mm specification
+steel-hr,3.0mm,ton,4150,CNY,2026-08-05,Hot rolled coil
+steel-cr,1.0mm,ton,4800,CNY,2026-08-05,Cold rolled sheet
+zinc,0#,ton,23500,CNY,2026-08-05,High purity
+lead,1#,ton,16200,CNY,2026-08-05,Standard grade
+nickel,1#,ton,135000,CNY,2026-08-05,LME referenced
+tin,1#,ton,225000,CNY,2026-08-05,Yunnan origin

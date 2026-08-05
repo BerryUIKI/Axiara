@@ -1,0 +1,97 @@
+# Axiara Price Crawler - Global Settings
+# Version: v0.1
+# See: docs/crawler-spec.md §3
+
+# HTTP Client Settings
+http:
+  timeout:
+    connect: 10  # seconds
+    read: 30     # seconds
+  retries:
+    max_attempts: 3
+    backoff:
+      - 1   # 1st retry after 1s
+      - 5   # 2nd retry after 5s
+      - 15  # 3rd retry after 15s
+  user_agent: "Axiara-PriceBot/0.1 (+https://github.com/BerryUIKI/Axiara)"
+  respect_crawl_delay: true
+  default_delay: 2  # seconds between requests to same source
+
+# Browser Settings (for JS-rendered pages)
+browser:
+  headless: true
+  timeout: 60000  # milliseconds
+  wait_after_load: 2000  # milliseconds to wait for JS rendering
+  user_agent: "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
+
+# Robots.txt Cache
+robots_cache:
+  enabled: true
+  path: ".data/cache/robots/"
+  ttl: 86400  # 24 hours in seconds
+
+# Normalization Settings
+normalization:
+  dictionary_path: "skills/price-crawler/config/normalization.yaml"
+  unknown_alias_action: keep_raw_and_flag  # Never guess silently
+
+# Anomaly Detection
+anomaly_filter:
+  enabled: true
+  method: median_range
+  range: [0.1, 10.0]  # [0.1×median, 10×median]
+  action: quarantine  # quarantine to confirmation diff, never auto-drop
+
+# Deduplication
+dedup:
+  key_fields: ["name", "spec", "unit", "currency", "source"]
+  strategy: keep_most_recent  # or keep_highest_confidence
+
+# Storage Paths
+storage:
+  market_data: "data/market/"
+  raw_capture: "data/market/{source}/raw/"
+  manifest: "db_dump/"
+  ledger: "ledger/"
+  file_format: json  # json or yaml
+
+# Output File Naming
+output:
+  pattern: "{yyyymmdd}-{material}.json"
+  raw_pattern: "{yyyymmdd}-{material}-raw.json"
+
+# Scheduling
+schedule:
+  default: on_demand  # on_demand or weekly
+  weekly:
+    enabled: false
+    day: monday
+    time: "09:00"
+    timezone: "Asia/Shanghai"
+
+# LangGraph Integration
+langgraph:
+  interrupt_on_confirm: true  # Always interrupt before write to data/market/
+  checkpointer_enabled: true  # Resume interrupted crawls
+
+# Logging
+logging:
+  level: INFO
+  path: "logs/crawler/"
+  format: "%(asctime)s - %(name)s - %(levelname)s - %(message)s"
+
+# Error Handling
+error_handling:
+  network_failure: retry_with_backoff  # retry_with_backoff or skip
+  parse_failure: log_and_skip_row
+  validation_failure: log_and_skip_row
+  source_disabled: refuse_upfront
+
+# Provenance Fields (always included)
+provenance:
+  required_fields:
+    - source
+    - url
+    - fetched_at
+    - confidence
+    - raw  # Raw text as displayed on page

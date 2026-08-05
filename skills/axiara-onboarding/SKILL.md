@@ -60,6 +60,57 @@ bash scripts/init-data.sh \
 - Unexpected baseline change → enter **review mode**: show the diff, ask "did you change this?", only continue after confirmation. Never silently continue.
 - Detect: manifest + `git status`; Recover: git history / `db_dump/` snapshots / SQLite cache; Audit: `ledger/` + git log.
 
+## Examples
+
+### Example 1: Personal mode (SQLite)
+
+```bash
+# User answers (in their language):
+# 1. Language: zh-CN
+# 2. Team sync? No (personal)
+# 3. Data source: none (fresh start)
+
+# Agent runs:
+bash scripts/init-data.sh --language zh-CN --sync-mode none --backend sqlite --data-source none
+
+# Result:
+# ✓ .data/ created with SQLite backend
+# ✓ local_config/config written with language=zh-CN, sync_mode=none, backend=sqlite
+# ✓ Ready to import price lists
+```
+
+### Example 2: Team mode (CSV + git)
+
+```bash
+# User answers:
+# 1. Language: en
+# 2. Team sync? Yes → Text + Git
+# 3. Data source: team repo → https://github.com/team/axiara-data.git
+
+# Agent runs:
+bash scripts/init-data.sh --language en --sync-mode git --backend csv --data-source team_repo --repo-url https://github.com/team/axiara-data.git
+
+# Result:
+# ✓ .data/ created with CSV backend
+# ✓ store/ cloned from team repo
+# ✓ local_config/config written with git sync settings
+# ⚠ Note: Push requires manual confirmation (not automatic)
+```
+
+### Example 3: Changing configuration
+
+```bash
+# User wants to change language from en to zh-CN
+# Agent runs with --language flag:
+
+bash scripts/init-data.sh --language zh-CN
+
+# Result:
+# ✓ Existing config backed up to config.bak
+# ✓ language updated to zh-CN
+# ⚠ Other settings preserved (no-flags runs never touch existing config)
+```
+
 ## Troubleshooting (quick)
 
 | Symptom | Fix |
@@ -69,3 +120,33 @@ bash scripts/init-data.sh \
 | `.data/` partly deleted | safe to recreate; only `local_config/` can't be regenerated |
 
 Full guide: `docs/init.md`. Runtime layout contract: `.data.template/README.md`.
+
+## Verification
+
+After onboarding completes, verify the setup:
+
+```bash
+python skills/axiara-onboarding/scripts/verify_setup.py
+```
+
+This checks:
+- ✓ `.data/` directory structure is correct
+- ✓ Configuration file exists with required sections
+- ✓ Store sync status (if git mode)
+- ✓ Manifest initialization
+
+## Common Mistakes
+
+| Mistake | Symptom | Fix |
+| --- | --- | --- |
+| Forgot to backup `local_config/` before reinstall | Private settings lost | `local_config/` is NOT regenerated — always backup before wiping `.data/` |
+| Re-running with wrong flags | Config overwritten unexpectedly | Use no-flags run to check status; always specify flags explicitly when changing |
+| Team repo URL wrong | `store/` empty after sync | Check `--repo-url` format; verify repo exists and is accessible |
+| SQL DSN format wrong | Connection fails | Use standard format: `mysql://user:pass@host:port/dbname` |
+
+## See Also
+
+- **Configuration schema**: `skills/axiara-onboarding/references/config_schema.md`
+- **Verification script**: `skills/axiara-onboarding/scripts/verify_setup.py`
+- **Initialization guide**: `docs/init.md`
+- **Data directory contract**: `.data.template/README.md`
