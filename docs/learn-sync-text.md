@@ -56,8 +56,8 @@ User says **"上传数据" / "重新上传" / "提交数据"** (or English equiv
 
 ### 3.2 Export — date + user ID
 
-- **User identity**: a **unique machine code / user id** (唯一机器码), sanitized to `[a-zA-Z0-9_-]` (e.g. `AX-3f8a-c2d1`). This is the `contributor` everywhere.
-- **Bundle location**: `learn_inbox/<machine-id>/<yyyymmdd>/bundle.yaml` — **date and user id are in the path**; provenance (contributor, timestamps, observation counts) is inside the bundle.
+- **User identity**: a **stable `user-id`** generated once at onboarding and persisted in `local_config` (survives machine changes); the **unique machine code** (唯一机器码) is the default/fallback. Both sanitized to `[a-zA-Z0-9_-]` (e.g. `AX-3f8a-c2d1`). This is the `contributor` everywhere.
+- **Bundle location**: `learn_inbox/<user-id>/<yyyymmdd>/bundle.yaml` — **date and user id are in the path**; provenance (contributor, timestamps, observation counts) is inside the bundle.
 - **"重新上传" (re-upload)**: creates a *new* dated directory `.../<yyyymmdd>/` on the same user branch; the previous pending upload of that user is flagged stale during review (no silent overwrite).
 - Post-upload: the personal library stays local (upload is a copy).
 
@@ -68,30 +68,35 @@ The data repo behind `store/` is **separate from the Axiara code repo**. It foll
 | Branch | Purpose | Writable by | Content |
 | --- | --- | --- | --- |
 | `main` | **Stable public library** — protected | Admin only (via PR, after review) | `learn_shared/` rules + manifest |
-| `user/<machine-id>` | **Per-user upload branch** — one per user | That user only | `learn_inbox/<machine-id>/<yyyymmdd>/` bundles |
+| `user/<user-id>` | **Per-user upload branch** — one per user | That user only | `learn_inbox/<user-id>/<yyyymmdd>/` bundles |
 | `review/<yyyymmdd>` (optional) | Training-Agent proposals staging | Training Agent | proposals → PR into `main` |
 
 Rules:
 1. **Users never push to `main`** — it is protected; only admin merges after review (PR-only, same convention as the code repo).
-2. **One branch per user**: `user/<machine-id>` — the user's only write point. Zero cross-user conflicts, natural isolation, full per-user audit.
-3. Upload commit message convention: `upload <machine-id> <yyyymmdd> [re-upload]`.
-4. Re-upload lands as a new dated directory on the same user branch; the review step marks the earlier pending dir stale.
-5. `main` updates happen **only via review PR**: training Agent aggregates `user/*` → proposals → admin confirms → merge into `main`.
-6. Users pull `main` read-only; their local overrides always win.
+2. **One branch per user**: `user/<user-id>` — the user's only write point. Zero cross-user conflicts, natural isolation, full per-user audit. *(Confirmed 2026-08-05: per-user branches stay — see §3.4 for the fallback if they ever become hard to manage.)*
+3. **`user-id` is stable** — generated once at onboarding, persisted in `local_config` (survives machine changes; the machine code is only the default/fallback). A machine switch keeps the same `user-id` → no orphan branches.
+4. **Append-only**: a user branch only ever *adds* new dated directories (`learn_inbox/<user-id>/<yyyymmdd>/`); never edits or deletes history. Re-upload = new dated dir (the review step flags the earlier pending one stale).
+5. Upload commit message convention: `upload <user-id> <yyyymmdd> [re-upload]`.
+6. `main` updates happen **only via review PR**: training Agent aggregates all `user/*` branches (`git fetch origin 'refs/heads/user/*'`) → proposals → admin confirms → merge into `main`.
+7. Users pull `main` read-only; their local overrides always win.
 
 Flow:
 
 ```
-user: "上传数据" ──▶ export bundle (machine-id + yyyymmdd)
-      ──▶ commit+push → user/<machine-id>/learn_inbox/<machine-id>/<yyyymmdd>/bundle.yaml
+user: "上传数据" ──▶ export bundle (user-id + yyyymmdd)
+      ──▶ commit+push → user/<user-id>/learn_inbox/<user-id>/<yyyymmdd>/bundle.yaml
       ──▶ training Agent aggregates user/* branches ──▶ proposals (review/<date>)
       ──▶ admin confirms ──▶ PR merge into main (learn_shared/ + manifest)
       ──▶ users pull main (read-only)
 ```
 
+### 3.4 Fallback (if per-user branches ever get unwieldy)
+
+If branch count / management becomes a burden, switch to a **single shared upload branch** (`upload/`) with the same directory isolation (`learn_inbox/<user-id>/<yyyymmdd>/`). Cost: shared write point — users rely on directory discipline instead of branch isolation; per-user permission isolation is lost (acceptable since uploads exclude customer-sensitive data). `main` stays protected either way.
+
 ## 4. Central Review Flow (text mode)
 
-1. **Ingest** — training Agent reads new `learn_inbox/<machine-id>/<date>/` bundles from all `user/*` branches, validates YAML + schema, ledger entry.
+1. **Ingest** — training Agent reads new `learn_inbox/<user-id>/<date>/` bundles from all `user/*` branches, validates YAML + schema, ledger entry.
 2. **Compare** — match bundle rules against `learn_shared/rules/*.yaml`:
    - same `rule_id` → version/trust comparison
    - new keys → new-rule candidates
