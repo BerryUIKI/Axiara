@@ -130,23 +130,45 @@ Axiara/
 └── src/             # 核心函式庫
 ```
 
+## 🧩 Skills
+
+Agent 技能包（`skills/` 單一來源，相容 WorkBuddy/Codex/Claude）：
+
+| 技能 | 用途 |
+| --- | --- |
+| **axiara-onboarding** | 工作區初始化（建立/加入）— 預填推斷（依語言推貨幣、依系統推時區）、`workspace.config.yaml` 模板 |
+| **csv-data-import** | 驗證並匯入價目表至官方基準；SHA-256 清單、帳本、學習路徑 |
+| **price-crawler** | 商品市場價格爬取 — robots 協定、7 步驟管線、插入前確認 |
+
+## 👥 多使用者學習（hub 模型）
+
+每個 Axiara 實例從自身的報價與修正學習到**個人調教庫**（本機）。上傳為手動且需使用者確認：說 *"上传数据"* / *"重新上传"* / *"提交数据"*，你的 Agent 就會把含日期的資料包匯出到**中心庫**（`learn_inbox/<user-id>/<yyyymmdd>/bundle.yaml`，推送到你自己的 `user/<user-id>` 分支）。**中心訓練 Agent** 審查所有上傳並提出公共規則變更建議；`learn_shared` 更新前須經**管理員確認**。動態規模監控會隨團隊成長提出儲存改善建議。見 [`docs/learn-sync.md`](docs/learn-sync.md)。
+
 ## 📚 文件
 
 - [業務模式與架構](docs/business-modes.md) — 資料權限模型、四大模式、LangGraph 對應
 - [PLAN.md](PLAN.md) — 藍圖的單一事實來源
+- [docs/init.md](docs/init.md) — 首次設定、資料指南與完整性
+- [docs/workspace-config.md](docs/workspace-config.md) — 建立/加入、設定模板
+- [docs/crawler-spec.md](docs/crawler-spec.md) · [docs/data-sources.md](docs/data-sources.md) — 爬蟲設計與來源註冊表
+- [docs/learning-plan.md](docs/learning-plan.md) · [docs/training-scenarios.md](docs/training-scenarios.md) — 學習計畫與使用者情境
+- [docs/learn-sync.md](docs/learn-sync.md) · [docs/learn-sync-text.md](docs/learn-sync-text.md) · [docs/learn-sync-sql.md](docs/learn-sync-sql.md) — 多使用者學習 hub
+- [docs/skill-requirements.md](docs/skill-requirements.md) — 技能待辦與決策 D-SK1–11
+- [docs/development-handoff.md](docs/development-handoff.md) — 外部 Coding Agent 任務書
 
 ## 🗺️ 藍圖
 
 - [x] 工作區初始化與設計決策
-- [ ] 套件脚手架（`uv init`、`src/` 佈局）
-- [ ] 儲存層（可插拔後端 + CSV）
+- [x] 套件脚手架（`uv init`、`src/` 佈局）
+- [x] 儲存層（檔案優先：CSV + Git 同步、SQLite 快取、權限強制）
+- [x] 價格抓取 — 爬蟲引擎（robots 協定、7 步驟管線、確認閘門）
 - [ ] 成本核算引擎（多維成本模型）
-- [ ] 價格抓取 Agent（LangGraph 爬取 + 正規化）
-- [ ] 任務排程器（APScheduler，按需）
 - [ ] 報價產生器（預設 + 使用者模板）
+- [ ] 任務排程器（APScheduler，按需）
 - [ ] 複核引擎（異常偵測）
+- [ ] 多使用者學習 hub（上傳流程、中心審查、監控、封存）
 - [ ] REST API
-- [ ] 測試與 CI
+- [ ] 測試與 CI 強化
 
 ## 🤝 貢獻
 

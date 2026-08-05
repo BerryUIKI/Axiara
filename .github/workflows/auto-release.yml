@@ -33,8 +33,16 @@ jobs:
         env:
           GH_TOKEN: ${{ github.token }}
         run: |
+          # Release notes come from the corresponding CHANGELOG version entry
+          # (doc-sync discipline: CHANGELOG [vX.Y.Z] is the main release record).
+          NOTES=$(mktemp)
+          awk -v ver="${{ steps.ver.outputs.version }}" '
+            /^## \[/ { if (p) exit; if (index($0, "[" ver "]") > 0) p=1; next }
+            p { print }
+          ' CHANGELOG.md > "$NOTES" || true
+          if [ ! -s "$NOTES" ]; then
+            printf 'Automated release from main (%s)\n\nGitHub automatically attaches source archives (zip / tar.gz) to this release.' "${{ github.sha }}" > "$NOTES"
+          fi
           gh release create "v${{ steps.ver.outputs.version }}" \
             --title "Axiara v${{ steps.ver.outputs.version }}" \
-            --notes "Automated release from main (${{ github.sha }})
-
-          GitHub automatically attaches source archives (zip / tar.gz) to this release."
+            --notes-file "$NOTES"

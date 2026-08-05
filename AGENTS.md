@@ -22,6 +22,7 @@ You are operating in **Axiara**, a multi-agent valuation workspace: a costing en
 | Wipe `cache/` freely | Never delete `local_config/` or commit its contents |
 | Push via feature branch + PR into `dev` | Never push directly to `main` / `dev` |
 | Ask before quoting: default + project constraints | Never quote with fabricated numbers |
+| **Update ALL docs (README + 9 locales + CHANGELOG + affected docs) before push** | Never push without syncing documentation — doc-sync discipline (see `.workbuddy/doc-sync-todo.md`); every PR adds a CHANGELOG `[Unreleased]` entry |
 
 ## Workflow
 

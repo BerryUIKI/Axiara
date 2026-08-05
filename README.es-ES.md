@@ -130,23 +130,45 @@ Axiara/
 └── src/             # Biblioteca central
 ```
 
+## 🧩 Skills
+
+Paquetes de habilidades (fuente única en `skills/`, compatible con WorkBuddy/Codex/Claude):
+
+| Skill | Propósito |
+| --- | --- |
+| **axiara-onboarding** | Inicialización del workspace (crear/unirse) — inferencia pre-rellenada (moneda por idioma, zona horaria por SO), plantillas `workspace.config.yaml` |
+| **csv-data-import** | Validar e importar listas de precios a la base oficial; manifiesto SHA-256, ledger, ruta de aprendizaje |
+| **price-crawler** | Rastreo de precios de mercado de materias primas — protocolo robots, pipeline de 7 pasos, confirmación antes de insertar |
+
+## 👥 Aprendizaje multiusuario (modelo hub)
+
+Cada instancia de Axiara aprende de sus propias cotizaciones y correcciones en una **biblioteca personal** (local). La subida es manual y confirmada por el usuario: di *"上传数据"* / *"重新上传"* / *"提交数据"*, y tu agente exporta un paquete fechado a la **biblioteca central** (`learn_inbox/<user-id>/<yyyymmdd>/bundle.yaml`, enviado a tu propia rama `user/<user-id>`). Un **agente de entrenamiento central** revisa todas las subidas y propone cambios a las reglas públicas; un **admin confirma** antes de que se actualice `learn_shared`. El monitoreo dinámico de escala sugiere mejoras de almacenamiento a medida que crece el equipo. Ver [`docs/learn-sync.md`](docs/learn-sync.md).
+
 ## 📚 Documentación
 
 - [Modos de negocio y arquitectura](docs/business-modes.md) — modelo de permisos de datos, cuatro modos, mapeo LangGraph
 - [PLAN.md](PLAN.md) — fuente única de verdad para la hoja de ruta
+- [docs/init.md](docs/init.md) — configuración inicial, guía de datos e integridad
+- [docs/workspace-config.md](docs/workspace-config.md) — crear/unirse, plantillas de configuración
+- [docs/crawler-spec.md](docs/crawler-spec.md) · [docs/data-sources.md](docs/data-sources.md) — diseño del crawler y registro de fuentes
+- [docs/learning-plan.md](docs/learning-plan.md) · [docs/training-scenarios.md](docs/training-scenarios.md) — plan de aprendizaje y escenarios de usuario
+- [docs/learn-sync.md](docs/learn-sync.md) · [docs/learn-sync-text.md](docs/learn-sync-text.md) · [docs/learn-sync-sql.md](docs/learn-sync-sql.md) — hub de aprendizaje multiusuario
+- [docs/skill-requirements.md](docs/skill-requirements.md) — backlog de skills y decisiones D-SK1–11
+- [docs/development-handoff.md](docs/development-handoff.md) — briefs de tareas para agentes de codificación externos
 
 ## 🗺️ Hoja de ruta
 
 - [x] Inicialización del espacio de trabajo y decisiones de diseño
-- [ ] Andamiaje del paquete (`uv init`, layout `src/`)
-- [ ] Capa de almacenamiento (backends conectables + CSV)
+- [x] Andamiaje del paquete (`uv init`, layout `src/`)
+- [x] Capa de almacenamiento (archivos primero: CSV + sync Git, caché SQLite, cumplimiento de permisos)
+- [x] Agente de recuperación de precios — motor crawler (protocolo robots, pipeline de 7 pasos, puerta de confirmación)
 - [ ] Motor de cálculo de costos (modelo de costos multidimensional)
-- [ ] Agente de recuperación de precios (rastreo LangGraph + normalización)
-- [ ] Programador de tareas (APScheduler, bajo demanda)
 - [ ] Generador de cotizaciones (plantillas por defecto + usuario)
+- [ ] Programador de tareas (APScheduler, bajo demanda)
 - [ ] Motor de revisión (detección de anomalías)
+- [ ] Hub de aprendizaje multiusuario (flujo de subida, revisión central, monitoreo, archivado)
 - [ ] API REST
-- [ ] Pruebas y CI
+- [ ] Pruebas y refuerzo de CI
 
 ## 🤝 Contribuciones
 

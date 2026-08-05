@@ -37,6 +37,8 @@ Axiara is an **agent workspace for valuation**. It gives AI agents four well-def
 - **🧩 Template-adaptive quoting** — ships a default quote template, adapts on the fly to user-provided templates (open-source / fork-friendly).
 - **💾 Storage for any setup — no servers needed** — personal: SQLite; team: CSV files synced via git (`store/`, with an auto local SQLite cache for fast queries), or SQL server (MySQL / MariaDB / PostgreSQL).
 - **🕐 On-demand crawling** — market data refreshes when you ask, not on a blind schedule.
+- **🔄 Multi-user learning hub** — every user tunes their own personal library (专属调教库); weekly upload to the central library, where a central training Agent reviews before public rules change (per-user branches, admin confirmation, dynamic scale monitoring).
+- **📝 AI-friendly learned data** — rules/bundles stored as YAML (readable, commentable, clean diffs); JSON reserved for machine-only exchange.
 
 ## 🚀 Start here — no tech skills needed
 
@@ -92,8 +94,6 @@ Either way, once setup finishes you can start with something like: *"Make me a q
 
 ## 🧑‍💻 Developer Quick Start
 
-> Project scaffolding in progress — commands below are the target experience.
-
 ```bash
 # Install dependencies
 uv sync
@@ -118,46 +118,81 @@ bash scripts/init-data.sh
 
 Creates the five runtime dirs and seeds your private config (`.data/local_config/config`, never overwritten); set `data_repo.url` there to sync the team data repo into `store/`. Full guide: [`docs/init.md`](docs/init.md).
 
+### What's implemented so far
+
+- **Storage layer** (`src/axiara/core/storage/`) — file-first CSV/JSON/YAML + SQLite cache + SHA-256 manifest + **write-permission enforcement** (agents can never write the official baseline).
+- **Crawler engine** (`src/axiara/core/crawler/`) — 7-step pipeline (robots-protocol, user-confirmation gate).
+- **Skills** (`skills/`) — onboarding, csv-data-import, price-crawler (see below).
+- Init script: language→currency inference, `--default-currency`, `workspace.config.yaml` export.
+- **42 tests passing**.
+
 ## 📁 Repository Layout
 
 ```
 Axiara/
 ├── AGENTS.md        # Agent operating manual — workflow & hard rules
+├── CHANGELOG.md     # Change log (dev log = [Unreleased]; main releases = version entries)
 ├── assets/          # Brand assets (logo, lockup, architecture diagrams — light/dark)
-├── docs/            # Design & architecture docs (business-modes, init, templates/)
+├── docs/            # Design & architecture docs (see Documentation below)
 ├── scripts/         # Ops scripts (init-data.sh)
 ├── .github/         # CI & release workflows (auto-release, PR source guard)
 ├── .data.template/  # Runtime data skeleton → .data/ (gitignored, see its README)
-│
-# Planned — scaffolding in progress
-├── agents/          # Agent definitions (LangGraph graphs)
 ├── data/            # Data layers
 │   ├── main/        #   official price baseline (manual-edit only)
-│   ├── learn/       #   learned reference
+│   ├── learn/       #   learned reference (personal library / uploads)
 │   ├── market/      #   crawled market prices
 │   └── uploads/     #   user-provided tables / documents
-├── skills/          # Agent skill packs (archive/query/quote/review)
+├── skills/          # Skill packs (axiara-onboarding, csv-data-import, price-crawler)
 ├── output/          # Generated deliverables (quotes, review reports)
-└── src/             # Core library
+└── src/axiara/      # Core library
+    ├── core/        #   storage, crawler, costing, quote
+    ├── agents/      #   LangGraph agent definitions
+    ├── api/         #   FastAPI app
+    └── scheduler/   #   APScheduler jobs
 ```
+
+## 🤖 Skills
+
+Agent skill packs (single source in `skills/`, WorkBuddy/Codex/Claude compatible):
+
+| Skill | Purpose |
+| --- | --- |
+| **axiara-onboarding** | Create/join workspace init — pre-filled inference (currency by language, timezone by OS), `workspace.config.yaml` templates |
+| **csv-data-import** | Validate + import price lists into the official baseline; SHA-256 manifest, ledger, learning path |
+| **price-crawler** | Commodity market-price crawling — robots-protocol, 7-step pipeline, confirm-before-insert |
+
+## 👥 Multi-user learning (hub model)
+
+Each user's Axiara learns from its own quotes and corrections into a **personal library** (local). Uploading is manual and user-confirmed: say *"上传数据"* / *"重新上传"* / *"提交数据"*, and your Agent exports a dated bundle to the **central library** (`learn_inbox/<user-id>/<yyyymmdd>/bundle.yaml`, pushed to your own `user/<user-id>` branch). A **central training Agent** reviews all uploads and proposes changes to the public rules; an **admin confirms** before `learn_shared` updates. Dynamic scale monitoring suggests storage upgrades as the team grows. See [`docs/learn-sync.md`](docs/learn-sync.md).
 
 ## 📚 Documentation
 
-- [Business Modes & Architecture](docs/business-modes.md) — data permission model, four modes, LangGraph mapping
 - [PLAN.md](PLAN.md) — single source of truth for the roadmap
+- [docs/init.md](docs/init.md) — first-time setup, data guide & data integrity
+- [docs/business-modes.md](docs/business-modes.md) — data permission model, four modes, LangGraph mapping
+- [docs/workspace-config.md](docs/workspace-config.md) — create/join onboarding, config templates & pre-filled inference
+- [docs/crawler-spec.md](docs/crawler-spec.md) — commodity price crawler design
+- [docs/data-sources.md](docs/data-sources.md) — source registry template + candidates
+- [docs/learning-plan.md](docs/learning-plan.md) — learned-library training plan
+- [docs/training-scenarios.md](docs/training-scenarios.md) — user training scenarios S1–S13
+- [docs/learn-sync.md](docs/learn-sync.md) — multi-user learning hub (overview)
+- [docs/learn-sync-text.md](docs/learn-sync-text.md) · [docs/learn-sync-sql.md](docs/learn-sync-sql.md) — hub implementation variants (text+git / SQL server)
+- [docs/skill-requirements.md](docs/skill-requirements.md) — skill backlog & decisions D-SK1–11
+- [docs/development-handoff.md](docs/development-handoff.md) — external coding-agent task briefs
 
 ## 🗺️ Roadmap
 
 - [x] Workspace initialization & design decisions
-- [ ] Package scaffolding (`uv init`, `src/` layout)
-- [ ] Storage layer (file-first: CSV + git sync, SQLite cache, SQL option)
+- [x] Package scaffolding (`uv init`, `src/` layout)
+- [x] Storage layer (file-first: CSV + git sync, SQLite cache, permission enforcement)
+- [x] Price fetch agent — crawler engine (robots-protocol, 7-step pipeline, confirm gate)
 - [ ] Costing engine (multi-dimensional cost model)
-- [ ] Price fetch agent (LangGraph crawl + normalize)
-- [ ] Task scheduler (APScheduler, on-demand)
 - [ ] Quotation generator (default + user templates)
+- [ ] Task scheduler (APScheduler, on-demand)
 - [ ] Review engine (anomaly detection)
+- [ ] Multi-user learning hub (upload flow, central review, monitoring, archiving)
 - [ ] REST API
-- [ ] Tests & CI
+- [ ] Tests & CI hardening
 
 ## 🤝 Contributing
 
