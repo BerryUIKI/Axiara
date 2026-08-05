@@ -28,6 +28,26 @@ from axiara.agents.nodes import (
 from axiara.agents.state import AgentState
 
 
+def _archive_route(state: AgentState) -> str:
+    """Entry routing for the archive graph: map user action to first node.
+
+    Returns a destination key of the archive entry map.
+    """
+    action = state.get("user_input", {}).get("action", "")
+    if action in ("import", "edit", "manual"):
+        return "manual_edit"
+    if action in ("learn", "upload"):
+        return "learn_agent"
+    if action in ("crawl", "fetch"):
+        return "crawl_agent"
+    return "edit_review"
+
+
+def _quote_route(state: AgentState) -> str:
+    """Entry routing for the quote graph: map user action to first node."""
+    action = state.get("user_input", {}).get("action", "")
+    return "quote" if action == "quote" else "batch_fill"
+
 def build_archive_graph() -> StateGraph:
     """Build the archive graph (Mode 1).
 
@@ -51,7 +71,7 @@ def build_archive_graph() -> StateGraph:
 
     # Set entry point based on action
     graph.set_conditional_entry_point(
-        dispatcher_node,
+        _archive_route,
         {
             "manual_edit": "manual_edit",
             "learn_agent": "learn_agent",
@@ -68,11 +88,11 @@ def build_archive_graph() -> StateGraph:
     # Edit review can cycle back to crawl/learn
     graph.add_conditional_edges(
         "edit_review",
-        lambda state: "crawl" if state.get("needs_crawl") else "learn" if state.get("needs_learn") else END,
+        lambda state: "crawl" if state.get("needs_crawl") else "learn" if state.get("needs_learn") else "__end__",
         {
             "crawl": "crawl_agent",
             "learn": "learn_agent",
-            END: END,
+            "__end__": END,
         },
     )
 
@@ -122,7 +142,7 @@ def build_quote_graph() -> StateGraph:
 
     # Set entry point based on action
     graph.set_conditional_entry_point(
-        dispatcher_node,
+        _quote_route,
         {
             "batch_fill": "batch_fill_agent",
             "quote": "quote_agent",

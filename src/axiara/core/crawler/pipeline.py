@@ -52,7 +52,7 @@ class CrawlerPipeline:
         if not file_path.exists():
             return {}
 
-        with open(file_path) as f:
+        with open(file_path, encoding="utf-8") as f:
             return yaml.safe_load(f) or {}
 
     def crawl(self, source_id: str, material: str) -> CrawlResult:
