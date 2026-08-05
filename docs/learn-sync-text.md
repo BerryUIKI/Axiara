@@ -52,13 +52,13 @@ data/learn/private/
 
 ### 3.1 Trigger
 
-User says **"上传数据" / "重新上传" / "提交数据"** (or English equivalents: *"upload my data" / "re-submit" / "submit my library"*) — or the weekly reminder fires. Always **manual, user-confirmed** (OQ-LS2): nothing auto-pushes.
+User says **"upload my data" / "re-submit" / "submit my library"** (the Agent also matches the same intent in the user's own language) — or the weekly reminder fires. Always **manual, user-confirmed** (OQ-LS2): nothing auto-pushes.
 
 ### 3.2 Export — date + user ID
 
-- **User identity**: a **stable `user-id`** generated once at onboarding and persisted in `local_config` (survives machine changes); the **unique machine code** (唯一机器码) is the default/fallback. Both sanitized to `[a-zA-Z0-9_-]` (e.g. `AX-3f8a-c2d1`). This is the `contributor` everywhere.
+- **User identity**: a **stable `user-id`** generated once at onboarding and persisted in `local_config` (survives machine changes); the **unique machine code** is the default/fallback. Both sanitized to `[a-zA-Z0-9_-]` (e.g. `AX-3f8a-c2d1`). This is the `contributor` everywhere.
 - **Bundle location**: `learn_inbox/<user-id>/<yyyymmdd>/bundle.yaml` — **date and user id are in the path**; provenance (contributor, timestamps, observation counts) is inside the bundle.
-- **"重新上传" (re-upload)**: creates a *new* dated directory `.../<yyyymmdd>/` on the same user branch; the previous pending upload of that user is flagged stale during review (no silent overwrite).
+- **Re-upload**: creates a *new* dated directory `.../<yyyymmdd>/` on the same user branch; the previous pending upload of that user is flagged stale during review (no silent overwrite).
 - Post-upload: the personal library stays local (upload is a copy).
 
 ### 3.3 Branch rules (text data repo)
@@ -83,7 +83,7 @@ Rules:
 Flow:
 
 ```
-user: "上传数据" ──▶ export bundle (user-id + yyyymmdd)
+user: "upload my data" ──▶ export bundle (user-id + yyyymmdd)
       ──▶ commit+push → user/<user-id>/learn_inbox/<user-id>/<yyyymmdd>/bundle.yaml
       ──▶ training Agent aggregates user/* branches ──▶ proposals (review/<date>)
       ──▶ admin confirms ──▶ PR merge into main (learn_shared/ + manifest)

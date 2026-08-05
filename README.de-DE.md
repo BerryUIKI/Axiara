@@ -142,7 +142,7 @@ Agent-Fähigkeitspakete (einzige Quelle in `skills/`, kompatibel mit WorkBuddy/C
 
 ## 👥 Multi-User-Lernen (Hub-Modell)
 
-Jede Axiara-Instanz lernt aus eigenen Angeboten und Korrekturen in eine **persönliche Bibliothek** (lokal). Das Hochladen erfolgt manuell und mit Benutzerbestätigung: Sage *"上传数据"* / *"重新上传"* / *"提交数据"*, und dein Agent exportiert ein datiertes Bündel in die **zentrale Bibliothek** (`learn_inbox/<user-id>/<yyyymmdd>/bundle.yaml`, gepusht auf deinen eigenen `user/<user-id>`-Branch). Ein **zentraler Trainings-Agent** prüft alle Uploads und schlägt Änderungen an den öffentlichen Regeln vor; ein **Admin bestätigt**, bevor `learn_shared` aktualisiert wird. Dynamisches Skalierungs-Monitoring schlägt Speicher-Upgrades vor, wenn das Team wächst. Siehe [`docs/learn-sync.md`](docs/learn-sync.md).
+Jede Axiara-Instanz lernt aus eigenen Angeboten und Korrekturen in eine **persönliche Bibliothek** (lokal). Das Hochladen erfolgt manuell und mit Benutzerbestätigung: Sage *"Daten hochladen"* / *"erneut hochladen"* / *"Daten einreichen"*, und dein Agent exportiert ein datiertes Bündel in die **zentrale Bibliothek** (`learn_inbox/<user-id>/<yyyymmdd>/bundle.yaml`, gepusht auf deinen eigenen `user/<user-id>`-Branch). Ein **zentraler Trainings-Agent** prüft alle Uploads und schlägt Änderungen an den öffentlichen Regeln vor; ein **Admin bestätigt**, bevor `learn_shared` aktualisiert wird. Dynamisches Skalierungs-Monitoring schlägt Speicher-Upgrades vor, wenn das Team wächst. Siehe [`docs/learn-sync.md`](docs/learn-sync.md).
 
 ## 📚 Dokumentation
 

@@ -142,7 +142,7 @@ Pacotes de habilidades (fonte única em `skills/`, compatível com WorkBuddy/Cod
 
 ## 👥 Aprendizado multiusuário (modelo hub)
 
-Cada instância do Axiara aprende com suas próprias cotações e correções em uma **biblioteca pessoal** (local). O envio é manual e confirmado pelo usuário: diga *"上传数据"* / *"重新上传"* / *"提交数据"*, e seu agente exporta um pacote datado para a **biblioteca central** (`learn_inbox/<user-id>/<yyyymmdd>/bundle.yaml`, enviado para sua própria branch `user/<user-id>`). Um **agente de treinamento central** revisa todos os envios e propõe mudanças nas regras públicas; um **admin confirma** antes da atualização de `learn_shared`. O monitoramento dinâmico de escala sugere melhorias de armazenamento conforme a equipe cresce. Ver [`docs/learn-sync.md`](docs/learn-sync.md).
+Cada instância do Axiara aprende com suas próprias cotações e correções em uma **biblioteca pessoal** (local). O envio é manual e confirmado pelo usuário: diga *"enviar dados"* / *"reenviar"* / *"submeter dados"*, e seu agente exporta um pacote datado para a **biblioteca central** (`learn_inbox/<user-id>/<yyyymmdd>/bundle.yaml`, enviado para sua própria branch `user/<user-id>`). Um **agente de treinamento central** revisa todos os envios e propõe mudanças nas regras públicas; um **admin confirma** antes da atualização de `learn_shared`. O monitoramento dinâmico de escala sugere melhorias de armazenamento conforme a equipe cresce. Ver [`docs/learn-sync.md`](docs/learn-sync.md).
 
 ## 📚 Documentação
 

@@ -1,6 +1,6 @@
 # Axiara — Multi-User Learning Data Sync (hub model)
 
-Status: **v0.2** (2026-08-05) — redesigned per user decision (D-SK7): each user maintains their **own personalized library** (专属调教库), uploads it **weekly** to a central library, and the **central training Agent reviews** whether the core shared library should change. Supersedes the v0.1 direct-sync model. Pairs with `docs/learning-plan.md`, `docs/workspace-config.md`.
+Status: **v0.2** (2026-08-05) — redesigned per user decision (D-SK7): each user maintains their **own personalized tuning library**, uploads it **weekly** to a central library, and the **central training Agent reviews** whether the core shared library should change. Supersedes the v0.1 direct-sync model. Pairs with `docs/learning-plan.md`, `docs/workspace-config.md`.
 
 > **Two implementation variants, by user storage mode:**
 > - Text format (team · text+git, no server): **`docs/learn-sync-text.md`**
