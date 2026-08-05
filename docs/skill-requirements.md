@@ -87,6 +87,7 @@ Rule of thumb: **workflows/specs/configs → WorkBuddy agent; Python code module
 - **D-SK5** — Initialization model (open-source, 2026-08-05): **create** (guided; everything pre-filled from inference — currency by language, timezone by OS, date/quote formats — confirm-or-edit) vs **join** (apply team `workspace.config.yaml`, near-zero Q&A). Design: `docs/workspace-config.md`.
 - **D-SK6** — Training report output (OQ-S3, 2026-08-05): **chat + `output/` file**. Multi-user learned-data sync: hub model per `docs/learn-sync.md`.
 - **D-SK7** — Skill distribution (2026-08-05): repo keeps **only `skills/` single source**; `.codex/skills/` and `.claude/skills/` removed (user corrected). OQ-C3 (template export) = **automatic**; OQ-LS2 (learn push) = **manual weekly upload** (user confirmed).
+- **D-SK8** — Learned-data format (2026-08-05): **AI-friendly first** — YAML preferred for rules/bundles/audit (readable, commentable, clean diffs); JSON only for machine exchange & DB-query needs (manifest, stats). Personal tuning libraries support both, YAML recommended.
 
 ## 6. Open Questions
 
