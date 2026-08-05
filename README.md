@@ -122,9 +122,10 @@ Creates the five runtime dirs and seeds your private config (`.data/local_config
 
 - **Storage layer** (`src/axiara/core/storage/`) — file-first CSV/JSON/YAML + SQLite cache + SHA-256 manifest + **write-permission enforcement** (agents can never write the official baseline).
 - **Crawler engine** (`src/axiara/core/crawler/`) — 7-step pipeline (robots-protocol, user-confirmation gate).
+- **Multi-user learning hub** (`src/axiara/core/learnsync/`) — user identity, bundle export (AI-friendly YAML), manual upload + review flow, dynamic scale monitoring, inactive-branch archiving.
 - **Skills** (`skills/`) — onboarding, csv-data-import, price-crawler (see below).
-- Init script: language→currency inference, `--default-currency`, `workspace.config.yaml` export.
-- **42 tests passing**.
+- Init script: language→currency inference, `--default-currency`, `--user-id`, `--branch-strategy`, `--enable-branch-archive`, `workspace.config.yaml` export.
+- **112 tests passing**.
 
 ## 📁 Repository Layout
 
@@ -190,7 +191,7 @@ Each user's Axiara learns from its own quotes and corrections into a **personal 
 - [ ] Quotation generator (default + user templates)
 - [ ] Task scheduler (APScheduler, on-demand)
 - [ ] Review engine (anomaly detection)
-- [ ] Multi-user learning hub (upload flow, central review, monitoring, archiving)
+- [x] Multi-user learning hub (upload flow, central review, monitoring, archiving)
 - [ ] REST API
 - [ ] Tests & CI hardening
 

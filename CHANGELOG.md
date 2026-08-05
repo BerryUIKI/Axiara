@@ -27,6 +27,7 @@ Maintenance rule: **every PR merged into `dev` must add its entry under `Unrelea
 - Document discipline: **docs must be updated before push** (including README + 9 locales); changes tracked in `.workbuddy/doc-sync-todo.md`.
 - Learned-data format: **AI-friendly first** — YAML preferred, JSON only for machine exchange.
 - **Doc sync (2026-08-05)**: README + 9 locales updated (Skills, multi-user hub, docs index, roadmap); AGENTS.md hard rule "docs must be updated before push"; PLAN.md D-SK1–11 reference; `.data.template/README.md` store layout; `auto-release.yml` release notes now read from CHANGELOG version entries.
+- **Batch 4 doc sync (2026-08-05)**: README + 9 locales — roadmap checkbox for the multi-user learning hub ticked, "what's implemented" section now lists `core/learnsync/` and 112 tests (catch-up after PR #29).
 
 ## [0.1.0] - 2026-08-04
 

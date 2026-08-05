@@ -166,7 +166,7 @@ Jede Axiara-Instanz lernt aus eigenen Angeboten und Korrekturen in eine **persö
 - [ ] Angebotsgenerator (Standard + Benutzervorlagen)
 - [ ] Aufgaben-Scheduler (APScheduler, On-Demand)
 - [ ] Prüf-Engine (Anomalieerkennung)
-- [ ] Multi-User-Lern-Hub (Upload-Flow, zentrale Prüfung, Monitoring, Archivierung)
+- [x] Multi-User-Lern-Hub (Upload-Flow, zentrale Prüfung, Monitoring, Archivierung)
 - [ ] REST-API
 - [ ] Tests & CI-Härtung
 

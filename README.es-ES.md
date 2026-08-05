@@ -166,7 +166,7 @@ Cada instancia de Axiara aprende de sus propias cotizaciones y correcciones en u
 - [ ] Generador de cotizaciones (plantillas por defecto + usuario)
 - [ ] Programador de tareas (APScheduler, bajo demanda)
 - [ ] Motor de revisión (detección de anomalías)
-- [ ] Hub de aprendizaje multiusuario (flujo de subida, revisión central, monitoreo, archivado)
+- [x] Hub de aprendizaje multiusuario (flujo de subida, revisión central, monitoreo, archivado)
 - [ ] API REST
 - [ ] Pruebas y refuerzo de CI
 

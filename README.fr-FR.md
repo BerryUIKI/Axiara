@@ -166,7 +166,7 @@ Chaque instance d'Axiara apprend de ses propres devis et corrections dans une **
 - [ ] Générateur de devis (templates par défaut + utilisateur)
 - [ ] Planificateur de tâches (APScheduler, à la demande)
 - [ ] Moteur de vérification (détection d'anomalies)
-- [ ] Hub d'apprentissage multi-utilisateur (flux d'envoi, revue centrale, monitoring, archivage)
+- [x] Hub d'apprentissage multi-utilisateur (flux d'envoi, revue centrale, monitoring, archivage)
 - [ ] API REST
 - [ ] Tests & durcissement CI
 
