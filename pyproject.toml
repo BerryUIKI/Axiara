@@ -1,0 +1,56 @@
+[project]
+name = "axiara"
+version = "0.1.0"
+description = "Agent quotation core — automated cost calculation and real-time market price intelligence, built on LangGraph."
+readme = "README.md"
+requires-python = ">=3.12"
+authors = [
+    { name = "Berry Wahlberg", email = "BerryWahlberg@gmail.com" },
+]
+license = "MIT"
+license-files = ["LICENSE"]
+keywords = ["quotation", "pricing", "multi-agent", "langgraph", "fastapi", "costing"]
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "Intended Audience :: Developers",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.12",
+    "Topic :: Office/Business :: Financial",
+]
+
+dependencies = [
+    "fastapi>=0.115",
+    "uvicorn[standard]>=0.30",
+    "langgraph>=0.2",
+    "apscheduler>=3.10",
+    "pydantic>=2.7",
+    "pydantic-settings>=2.3",
+    "openpyxl>=3.1",
+    "pandas>=2.2",
+    "python-multipart>=0.0.9",
+]
+
+[project.scripts]
+axiara = "axiara.cli:main"
+
+[dependency-groups]
+dev = [
+    "pytest>=8.2",
+    "pytest-asyncio>=0.23",
+    "ruff>=0.5",
+]
+
+[build-system]
+requires = ["uv_build>=0.12.1,<0.13.0"]
+build-backend = "uv_build"
+
+[tool.uv]
+package = true
+
+[tool.ruff]
+line-length = 100
+target-version = "py312"
+
+[tool.pytest.ini_options]
+asyncio_mode = "auto"
+testpaths = ["tests"]
