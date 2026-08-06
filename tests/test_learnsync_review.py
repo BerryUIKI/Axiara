@@ -8,7 +8,7 @@ Tests for:
 """
 
 import tempfile
-from datetime import datetime
+from datetime import datetime, timezone
 from pathlib import Path
 
 import pytest
@@ -133,7 +133,7 @@ class TestReviewManager:
             # Create bundle with new rule
             metadata = BundleMetadata(
                 user_id="AX-test-1234",
-                created_at=datetime.utcnow(),
+                created_at=datetime.now(timezone.utc),
             )
             
             new_rule = BundleRule(
@@ -144,7 +144,7 @@ class TestReviewManager:
                 trust="user_rule",
                 contributor="AX-test-1234",
                 version=1,
-                updated_at=datetime.utcnow(),
+                updated_at=datetime.now(timezone.utc),
             )
             
             bundle = Bundle(metadata=metadata, rules=[new_rule])
@@ -180,7 +180,7 @@ class TestReviewManager:
             # New version of same rule
             metadata = BundleMetadata(
                 user_id="AX-test-1234",
-                created_at=datetime.utcnow(),
+                created_at=datetime.now(timezone.utc),
             )
             
             new_rule = BundleRule(
@@ -191,7 +191,7 @@ class TestReviewManager:
                 trust="user_rule",
                 contributor="AX-test-1234",
                 version=2,
-                updated_at=datetime.utcnow(),
+                updated_at=datetime.now(timezone.utc),
             )
             
             bundle = Bundle(metadata=metadata, rules=[new_rule])
@@ -227,7 +227,7 @@ class TestReviewManager:
             # Older version
             metadata = BundleMetadata(
                 user_id="AX-test-1234",
-                created_at=datetime.utcnow(),
+                created_at=datetime.now(timezone.utc),
             )
             
             old_rule = BundleRule(
@@ -238,7 +238,7 @@ class TestReviewManager:
                 trust="stats",
                 contributor="AX-test-1234",
                 version=1,
-                updated_at=datetime.utcnow(),
+                updated_at=datetime.now(timezone.utc),
             )
             
             bundle = Bundle(metadata=metadata, rules=[old_rule])
@@ -271,7 +271,7 @@ class TestReviewManager:
             
             # Create session
             session = ReviewSession(
-                review_date=datetime.utcnow(),
+                review_date=datetime.now(timezone.utc),
                 contributors=["AX-test-1234"],
                 bundles_processed=1,
                 proposals=[
@@ -308,7 +308,7 @@ class TestReviewManager:
             
             # Create session with proposals
             session = ReviewSession(
-                review_date=datetime.utcnow(),
+                review_date=datetime.now(timezone.utc),
                 contributors=["AX-test-1234"],
                 bundles_processed=1,
                 proposals=[

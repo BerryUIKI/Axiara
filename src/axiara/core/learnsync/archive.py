@@ -13,7 +13,7 @@ from __future__ import annotations
 
 import subprocess
 from dataclasses import dataclass, field
-from datetime import datetime, timedelta
+from datetime import datetime, timedelta, timezone
 from pathlib import Path
 from typing import Any
 
@@ -100,7 +100,7 @@ class ArchiveManager:
             return []
         
         candidates: list[ArchiveCandidate] = []
-        threshold_date = datetime.utcnow() - timedelta(days=self.idle_threshold_days)
+        threshold_date = datetime.now(timezone.utc) - timedelta(days=self.idle_threshold_days)
         
         # Get list of user branches
         user_branches = self._list_user_branches()
@@ -111,7 +111,7 @@ class ArchiveManager:
             
             if last_commit_date and last_commit_date < threshold_date:
                 # Calculate days inactive
-                days_inactive = (datetime.utcnow() - last_commit_date).days
+                days_inactive = (datetime.now(timezone.utc) - last_commit_date).days
                 
                 # Get commit count
                 commit_count = self._get_commit_count(branch)
@@ -242,7 +242,7 @@ class ArchiveManager:
         
         try:
             # Create archive path
-            archive_date = datetime.utcnow().strftime("%Y%m%d")
+            archive_date = datetime.now(timezone.utc).strftime("%Y%m%d")
             archive_branch = "archive"
             archive_path = f"archive/{candidate.user_id}/{archive_date}"
             
@@ -402,7 +402,7 @@ class ArchiveManager:
         
         # Add new entry
         entry = {
-            "timestamp": datetime.utcnow().isoformat(),
+            "timestamp": datetime.now(timezone.utc).isoformat(),
             "action": "archive_branch",
             "user_id": candidate.user_id,
             "source_branch": candidate.branch,

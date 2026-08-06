@@ -12,7 +12,7 @@ from __future__ import annotations
 
 import subprocess
 from dataclasses import dataclass, field
-from datetime import datetime
+from datetime import datetime, timezone
 from enum import StrEnum
 from pathlib import Path
 from typing import Any
@@ -367,7 +367,7 @@ class ReviewManager:
             all_proposals.extend(proposals)
         
         # Create review session
-        review_date = datetime.utcnow()
+        review_date = datetime.now(timezone.utc)
         inbox_path = f"learn_inbox/_reviews/{review_date.strftime('%Y%m%d')}"
         
         session = ReviewSession(
@@ -534,7 +534,7 @@ class ReviewManager:
         # Create manifest
         manifest = {
             "version": "1.0",
-            "updated_at": datetime.utcnow().isoformat(),
+            "updated_at": datetime.now(timezone.utc).isoformat(),
             "checksums": checksums,
         }
         

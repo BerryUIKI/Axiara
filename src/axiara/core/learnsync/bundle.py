@@ -11,7 +11,7 @@ from __future__ import annotations
 
 import hashlib
 from dataclasses import dataclass, field
-from datetime import datetime
+from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any
 
@@ -239,7 +239,7 @@ class BundleExporter:
         # Create metadata
         metadata = BundleMetadata(
             user_id=user_id,
-            created_at=datetime.utcnow(),
+            created_at=datetime.now(timezone.utc),
             observation_count=total_observations,
             rule_count=len(included_rules),
             excluded_count=excluded_count,

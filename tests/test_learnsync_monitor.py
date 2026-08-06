@@ -7,7 +7,7 @@ Tests for:
 """
 
 import tempfile
-from datetime import datetime, timedelta
+from datetime import datetime, timedelta, timezone
 from pathlib import Path
 
 import pytest
@@ -43,13 +43,13 @@ class TestScaleMonitor:
             
             # Create bundle files for active users
             for user_id in ["AX-0001-abcd", "AX-0002-efgh"]:
-                inbox_dir = store_dir / "learn_inbox" / user_id / datetime.utcnow().strftime("%Y%m%d")
+                inbox_dir = store_dir / "learn_inbox" / user_id / datetime.now(timezone.utc).strftime("%Y%m%d")
                 inbox_dir.mkdir(parents=True)
                 
                 bundle_data = {
                     "metadata": {
                         "user_id": user_id,
-                        "created_at": datetime.utcnow().isoformat(),
+                        "created_at": datetime.now(timezone.utc).isoformat(),
                         "rule_count": 5,
                     },
                     "rules": [],

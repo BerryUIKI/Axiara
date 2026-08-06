@@ -14,7 +14,7 @@ Provides tier classification and migration recommendations.
 from __future__ import annotations
 
 from dataclasses import dataclass, field
-from datetime import datetime, timedelta
+from datetime import datetime, timedelta, timezone
 from enum import StrEnum
 from pathlib import Path
 from typing import Any
@@ -78,7 +78,7 @@ class ScaleReport:
     violations: list[str]
     recommendations: list[str]
     migration_proposal: str | None = None
-    generated_at: datetime = field(default_factory=datetime.utcnow)
+    generated_at: datetime = field(default_factory=lambda: datetime.now(timezone.utc))
     
     def to_dict(self) -> dict[str, Any]:
         """Convert to dictionary."""
@@ -135,7 +135,7 @@ class ScaleMonitor:
         """
         self.store_dir = store_dir or Path(".data/store")
         self.window_days = window_days
-        self.window_start = datetime.utcnow() - timedelta(days=window_days)
+        self.window_start = datetime.now(timezone.utc) - timedelta(days=window_days)
     
     def calculate_metrics(self) -> ScaleMetrics:
         """Calculate current metrics.
@@ -143,7 +143,7 @@ class ScaleMonitor:
         Returns:
             ScaleMetrics instance
         """
-        metrics = ScaleMetrics(calculated_at=datetime.utcnow())
+        metrics = ScaleMetrics(calculated_at=datetime.now(timezone.utc))
         
         # Count active contributors (users who uploaded in window)
         contributors = self._count_active_contributors()
@@ -195,7 +195,7 @@ class ScaleMonitor:
                 for date_dir in user_dir.iterdir():
                     if date_dir.is_dir():
                         try:
-                            upload_date = datetime.strptime(date_dir.name, "%Y%m%d")
+                            upload_date = datetime.strptime(date_dir.name, "%Y%m%d").replace(tzinfo=timezone.utc)
                             if upload_date >= self.window_start:
                                 contributors.add(user_dir.name)
                                 break
@@ -221,7 +221,7 @@ class ScaleMonitor:
                 for date_dir in user_dir.iterdir():
                     if date_dir.is_dir():
                         try:
-                            upload_date = datetime.strptime(date_dir.name, "%Y%m%d")
+                            upload_date = datetime.strptime(date_dir.name, "%Y%m%d").replace(tzinfo=timezone.utc)
                             if upload_date >= self.window_start:
                                 bundle_file = date_dir / "bundle.yaml"
                                 if bundle_file.exists():
@@ -280,7 +280,7 @@ class ScaleMonitor:
         
         oldest_days = 0.0
         if oldest_date:
-            oldest_days = (datetime.utcnow() - oldest_date).total_seconds() / 86400
+            oldest_days = (datetime.now(timezone.utc) - oldest_date.replace(tzinfo=timezone.utc)).total_seconds() / 86400
         
         return {
             "size": backlog_size,

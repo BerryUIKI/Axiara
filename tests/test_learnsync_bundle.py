@@ -8,7 +8,7 @@ Tests for:
 """
 
 import tempfile
-from datetime import datetime
+from datetime import datetime, timezone
 from pathlib import Path
 
 import pytest
@@ -167,7 +167,7 @@ class TestBundleExporter:
             # Create bundle
             metadata = BundleMetadata(
                 user_id="AX-test-1234",
-                created_at=datetime.utcnow(),
+                created_at=datetime.now(timezone.utc),
                 rule_count=2,
             )
             
@@ -180,7 +180,7 @@ class TestBundleExporter:
                     trust="user_rule",
                     contributor="AX-test-1234",
                     version=1,
-                    updated_at=datetime.utcnow(),
+                    updated_at=datetime.now(timezone.utc),
                 ),
                 BundleRule(
                     rule_id="pc-0002",
@@ -190,7 +190,7 @@ class TestBundleExporter:
                     trust="stats",
                     contributor="AX-test-1234",
                     version=1,
-                    updated_at=datetime.utcnow(),
+                    updated_at=datetime.now(timezone.utc),
                 ),
             ]
             
@@ -233,7 +233,7 @@ class TestBundleValidator:
         """Test validation of valid bundle."""
         metadata = BundleMetadata(
             user_id="AX-test-1234",
-            created_at=datetime.utcnow(),
+            created_at=datetime.now(timezone.utc),
         )
         
         rules = [
@@ -245,7 +245,7 @@ class TestBundleValidator:
                 trust="user_rule",
                 contributor="AX-test-1234",
                 version=1,
-                updated_at=datetime.utcnow(),
+                updated_at=datetime.now(timezone.utc),
             ),
         ]
         
@@ -261,7 +261,7 @@ class TestBundleValidator:
         """Test validation catches missing required fields."""
         metadata = BundleMetadata(
             user_id="",  # Missing
-            created_at=datetime.utcnow(),
+            created_at=datetime.now(timezone.utc),
         )
         
         rules = [
@@ -273,7 +273,7 @@ class TestBundleValidator:
                 trust="",
                 contributor="",
                 version=0,  # Invalid
-                updated_at=datetime.utcnow(),
+                updated_at=datetime.now(timezone.utc),
             ),
         ]
         
@@ -289,7 +289,7 @@ class TestBundleValidator:
         """Test validation catches invalid kind."""
         metadata = BundleMetadata(
             user_id="AX-test-1234",
-            created_at=datetime.utcnow(),
+            created_at=datetime.now(timezone.utc),
         )
         
         rules = [
@@ -301,7 +301,7 @@ class TestBundleValidator:
                 trust="user_rule",
                 contributor="AX-test-1234",
                 version=1,
-                updated_at=datetime.utcnow(),
+                updated_at=datetime.now(timezone.utc),
             ),
         ]
         
@@ -317,7 +317,7 @@ class TestBundleValidator:
         """Test validation catches invalid trust level."""
         metadata = BundleMetadata(
             user_id="AX-test-1234",
-            created_at=datetime.utcnow(),
+            created_at=datetime.now(timezone.utc),
         )
         
         rules = [
@@ -329,7 +329,7 @@ class TestBundleValidator:
                 trust="invalid_trust",  # Invalid
                 contributor="AX-test-1234",
                 version=1,
-                updated_at=datetime.utcnow(),
+                updated_at=datetime.now(timezone.utc),
             ),
         ]
         
@@ -345,7 +345,7 @@ class TestBundleValidator:
         """Test validation catches checksum mismatch."""
         metadata = BundleMetadata(
             user_id="AX-test-1234",
-            created_at=datetime.utcnow(),
+            created_at=datetime.now(timezone.utc),
             checksum="invalid-checksum-123",  # Wrong
         )
         
@@ -361,7 +361,7 @@ class TestBundleValidator:
         """Test that bundles with credentials are rejected."""
         metadata = BundleMetadata(
             user_id="AX-test-1234",
-            created_at=datetime.utcnow(),
+            created_at=datetime.now(timezone.utc),
         )
         
         # Rule with credential-like value
@@ -374,7 +374,7 @@ class TestBundleValidator:
                 trust="user_rule",
                 contributor="AX-test-1234",
                 version=1,
-                updated_at=datetime.utcnow(),
+                updated_at=datetime.now(timezone.utc),
             ),
         ]
         
