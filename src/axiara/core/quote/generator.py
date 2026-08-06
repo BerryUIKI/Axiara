@@ -8,7 +8,7 @@ Emits learning events for approved/corrected quotations.
 from __future__ import annotations
 
 from dataclasses import dataclass, field
-from datetime import datetime
+from datetime import datetime, timezone
 from enum import StrEnum
 from pathlib import Path
 from typing import Any
@@ -68,7 +68,7 @@ class Quotation:
     confidence: float = 1.0
     sources: dict[str, list[str]] = field(default_factory=dict)
     warnings: list[str] = field(default_factory=list)
-    created_at: str = field(default_factory=lambda: datetime.utcnow().isoformat())
+    created_at: str = field(default_factory=lambda: datetime.now(timezone.utc).isoformat())
     template_used: str = "default"
 
 
@@ -82,7 +82,7 @@ class LearningEvent:
     final_price: float
     margin: float
     correction: bool = False  # True if this was a user correction
-    timestamp: str = field(default_factory=lambda: datetime.utcnow().isoformat())
+    timestamp: str = field(default_factory=lambda: datetime.now(timezone.utc).isoformat())
 
 
 class QuoteGenerator:
@@ -449,14 +449,28 @@ class QuoteGenerator:
 
         # Add processes
         if processes:
+            # Extract process costs from cost_result
+            # cost_result.breakdown has processing (total process cost) and loss fields
+            total_process_cost = cost_result.breakdown.processing
+            process_count = len(processes)
+
             for process in processes:
+                # Distribute cost evenly across processes (simplified;
+                # a full implementation would use per-process costs from learn_rules)
+                if process_count > 0:
+                    unit_cost = total_process_cost / process.quantity if process.quantity > 0 else 0.0
+                    total_cost = total_process_cost / process_count
+                else:
+                    unit_cost = 0.0
+                    total_cost = 0.0
+
                 items.append({
                     "type": "process",
                     "name": process.name,
                     "quantity": process.quantity,
                     "unit": process.unit,
-                    "unit_cost": 0.0,  # Would be calculated from process_cost rules
-                    "total_cost": 0.0,
+                    "unit_cost": unit_cost,
+                    "total_cost": total_cost,
                 })
 
         return items
@@ -482,7 +496,7 @@ class QuoteGenerator:
 
         # Generate default filename
         if output_path is None:
-            timestamp = datetime.utcnow().strftime("%Y%m%d-%H%M%S")
+            timestamp = datetime.now(timezone.utc).strftime("%Y%m%d-%H%M%S")
             output_path = self.output_dir / f"quotation-{timestamp}.json"
 
         # For now, save as JSON
