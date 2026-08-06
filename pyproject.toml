@@ -58,3 +58,8 @@ target-version = "py312"
 [tool.pytest.ini_options]
 asyncio_mode = "auto"
 testpaths = ["tests"]
+# langsmith's pytest plugin (entry point "langsmith_plugin") tries to reach the
+# LangSmith tracing service at plugin-load time; on machines without access it
+# hangs and pytest is interrupted (KeyboardInterrupt). Axiara doesn't use remote
+# tracing — disable it. Note the entry-point name, not the package name.
+addopts = "-p no:langsmith_plugin"
