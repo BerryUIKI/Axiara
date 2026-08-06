@@ -193,7 +193,7 @@ Chaque instance d'Axiara apprend de ses propres devis et corrections dans une **
 - [x] Moteur de calcul des coûts (modèle de coûts multidimensionnel)
 - [x] Générateur de devis (templates par défaut + utilisateur)
 - [x] Planificateur de tâches (APScheduler, à la demande)
-- [ ] Moteur de vérification (détection d'anomalies)
+- [x] Moteur de vérification (détection d'anomalies)
 - [x] Hub d'apprentissage multi-utilisateur (flux d'envoi, revue centrale, monitoring, archivage)
 - [x] API REST
 - [ ] Tests & durcissement CI

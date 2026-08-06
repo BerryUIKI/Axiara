@@ -144,31 +144,46 @@ def crawl_agent_node(state: AgentState) -> dict[str, Any]:
 def edit_review_node(state: AgentState) -> dict[str, Any]:
     """Handle edit review operations (Mode 1.3).
 
+    Runs the anomaly-detection review engine for a three-way cross-check
+    across main / learn / market. The engine is read-only: it produces a
+    pending-review list for human confirmation and can never write main_db.
+
     Args:
         state: Current agent state
 
     Returns:
         State updates with review suggestions
     """
+    from axiara.core.review import ReviewEngine
+
     # Cross-validate main_db + learn_db + market_db
     main_ref = state.get("main_db_ref")
     learn_ref = state.get("learn_db_ref")
     market_ref = state.get("market_db_ref")
 
-    # Placeholder - would implement three-way cross-check
-    suggestions = []
+    report = ReviewEngine().check_three_way(main_ref, learn_ref, market_ref)
 
-    if main_ref and market_ref:
-        # Compare official vs market prices
-        suggestions.append({
-            "type": "price_anomaly",
-            "message": "Market prices deviate from baseline",
-        })
+    if not report.has_issues:
+        return {
+            "review_suggestions": [],
+            "checked": report.checked,
+            "needs_confirmation": False,
+            "confirmation_message": "Three-way cross-check passed: no anomalies found.",
+        }
 
+    suggestions = [issue.to_dict() for issue in report.issues]
     return {
         "review_suggestions": suggestions,
+        "checked": report.checked,
         "needs_confirmation": True,
-        "confirmation_message": "Review suggestions generated. Confirm to proceed?",
+        "confirmation_message": (
+            f"Cross-check found {len(suggestions)} issue(s) "
+            f"({report.checked.get('price_anomalies', 0)} price anomalies, "
+            f"{report.checked.get('missing_processes', 0)} missing processes, "
+            f"{report.checked.get('stale_prices', 0)} stale prices, "
+            f"{report.checked.get('missing_baseline', 0)} missing baselines). "
+            "Confirm to proceed?"
+        ),
     }
 
 
@@ -326,13 +341,18 @@ def quote_agent_node(state: AgentState) -> dict[str, Any]:
 def user_review_agent_node(state: AgentState) -> dict[str, Any]:
     """Handle user review (Mode 4).
 
+    Validates the user's own cost/quote table against main + market via
+    the anomaly-detection review engine, flagging abnormal low/high prices,
+    missing processes, and unvalidatable rows.
+
     Args:
         state: Current agent state
 
     Returns:
         State updates with review results
     """
-    # Cross-validate user's cost/quote table
+    from axiara.core.review import ReviewEngine, ReviewError
+
     user_input = state.get("user_input", {})
 
     if not user_input.get("cost_table"):
@@ -341,16 +361,36 @@ def user_review_agent_node(state: AgentState) -> dict[str, Any]:
             "needs_confirmation": False,
         }
 
-    # Placeholder - would implement cross-validation
-    suggestions = [
-        {
-            "type": "price_anomaly",
-            "message": "Some prices are outside normal range",
+    try:
+        report = ReviewEngine().check_cost_table(
+            user_input["cost_table"],
+            main_data=state.get("main_db_ref"),
+            market_data=state.get("market_db_ref"),
+            learn_data=state.get("learn_db_ref"),
+        )
+    except ReviewError as e:
+        return {
+            "error": str(e),
+            "needs_confirmation": False,
         }
-    ]
 
+    if not report.has_issues:
+        return {
+            "review_suggestions": [],
+            "checked": report.checked,
+            "needs_confirmation": False,
+            "confirmation_message": (
+                "Review complete: no anomalies found in cost table."
+            ),
+        }
+
+    suggestions = [issue.to_dict() for issue in report.issues]
     return {
         "review_suggestions": suggestions,
+        "checked": report.checked,
         "needs_confirmation": True,
-        "confirmation_message": "Review complete. Apply suggestions?",
+        "confirmation_message": (
+            f"Review found {len(suggestions)} issue(s) in cost table. "
+            "Apply suggestions?"
+        ),
     }

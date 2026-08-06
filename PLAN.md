@@ -65,6 +65,7 @@ Detailed skill/learning decisions live in `docs/skill-requirements.md` §5 (sing
 - [ ] **Learning engine** — ingest historical quotes/invoices → clean → extract material/process/cost/pricing rules → `learn_db` (design: `docs/learning-plan.md`, phases 0–5)
 - [x] **Task scheduler** — APScheduler jobs: periodic price fetch, scheduled quotation generation
 - [x] **Quotation generator** — compose cost + price into quotations
+- [x] **Review engine** — anomaly detection: three-way cross-check (main/learn/market) + user cost-table validation (Mode 1.3 & Mode 4); tunable thresholds (`core/review/`, wired into `edit_review_node` / `user_review_agent_node`; read-only, never writes main_db)
 - [x] **REST API** — FastAPI endpoints for external clients
 - [ ] **Tests & CI** — unit/integration tests, CI pipeline
 - [x] **Git remote** — create remote repo, link, push per PR-only workflow (remote not created yet)
