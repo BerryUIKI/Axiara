@@ -8,76 +8,76 @@
 </defs>
 
 <!-- Header -->
-<rect x="40" y="20" width="1200" height="60" rx="12" fill="#04342C" stroke="#5DCAA5" stroke-width="1"/>
-<text x="640" y="57" font-size="28" font-weight="600" fill="#E1F5EE" text-anchor="middle">Axiara Setup — Four Quick Choices</text>
+<rect x="40" y="20" width="1200" height="56" rx="12" fill="#04342C" stroke="#5DCAA5" stroke-width="1"/>
+<text x="640" y="55" font-size="28" font-weight="600" fill="#E1F5EE" text-anchor="middle">Axiara Setup — Four Quick Choices</text>
 
 <!-- ============ Step 1 — Language ============ -->
-<text x="640" y="106" font-size="22" font-weight="600" fill="#E1F5EE" text-anchor="middle">1 · Interface language</text>
-<rect x="40" y="118" width="1200" height="60" rx="10" fill="#0E2402" stroke="#618D3A" stroke-width="1"/>
-<text x="640" y="142" font-size="20" fill="#C0DD97" text-anchor="middle">English · 简体中文 · 繁體中文 · 日本語 · 한국어 · Français</text>
-<text x="640" y="168" font-size="20" fill="#97C459" text-anchor="middle">Deutsch · Español · Português · Русский</text>
-<line x1="640" y1="182" x2="640" y2="208" stroke="#9E9D98" stroke-width="1.5" marker-end="url(#arrow)"/>
+<text x="640" y="100" font-size="22" font-weight="600" fill="#E1F5EE" text-anchor="middle">1 · Interface language</text>
+<rect x="40" y="112" width="1200" height="64" rx="10" fill="#0E2402" stroke="#618D3A" stroke-width="1"/>
+<text x="640" y="138" font-size="16" fill="#C0DD97" text-anchor="middle">English · 简体中文 · 繁體中文 · 日本語 · 한국어 · Français</text>
+<text x="640" y="162" font-size="16" fill="#97C459" text-anchor="middle">Deutsch · Español · Português · Русский</text>
+<line x1="640" y1="180" x2="640" y2="202" stroke="#9E9D98" stroke-width="1.5" marker-end="url(#arrow)"/>
 
 <!-- ============ Step 2 — Storage & sync ============ -->
-<text x="640" y="230" font-size="22" font-weight="600" fill="#E1F5EE" text-anchor="middle">2 · Storage &amp; sync — do you need team sync?</text>
+<text x="640" y="224" font-size="22" font-weight="600" fill="#E1F5EE" text-anchor="middle">2 · Storage &amp; sync — do you need team sync?</text>
 
-<line x1="640" y1="244" x2="230" y2="272" stroke="#9E9D98" stroke-width="1.5"/>
-<line x1="640" y1="244" x2="640" y2="272" stroke="#9E9D98" stroke-width="1.5"/>
-<line x1="640" y1="244" x2="1050" y2="272" stroke="#9E9D98" stroke-width="1.5"/>
+<line x1="640" y1="236" x2="230" y2="262" stroke="#9E9D98" stroke-width="1.5"/>
+<line x1="640" y1="236" x2="640" y2="262" stroke="#9E9D98" stroke-width="1.5"/>
+<line x1="640" y1="236" x2="1050" y2="262" stroke="#9E9D98" stroke-width="1.5"/>
 
-<rect x="40" y="276" width="380" height="92" rx="10" fill="#173404" stroke="#97C459" stroke-width="1"/>
-<text x="230" y="306" font-size="22" font-weight="600" fill="#C0DD97" text-anchor="middle">No — personal</text>
-<text x="230" y="336" font-size="18" fill="#97C459" text-anchor="middle">SQLite · zero config</text>
-<text x="230" y="360" font-size="18" fill="#97C459" text-anchor="middle">single-file database</text>
+<rect x="40" y="266" width="380" height="96" rx="10" fill="#173404" stroke="#97C459" stroke-width="1"/>
+<text x="230" y="294" font-size="20" font-weight="600" fill="#C0DD97" text-anchor="middle">No — personal</text>
+<text x="230" y="324" font-size="16" fill="#97C459" text-anchor="middle">SQLite · zero config</text>
+<text x="230" y="348" font-size="16" fill="#97C459" text-anchor="middle">single-file database</text>
 
-<rect x="450" y="276" width="380" height="92" rx="10" fill="#26215C" stroke="#AFA9EC" stroke-width="1"/>
-<text x="640" y="306" font-size="22" font-weight="600" fill="#CECBF6" text-anchor="middle">Yes — text + Git</text>
-<text x="640" y="336" font-size="18" fill="#AFA9EC" text-anchor="middle">CSV files synced via git</text>
-<text x="640" y="360" font-size="18" fill="#AFA9EC" text-anchor="middle">no server · local cache</text>
+<rect x="450" y="266" width="380" height="96" rx="10" fill="#26215C" stroke="#AFA9EC" stroke-width="1"/>
+<text x="640" y="294" font-size="20" font-weight="600" fill="#CECBF6" text-anchor="middle">Yes — text + Git</text>
+<text x="640" y="324" font-size="16" fill="#AFA9EC" text-anchor="middle">CSV files synced via git</text>
+<text x="640" y="348" font-size="16" fill="#AFA9EC" text-anchor="middle">no server · local cache</text>
 
-<rect x="860" y="276" width="380" height="92" rx="10" fill="#412402" stroke="#EF9F27" stroke-width="1"/>
-<text x="1050" y="306" font-size="22" font-weight="600" fill="#FAC775" text-anchor="middle">Yes — SQL server</text>
-<text x="1050" y="336" font-size="18" fill="#EF9F27" text-anchor="middle">MySQL · MariaDB ·</text>
-<text x="1050" y="360" font-size="18" fill="#EF9F27" text-anchor="middle">PostgreSQL (DSN)</text>
+<rect x="860" y="266" width="380" height="96" rx="10" fill="#412402" stroke="#EF9F27" stroke-width="1"/>
+<text x="1050" y="294" font-size="20" font-weight="600" fill="#FAC775" text-anchor="middle">Yes — SQL server</text>
+<text x="1050" y="324" font-size="16" fill="#EF9F27" text-anchor="middle">MySQL · MariaDB ·</text>
+<text x="1050" y="348" font-size="16" fill="#EF9F27" text-anchor="middle">PostgreSQL (DSN)</text>
 
-<line x1="230" y1="372" x2="230" y2="398" stroke="#9E9D98" stroke-width="1.5" marker-end="url(#arrow)"/>
-<line x1="640" y1="372" x2="640" y2="398" stroke="#9E9D98" stroke-width="1.5" marker-end="url(#arrow)"/>
-<line x1="1050" y1="372" x2="1050" y2="398" stroke="#9E9D98" stroke-width="1.5" marker-end="url(#arrow)"/>
+<line x1="230" y1="366" x2="230" y2="388" stroke="#9E9D98" stroke-width="1.5" marker-end="url(#arrow)"/>
+<line x1="640" y1="366" x2="640" y2="388" stroke="#9E9D98" stroke-width="1.5" marker-end="url(#arrow)"/>
+<line x1="1050" y1="366" x2="1050" y2="388" stroke="#9E9D98" stroke-width="1.5" marker-end="url(#arrow)"/>
 
 <!-- ============ Step 3 — Data source ============ -->
-<text x="640" y="420" font-size="22" font-weight="600" fill="#E1F5EE" text-anchor="middle">3 · Data source</text>
+<text x="640" y="410" font-size="22" font-weight="600" fill="#E1F5EE" text-anchor="middle">3 · Data source</text>
 
-<line x1="230" y1="432" x2="230" y2="456" stroke="#9E9D98" stroke-width="1.5" marker-end="url(#arrow)"/>
-<line x1="640" y1="432" x2="640" y2="456" stroke="#9E9D98" stroke-width="1.5" marker-end="url(#arrow)"/>
-<line x1="1050" y1="432" x2="1050" y2="456" stroke="#9E9D98" stroke-width="1.5" marker-end="url(#arrow)"/>
+<line x1="230" y1="420" x2="230" y2="442" stroke="#9E9D98" stroke-width="1.5" marker-end="url(#arrow)"/>
+<line x1="640" y1="420" x2="640" y2="442" stroke="#9E9D98" stroke-width="1.5" marker-end="url(#arrow)"/>
+<line x1="1050" y1="420" x2="1050" y2="442" stroke="#9E9D98" stroke-width="1.5" marker-end="url(#arrow)"/>
 
-<rect x="40" y="460" width="380" height="76" rx="10" fill="#0E2402" stroke="#618D3A" stroke-width="1"/>
-<text x="230" y="490" font-size="22" font-weight="600" fill="#C0DD97" text-anchor="middle">Local files</text>
-<text x="230" y="518" font-size="18" fill="#97C459" text-anchor="middle">import price lists (Excel / CSV)</text>
+<rect x="40" y="446" width="380" height="76" rx="10" fill="#0E2402" stroke="#618D3A" stroke-width="1"/>
+<text x="230" y="474" font-size="20" font-weight="600" fill="#C0DD97" text-anchor="middle">Local files</text>
+<text x="230" y="502" font-size="16" fill="#97C459" text-anchor="middle">import price lists (Excel / CSV)</text>
 
-<rect x="450" y="460" width="380" height="76" rx="10" fill="#1C1848" stroke="#7A71C9" stroke-width="1"/>
-<text x="640" y="490" font-size="22" font-weight="600" fill="#CECBF6" text-anchor="middle">Team repo</text>
-<text x="640" y="518" font-size="18" fill="#AFA9EC" text-anchor="middle">repo URL → clone to store/</text>
+<rect x="450" y="446" width="380" height="76" rx="10" fill="#1C1848" stroke="#7A71C9" stroke-width="1"/>
+<text x="640" y="474" font-size="20" font-weight="600" fill="#CECBF6" text-anchor="middle">Team repo</text>
+<text x="640" y="502" font-size="16" fill="#AFA9EC" text-anchor="middle">repo URL → clone to store/</text>
 
-<rect x="860" y="460" width="380" height="76" rx="10" fill="#2F1B02" stroke="#B97B2A" stroke-width="1"/>
-<text x="1050" y="490" font-size="22" font-weight="600" fill="#FAC775" text-anchor="middle">No data yet</text>
-<text x="1050" y="518" font-size="18" fill="#EF9F27" text-anchor="middle">start empty, fetch later</text>
+<rect x="860" y="446" width="380" height="76" rx="10" fill="#2F1B02" stroke="#B97B2A" stroke-width="1"/>
+<text x="1050" y="474" font-size="20" font-weight="600" fill="#FAC775" text-anchor="middle">No data yet</text>
+<text x="1050" y="502" font-size="16" fill="#EF9F27" text-anchor="middle">start empty, fetch later</text>
 
-<line x1="230" y1="540" x2="230" y2="566" stroke="#9E9D98" stroke-width="1.5" marker-end="url(#arrow)"/>
-<line x1="640" y1="540" x2="640" y2="566" stroke="#9E9D98" stroke-width="1.5" marker-end="url(#arrow)"/>
-<line x1="1050" y1="540" x2="1050" y2="566" stroke="#9E9D98" stroke-width="1.5" marker-end="url(#arrow)"/>
+<line x1="230" y1="526" x2="230" y2="548" stroke="#9E9D98" stroke-width="1.5" marker-end="url(#arrow)"/>
+<line x1="640" y1="526" x2="640" y2="548" stroke="#9E9D98" stroke-width="1.5" marker-end="url(#arrow)"/>
+<line x1="1050" y1="526" x2="1050" y2="548" stroke="#9E9D98" stroke-width="1.5" marker-end="url(#arrow)"/>
 
 <!-- ============ Step 4 — Dev environment ============ -->
-<text x="640" y="588" font-size="22" font-weight="600" fill="#E1F5EE" text-anchor="middle">4 · Dev environment (optional)</text>
+<text x="640" y="570" font-size="22" font-weight="600" fill="#E1F5EE" text-anchor="middle">4 · Dev environment (optional)</text>
 
-<line x1="425" y1="600" x2="425" y2="624" stroke="#9E9D98" stroke-width="1.5" marker-end="url(#arrow)"/>
-<line x1="855" y1="600" x2="855" y2="624" stroke="#9E9D98" stroke-width="1.5" marker-end="url(#arrow)"/>
+<line x1="425" y1="582" x2="425" y2="604" stroke="#9E9D98" stroke-width="1.5" marker-end="url(#arrow)"/>
+<line x1="855" y1="582" x2="855" y2="604" stroke="#9E9D98" stroke-width="1.5" marker-end="url(#arrow)"/>
 
-<rect x="160" y="628" width="530" height="58" rx="10" fill="#04342C" stroke="#5DCAA5" stroke-width="1"/>
-<text x="425" y="654" font-size="20" font-weight="600" fill="#E1F5EE" text-anchor="middle">Agent-only (recommended, zero setup)</text>
-<text x="425" y="678" font-size="16" fill="#9FE1CB" text-anchor="middle">your AI agent handles everything</text>
+<rect x="160" y="608" width="530" height="64" rx="10" fill="#04342C" stroke="#5DCAA5" stroke-width="1"/>
+<text x="425" y="634" font-size="18" font-weight="600" fill="#E1F5EE" text-anchor="middle">Agent-only (recommended, zero setup)</text>
+<text x="425" y="658" font-size="14" fill="#9FE1CB" text-anchor="middle">your AI agent handles everything</text>
 
-<rect x="590" y="628" width="530" height="58" rx="10" fill="#412402" stroke="#EF9F27" stroke-width="1"/>
-<text x="855" y="654" font-size="20" font-weight="600" fill="#FAC775" text-anchor="middle">With dev environment</text>
-<text x="855" y="678" font-size="16" fill="#EF9F27" text-anchor="middle">uv sync → REST API · CLI · tests</text>
+<rect x="590" y="608" width="530" height="64" rx="10" fill="#412402" stroke="#EF9F27" stroke-width="1"/>
+<text x="855" y="634" font-size="18" font-weight="600" fill="#FAC775" text-anchor="middle">With dev environment</text>
+<text x="855" y="658" font-size="14" fill="#EF9F27" text-anchor="middle">uv sync → REST API · CLI · tests</text>
 </svg>
