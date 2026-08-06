@@ -3,7 +3,7 @@
 from __future__ import annotations
 
 import json
-from datetime import date, datetime
+from datetime import date, datetime, timezone
 from pathlib import Path
 from typing import Any
 
@@ -102,7 +102,7 @@ class Storer:
             self.storage.write(
                 DataLayer.MARKET,
                 raw_filename,
-                {"raw": raw_capture, "source": source, "timestamp": datetime.utcnow().isoformat()},
+                {"raw": raw_capture, "source": source, "timestamp": datetime.now(timezone.utc).isoformat()},
                 source="crawler",
                 user_confirmed=True
             )

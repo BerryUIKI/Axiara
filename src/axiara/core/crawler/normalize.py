@@ -3,7 +3,7 @@
 from __future__ import annotations
 
 from dataclasses import dataclass
-from datetime import date, datetime
+from datetime import date, datetime, timezone
 from typing import Any, Literal
 
 from axiara.core.crawler.parse import ParsedRow
@@ -84,7 +84,7 @@ class Normalizer:
             note=None,
             source=source,
             url=url,
-            fetched_at=datetime.utcnow(),
+            fetched_at=datetime.now(timezone.utc),
             confidence=confidence,
             raw=parsed_row.raw
         )
