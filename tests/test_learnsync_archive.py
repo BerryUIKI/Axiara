@@ -7,7 +7,7 @@ Tests for:
 """
 
 import tempfile
-from datetime import datetime, timedelta
+from datetime import datetime, timedelta, timezone
 from pathlib import Path
 from unittest.mock import MagicMock, patch
 
@@ -66,7 +66,7 @@ class TestArchiveManager:
             )
             
             # Mock old branch
-            old_date = datetime.utcnow() - timedelta(days=200)
+            old_date = datetime.now(timezone.utc) - timedelta(days=200)
             
             with patch.object(manager, "_list_user_branches", return_value=["user/AX-old-1234"]), \
                  patch.object(manager, "_get_last_commit_date", return_value=old_date), \
@@ -90,7 +90,7 @@ class TestArchiveManager:
             )
             
             # Mock recent branch
-            recent_date = datetime.utcnow() - timedelta(days=30)
+            recent_date = datetime.now(timezone.utc) - timedelta(days=30)
             
             with patch.object(manager, "_list_user_branches", return_value=["user/AX-new-1234"]), \
                  patch.object(manager, "_get_last_commit_date", return_value=recent_date), \
@@ -114,7 +114,7 @@ class TestArchiveManager:
             candidate = ArchiveCandidate(
                 user_id="AX-test-1234",
                 branch="user/AX-test-1234",
-                last_commit_date=datetime.utcnow(),
+                last_commit_date=datetime.now(timezone.utc),
                 days_inactive=200,
                 commit_count=5,
             )
@@ -137,7 +137,7 @@ class TestArchiveManager:
             candidate = ArchiveCandidate(
                 user_id="AX-test-1234",
                 branch="user/AX-test-1234",
-                last_commit_date=datetime.utcnow() - timedelta(days=200),
+                last_commit_date=datetime.now(timezone.utc) - timedelta(days=200),
                 days_inactive=200,
                 commit_count=5,
             )

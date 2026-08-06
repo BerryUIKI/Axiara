@@ -14,7 +14,7 @@ import platform
 import re
 import uuid
 from dataclasses import dataclass
-from datetime import datetime
+from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any
 
@@ -221,14 +221,14 @@ class UserIdManager:
         
         config["app"]["user_id"] = new_id
         config["app"]["machine_code"] = machine_code
-        config["app"]["user_id_created_at"] = datetime.utcnow().isoformat()
+        config["app"]["user_id_created_at"] = datetime.now(timezone.utc).isoformat()
         
         self.save_config(config)
         
         return UserIdInfo(
             user_id=new_id,
             machine_code=machine_code,
-            created_at=datetime.utcnow(),
+            created_at=datetime.now(timezone.utc),
             source="generated",
         )
     
@@ -251,7 +251,7 @@ class UserIdManager:
             config["app"] = {}
         
         config["app"]["user_id"] = sanitized
-        config["app"]["user_id_set_at"] = datetime.utcnow().isoformat()
+        config["app"]["user_id_set_at"] = datetime.now(timezone.utc).isoformat()
         
         self.save_config(config)
         

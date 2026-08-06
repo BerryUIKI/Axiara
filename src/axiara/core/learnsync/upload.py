@@ -11,7 +11,7 @@ from __future__ import annotations
 
 import subprocess
 from dataclasses import dataclass
-from datetime import datetime
+from datetime import datetime, timezone
 from enum import Enum
 from pathlib import Path
 from typing import Any
@@ -99,7 +99,7 @@ class UploadManager:
         )
         
         # Determine bundle path
-        date_str = datetime.utcnow().strftime("%Y%m%d")
+        date_str = datetime.now(timezone.utc).strftime("%Y%m%d")
         bundle_filename = "bundle.yaml"
         bundle_path = f"learn_inbox/{user_id}/{date_str}/{bundle_filename}"
         
@@ -138,7 +138,7 @@ class UploadManager:
             self._ensure_branch(branch)
             
             # Add and commit
-            commit_message = f"upload {user_id} {datetime.utcnow().strftime('%Y%m%d')}"
+            commit_message = f"upload {user_id} {datetime.now(timezone.utc).strftime('%Y%m%d')}"
             if is_reupload:
                 commit_message += " [re-upload]"
             
@@ -151,7 +151,7 @@ class UploadManager:
             # Record upload
             self.exporter.record_upload(
                 user_id=user_id,
-                timestamp=datetime.utcnow(),
+                timestamp=datetime.now(timezone.utc),
                 bundle_path=bundle_path,
             )
             
@@ -161,7 +161,7 @@ class UploadManager:
                 bundle_path=bundle_path,
                 branch=branch,
                 commit_hash=commit_hash,
-                timestamp=datetime.utcnow(),
+                timestamp=datetime.now(timezone.utc),
                 message="Upload successful",
             )
         
