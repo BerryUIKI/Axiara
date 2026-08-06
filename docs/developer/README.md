@@ -43,7 +43,7 @@ uv sync --dev
 bash scripts/init-data.sh --language en --sync-mode none --backend sqlite --data-source none
 
 # 3. Run tests
-uv run pytest            # full suite (currently 206 tests)
+uv run pytest            # full suite (currently 234 tests)
 uv run pytest -q         # quiet
 ```
 

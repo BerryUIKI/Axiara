@@ -193,7 +193,7 @@ Jede Axiara-Instanz lernt aus eigenen Angeboten und Korrekturen in eine **persö
 - [x] Kostenberechnungs-Engine (mehrdimensionales Kostenmodell)
 - [x] Angebotsgenerator (Standard + Benutzervorlagen)
 - [x] Aufgaben-Scheduler (APScheduler, On-Demand)
-- [ ] Prüf-Engine (Anomalieerkennung)
+- [x] Prüf-Engine (Anomalieerkennung)
 - [x] Multi-User-Lern-Hub (Upload-Flow, zentrale Prüfung, Monitoring, Archivierung)
 - [x] REST-API
 - [ ] Tests & CI-Härtung

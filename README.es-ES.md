@@ -193,7 +193,7 @@ Cada instancia de Axiara aprende de sus propias cotizaciones y correcciones en u
 - [x] Motor de cálculo de costos (modelo de costos multidimensional)
 - [x] Generador de cotizaciones (plantillas por defecto + usuario)
 - [x] Programador de tareas (APScheduler, bajo demanda)
-- [ ] Motor de revisión (detección de anomalías)
+- [x] Motor de revisión (detección de anomalías)
 - [x] Hub de aprendizaje multiusuario (flujo de subida, revisión central, monitoreo, archivado)
 - [x] API REST
 - [ ] Pruebas y refuerzo de CI

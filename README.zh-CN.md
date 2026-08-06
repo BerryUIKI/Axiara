@@ -155,13 +155,14 @@ bash scripts/init-data.sh
 - **爬虫引擎**（`src/axiara/core/crawler/`）— 7 步管线（robots 协议、用户确认闸门）。
 - **成本核算引擎**（`src/axiara/core/costing/`）— 多维成本模型，含单位换算与置信度评分（批次 2）。
 - **报价生成器**（`src/axiara/core/quote/`）— 低/中/高三档定价，约束协商与学习反馈闭环（批次 2）。
+- **复核引擎**（`src/axiara/core/review/`）— 异常检测：main/learn/market 三方交叉校验、成本表校验、可配置阈值（价格偏离、过期天数）。
 - **LangGraph Agents**（`src/axiara/agents/`）— 四大模式的图与节点，支持 interrupt/resume 与 MemorySaver 检查点（批次 3）。
 - **REST API**（`src/axiara/api/`）— 覆盖四模式的 FastAPI 端点 + 健康检查（批次 3）。
 - **APScheduler 定时任务**（`src/axiara/scheduler/`）— 周提醒、爬虫刷新、规模健康报告、归档检测（批次 3）。
 - **多用户学习 hub**（`src/axiara/core/learnsync/`）— 用户身份、数据包导出（AI 友好 YAML）、手动上传 + 审查流程、动态规模监控、非活跃分支归档。
 - **Skills**（`skills/`）— onboarding、csv-data-import、price-crawler（见下文）。
 - 初始化脚本：语言→货币推断、`--default-currency`、`--user-id`、`--branch-strategy`、`--enable-branch-archive`、`workspace.config.yaml` 导出。
-- **206 个测试全部通过**。
+- **234 个测试全部通过**。
 
 ## 📁 仓库结构
 
@@ -226,10 +227,10 @@ Agent 技能包（`skills/` 单一来源，兼容 WorkBuddy/Codex/Claude）：
 - [x] 成本核算引擎（多维成本模型）
 - [x] 报价生成器（默认 + 用户模板）
 - [x] 任务调度器（APScheduler，按需）
-- [ ] 复核引擎（异常检测）— Agent 节点已搭骨架；核心校验待实现
+- [x] 复核引擎（异常检测）— 三方交叉校验 + 成本表校验
 - [x] 多用户学习 hub（上传流程、中心审查、监控、归档）
 - [x] REST API
-- [x] 测试与 CI — 206 个测试通过；CI 工作流（`test.yml`）在 push/PR 时全绿
+- [x] 测试与 CI — 234 个测试通过；CI 工作流（`test.yml`）在 push/PR 时全绿
 
 ## 🤝 贡献
 
