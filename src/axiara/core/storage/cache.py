@@ -124,8 +124,12 @@ class SQLiteCache:
         if self._conn is None:
             self._conn = sqlite3.connect(str(self.db_path))
             self._conn.row_factory = sqlite3.Row
-            # Enable WAL mode for concurrent read safety with FastAPI
-            self._conn.execute("PRAGMA journal_mode=WAL;")
+            # Note: WAL journal mode was considered for concurrent read safety
+            # with FastAPI, but `PRAGMA journal_mode=WAL` permanently hangs on
+            # some Windows + SQLite builds (blocking startup). The default
+            # rollback journal is safe for the single-user/team-git use cases;
+            # revisit WAL only behind a config flag if multi-process access
+            # becomes a real requirement.
         return self._conn
 
     def _get_table_name(self, layer: DataLayer) -> str:

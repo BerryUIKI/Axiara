@@ -16,7 +16,7 @@ env/
 
 # uv
 .uv/
-uv.lock
+# uv.lock IS committed (reproducible builds, CI cache matching for setup-uv)
 
 # Testing
 .pytest_cache/
