@@ -14,7 +14,8 @@ Additional endpoints:
 
 from __future__ import annotations
 
-from datetime import datetime
+import uuid
+from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any
 
@@ -28,6 +29,11 @@ app = FastAPI(
     description="Multi-agent valuation core - costing engine + price-fetch agent + quotation generator",
     version="0.2.0",
 )
+
+
+def _graph_config() -> dict[str, Any]:
+    """Generate a unique graph config with a per-request thread_id."""
+    return {"configurable": {"thread_id": str(uuid.uuid4())}}
 
 
 # Pydantic models for request/response
@@ -96,7 +102,7 @@ async def manual_edit(request: dict[str, Any]) -> dict[str, Any]:
     }
 
     graph = get_archive_graph()
-    result = await graph.ainvoke(initial_state, config={"configurable": {"thread_id": "default"}})
+    result = await graph.ainvoke(initial_state, config=_graph_config())
 
     if result.get("error"):
         raise HTTPException(status_code=400, detail=result["error"])
@@ -122,7 +128,7 @@ async def learn(request: dict[str, Any]) -> dict[str, Any]:
     }
 
     graph = get_archive_graph()
-    result = await graph.ainvoke(initial_state, config={"configurable": {"thread_id": "default"}})
+    result = await graph.ainvoke(initial_state, config=_graph_config())
 
     if result.get("error"):
         raise HTTPException(status_code=400, detail=result["error"])
@@ -152,7 +158,7 @@ async def crawl(request: CrawlRequest) -> dict[str, Any]:
     }
 
     graph = get_archive_graph()
-    result = await graph.ainvoke(initial_state, config={"configurable": {"thread_id": "default"}})
+    result = await graph.ainvoke(initial_state, config=_graph_config())
 
     if result.get("error"):
         raise HTTPException(status_code=400, detail=result["error"])
@@ -178,7 +184,7 @@ async def edit_review(request: dict[str, Any]) -> dict[str, Any]:
     }
 
     graph = get_archive_graph()
-    result = await graph.ainvoke(initial_state, config={"configurable": {"thread_id": "default"}})
+    result = await graph.ainvoke(initial_state, config=_graph_config())
 
     if result.get("error"):
         raise HTTPException(status_code=400, detail=result["error"])
@@ -210,7 +216,7 @@ async def query(request: QueryRequest) -> dict[str, Any]:
     }
 
     graph = get_query_graph()
-    result = await graph.ainvoke(initial_state, config={"configurable": {"thread_id": "default"}})
+    result = await graph.ainvoke(initial_state, config=_graph_config())
 
     if result.get("error"):
         raise HTTPException(status_code=400, detail=result["error"])
@@ -241,7 +247,7 @@ async def batch_fill(file: UploadFile) -> dict[str, Any]:
     }
 
     graph = get_quote_graph()
-    result = await graph.ainvoke(initial_state, config={"configurable": {"thread_id": "default"}})
+    result = await graph.ainvoke(initial_state, config=_graph_config())
 
     if result.get("error"):
         raise HTTPException(status_code=400, detail=result["error"])
@@ -272,7 +278,7 @@ async def generate_quote(request: QuotationRequest) -> dict[str, Any]:
     }
 
     graph = get_quote_graph()
-    result = await graph.ainvoke(initial_state, config={"configurable": {"thread_id": "default"}})
+    result = await graph.ainvoke(initial_state, config=_graph_config())
 
     if result.get("error"):
         raise HTTPException(status_code=400, detail=result["error"])
@@ -299,7 +305,7 @@ async def review(request: dict[str, Any]) -> dict[str, Any]:
     }
 
     graph = get_review_graph()
-    result = await graph.ainvoke(initial_state, config={"configurable": {"thread_id": "default"}})
+    result = await graph.ainvoke(initial_state, config=_graph_config())
 
     if result.get("error"):
         raise HTTPException(status_code=400, detail=result["error"])
@@ -362,7 +368,7 @@ async def health() -> HealthResponse:
     """
     return HealthResponse(
         status="healthy",
-        timestamp=datetime.utcnow().isoformat(),
+        timestamp=datetime.now(timezone.utc).isoformat(),
         version="0.2.0",
     )
 

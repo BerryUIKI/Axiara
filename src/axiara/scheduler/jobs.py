@@ -11,7 +11,7 @@ Jobs are registrations that call existing modules.
 
 from __future__ import annotations
 
-from datetime import datetime
+from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any
 
@@ -49,7 +49,7 @@ async def weekly_upload_reminder_job() -> dict[str, Any]:
 
     return {
         "job": "weekly_upload_reminder",
-        "timestamp": datetime.utcnow().isoformat(),
+        "timestamp": datetime.now(timezone.utc).isoformat(),
         "status": "reminder_sent",
         "message": "Weekly upload reminder sent to users",
     }
@@ -71,7 +71,7 @@ async def weekly_crawler_refresh_job() -> dict[str, Any]:
     if not config_path.exists():
         return {
             "job": "weekly_crawler_refresh",
-            "timestamp": datetime.utcnow().isoformat(),
+            "timestamp": datetime.now(timezone.utc).isoformat(),
             "status": "error",
             "error": "No sources configured",
         }
@@ -81,7 +81,7 @@ async def weekly_crawler_refresh_job() -> dict[str, Any]:
 
     return {
         "job": "weekly_crawler_refresh",
-        "timestamp": datetime.utcnow().isoformat(),
+        "timestamp": datetime.now(timezone.utc).isoformat(),
         "status": "diff_produced",
         "message": "Market price diff ready for review",
     }
@@ -107,7 +107,7 @@ async def monthly_scale_report_job() -> dict[str, Any]:
     }
 
     # Save report to output/
-    output_path = Path("output") / f"scale-report-{datetime.utcnow().strftime('%Y%m%d')}.json"
+    output_path = Path("output") / f"scale-report-{datetime.now(timezone.utc).strftime('%Y%m%d')}.json"
     output_path.parent.mkdir(parents=True, exist_ok=True)
 
     import json
@@ -116,7 +116,7 @@ async def monthly_scale_report_job() -> dict[str, Any]:
 
     return {
         "job": "monthly_scale_report",
-        "timestamp": datetime.utcnow().isoformat(),
+        "timestamp": datetime.now(timezone.utc).isoformat(),
         "status": "report_generated",
         "output_path": str(output_path),
         "tier": report.get("tier", "unknown"),
@@ -141,7 +141,7 @@ async def archive_detection_job() -> dict[str, Any]:
 
     return {
         "job": "archive_detection",
-        "timestamp": datetime.utcnow().isoformat(),
+        "timestamp": datetime.now(timezone.utc).isoformat(),
         "status": "candidates_detected",
         "count": len(candidates),
         "candidates": candidates[:10],  # First 10 for preview
