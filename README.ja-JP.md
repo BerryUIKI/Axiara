@@ -172,7 +172,7 @@ Axiara/
 
 ## 🤝 コントリビューション
 
-コントリビューション歓迎。まず [PLAN.md](PLAN.md) を読み、PR-only ワークフローに従ってください：**`main` への直接プッシュは禁止**。
+コントリビューション歓迎。まず [PLAN.md](PLAN.md) と [CONTRIBUTING.md](CONTRIBUTING.md) を読み、PR-only ワークフローに従ってください：**`main` / `dev` への直接プッシュは禁止**。
 
 ## 📄 ライセンス
 

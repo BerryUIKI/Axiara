@@ -1,8 +1,8 @@
 # Axiara — Developer Documentation
 
-> **Branch scope**: this directory lives on the `dev` branch **only**. It is
-> developer-facing and is **not** part of the `main` (release) branch, which
-> carries only user-facing docs. Do not port these files into `main`.
+> **Audience**: developer-facing documentation, distinct from the
+> user-facing README/docs. It lives alongside the user docs in the repo and
+> ships with both `dev` and `main` — developers read it, users never need to.
 
 This is the single entry point for developers working on the Axiara codebase:
 architecture, environment setup, coding conventions, the visual identity
@@ -78,7 +78,7 @@ src/axiara/
 tests/            pytest suite (mirrors src/axiara/ layout)
 scripts/          init-data.sh, helper scripts
 assets/           SVG diagrams & logo (see VI-GUIDE.md)
-docs/developer/   THIS directory (dev branch only)
+docs/developer/   THIS directory — developer docs (README.md, VI-GUIDE.md, DEV-AGENT.md)
 ```
 
 ## Workflow & conventions

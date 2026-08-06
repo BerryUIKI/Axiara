@@ -172,7 +172,7 @@ Cada instancia de Axiara aprende de sus propias cotizaciones y correcciones en u
 
 ## 🤝 Contribuciones
 
-Las contribuciones son bienvenidas. Lea primero [PLAN.md](PLAN.md) y siga el flujo de trabajo solo-PR: **nunca haga push directo a `main`**.
+Las contribuciones son bienvenidas. Lea primero [PLAN.md](PLAN.md) y [CONTRIBUTING.md](CONTRIBUTING.md) y siga el flujo de trabajo solo-PR: **nunca haga push directo a `main` / `dev`**.
 
 ## 📄 Licencia
 

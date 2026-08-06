@@ -172,7 +172,7 @@ Chaque instance d'Axiara apprend de ses propres devis et corrections dans une **
 
 ## 🤝 Contribution
 
-Les contributions sont les bienvenues. Lisez d'abord [PLAN.md](PLAN.md) et suivez le workflow PR-only : **ne jamais pousser directement vers `main`**.
+Les contributions sont les bienvenues. Lisez d'abord [PLAN.md](PLAN.md) et [CONTRIBUTING.md](CONTRIBUTING.md) et suivez le workflow PR-only : **ne jamais pousser directement vers `main` / `dev`**.
 
 ## 📄 Licence
 

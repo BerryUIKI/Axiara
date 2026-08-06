@@ -233,7 +233,7 @@ Agent 技能包（`skills/` 单一来源，兼容 WorkBuddy/Codex/Claude）：
 
 ## 🤝 贡献
 
-欢迎贡献。请先阅读 [PLAN.md](PLAN.md) 和 [CHANGELOG.md](CHANGELOG.md)（每个进 `dev` 的 PR 都需在 `[Unreleased]` 区补条目），并遵循 PR-only 工作流：**切勿直接推送 `main` / `dev`**。
+欢迎贡献。请先阅读 [PLAN.md](PLAN.md)、[CHANGELOG.md](CHANGELOG.md)（每个进 `dev` 的 PR 都需在 `[Unreleased]` 区补条目）和 [CONTRIBUTING.md](CONTRIBUTING.md)，并遵循 PR-only 工作流：**切勿直接推送 `main` / `dev`**。
 
 ## 📄 许可证
 

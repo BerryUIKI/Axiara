@@ -40,8 +40,8 @@ documentation and visual assets in sync.
 - **Docs discipline (hard rule):** user-facing changes update `README.md` +
   all 9 locale READMEs + `CHANGELOG.md` `[Unreleased]` + affected
   `docs/*.md` **before** push; track pending items in
-  `.workbuddy/doc-sync-todo.md`. Developer-only docs live in
-  `docs/developer/` (dev branch only — never port to `main`).
+  `.workbuddy/doc-sync-todo.md`. Developer docs live in
+  `docs/developer/` and ship with all branches.
 - **Lint**: keep ruff happy on the code you touch
   (`uv run ruff check src/ tests/`). The repo has legacy findings (CI treats
   lint as advisory until a cleanup PR) — do not make them worse.

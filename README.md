@@ -216,7 +216,9 @@ Each user's Axiara learns from its own quotes and corrections into a **personal 
 
 ## 🤝 Contributing
 
-Contributions are welcome. Please read [PLAN.md](PLAN.md) first, and follow the PR-only workflow: **never push directly to `main`**.
+Contributions are welcome. Please read [PLAN.md](PLAN.md) and
+[CONTRIBUTING.md](CONTRIBUTING.md) first, and follow the PR-only workflow:
+**never push directly to `main` / `dev`**.
 
 ## 📄 License
 
