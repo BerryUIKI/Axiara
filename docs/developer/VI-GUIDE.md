@@ -118,11 +118,23 @@ Locale suffix set: `zh` (zh-CN), `zh-TW`, `ja-JP`, `ko-KR`, `de-DE`, `es-ES`,
 | `axiara-modes*.svg` | Four modes flow (10 locales) |
 | `axiara-setup-decision*.svg` | Onboarding decision tree (10 locales) |
 
-**Localization workflow** (repeatable): start from the EN light SVG, apply a
-per-locale string dict on `<text>` bodies (decode `&amp;` → `&` before
-matching — ElementTree parses entities), then generate the dark twin via the
-§2 palette mapping. Container geometry stays untouched — keep translations
-short enough to fit the boxes.
+**Localization workflow** (repeatable, automated):
+`scripts/dev/i18n_svg.py` regenerates the 8 derived locales (all except
+zh-CN, which is a hand-written baseline) from the EN sources:
+
+```bash
+python scripts/dev/i18n_svg.py            # regenerate all managed locales
+python scripts/dev/i18n_svg.py --locale de-DE
+python scripts/dev/i18n_svg.py --extract  # re-derive i18n_dicts.py from committed SVGs
+```
+
+- Translation strings live in `scripts/dev/i18n_dicts.py` — the single
+  source of truth. Edit there, then run the generator.
+- The generator regex-replaces `<text>` bodies and ET-round-trips to match
+  the committed byte format (no format churn); dark twins come from the §2
+  palette map; files are written with LF line endings.
+- Container geometry stays untouched — keep translations short enough to
+  fit the boxes. zh-CN (`-zh`) SVGs are hand-written and not regenerated.
 
 ---
 
