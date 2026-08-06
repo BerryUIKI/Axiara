@@ -11,7 +11,9 @@ Maintenance rule: **every PR merged into `dev` must add its entry under `Unrelea
 
 ## [Unreleased] — dev branch
 
-_No pending changes — re-opened on the next dev PR._
+### Changed
+
+- **README consolidation** (this PR): root keeps only `README.md` (English) + `README.zh-CN.md`; the other 8 locale READMEs moved to `docs/README/` (archived via `git mv`, history preserved, links kept from the switchers; no longer force-synced with the English README). Language switchers updated in all 10 files — current language bold, others linked (`../` for the archived copies).
 
 ## [0.1.1] - 2026-08-06
 

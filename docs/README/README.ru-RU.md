@@ -14,12 +14,12 @@
   <a href="#"><img src="https://img.shields.io/badge/framework-LangGraph-purple" alt="LangGraph" /></a>
   <a href="#"><img src="https://img.shields.io/badge/api-FastAPI-teal" alt="FastAPI" /></a>
   <a href="#"><img src="https://img.shields.io/badge/license-MIT-green" alt="License: MIT" /></a>
-  <a href="README.md"><img src="https://img.shields.io/badge/lang-English-blue" alt="English" /></a>
+  <a href="../README.md"><img src="https://img.shields.io/badge/lang-English-blue" alt="English" /></a>
 </p>
 
 ---
 
-**Читать на:** [English](README.md) · [简体中文](README.zh-CN.md) · [繁體中文](README.zh-TW.md) · [日本語](README.ja-JP.md) · [한국어](README.ko-KR.md) · [Français](README.fr-FR.md) · [Deutsch](README.de-DE.md) · [Español](README.es-ES.md) · [Português](README.pt-BR.md) · [Русский](README.ru-RU.md)
+**Читать на:** [English](../README.md) · [简体中文](../README.zh-CN.md) · [繁體中文](README.zh-TW.md) · [日本語](README.ja-JP.md) · [한국어](README.ko-KR.md) · [Français](README.fr-FR.md) · [Deutsch](README.de-DE.md) · [Español](README.es-ES.md) · [Português](README.pt-BR.md) · **Русский**
 
 ---
 
