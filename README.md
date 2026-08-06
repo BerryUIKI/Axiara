@@ -81,6 +81,14 @@ Either way, once setup finishes you can start with something like: *"Make me a q
   <img src="assets/axiara-architecture.svg" alt="Axiara architecture" style="max-width: 100%; height: auto; width: 680px;" />
 </picture>
 
+## 🧩 The Four Modes at a Glance
+
+<img src="assets/axiara-modes.svg" alt="Axiara four modes" style="max-width: 100%; height: auto; width: 1280px;" />
+
+## 🧭 Setup — Four Quick Choices
+
+<img src="assets/axiara-setup-decision.svg" alt="Axiara setup decision tree" style="max-width: 100%; height: auto; width: 1280px;" />
+
 ## 🧰 Tech Stack
 
 | Layer | Choice |
@@ -195,10 +203,10 @@ Each user's Axiara learns from its own quotes and corrections into a **personal 
 - [x] Costing engine (multi-dimensional cost model)
 - [x] Quotation generator (default + user templates)
 - [x] Task scheduler (APScheduler, on-demand)
-- [ ] Review engine (anomaly detection)
+- [ ] Review engine (anomaly detection) — agent nodes stubbed; core validation pending
 - [x] Multi-user learning hub (upload flow, central review, monitoring, archiving)
 - [x] REST API
-- [ ] Tests & CI hardening
+- [x] Tests & CI — 206 tests passing; CI workflow (`test.yml`) green on push/PR
 
 ## 🤝 Contributing
 
