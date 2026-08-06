@@ -74,12 +74,40 @@ Axiara に新しいバージョンがあるか確認してください：https:/
 
 どちらの方法でも、初期化が終われば「XX の見積もりを作って」のように直接頼めます——後はエージェントがやってくれます。
 
+
 ## 🏗️ アーキテクチャ
 
 <picture>
-  <source media="(prefers-color-scheme: dark)" srcset="assets/axiara-architecture-dark.svg" />
-  <img src="assets/axiara-architecture.svg" alt="Axiara architecture" style="max-width: 100%; height: auto; width: 1280px;" />
+  <source media="(prefers-color-scheme: dark)" srcset="assets/axiara-architecture-ja-JP-dark.svg" />
+  <img src="assets/axiara-architecture-ja-JP.svg" alt="Axiara architecture" style="max-width: 100%; height: auto; width: 1280px;" />
 </picture>
+
+## 🧩 4つのモード概要
+
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="assets/axiara-modes-ja-JP-dark.svg" />
+  <img src="assets/axiara-modes-ja-JP.svg" alt="Axiara modes" style="max-width: 100%; height: auto; width: 1280px;" />
+</picture>
+
+## 🧭 初期設定 — 4つの選択肢
+
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="assets/axiara-setup-decision-ja-JP-dark.svg" />
+  <img src="assets/axiara-setup-decision-ja-JP.svg" alt="Axiara setup" style="max-width: 100%; height: auto; width: 1280px;" />
+</picture>
+
+### 💡 Python 環境は必要ですか？（先にご確認ください）
+
+**ほとんどの場合、必要ありません。** Axiara は AI エージェント向けの「ワークスペース」です——リポジトリフォルダを AI アシスタント（WorkBuddy、Claude など）に渡すだけで、エージェントが依存関係を自動処理します。
+
+**自分で実行する**（エージェントに任せない）場合のみ Python 環境が必要です：
+
+| やりたいこと | .venv 必要？ | 手順 |
+|------------|:---:|--------|
+| AI エージェントに任せる（推奨） | ❌ 不要 | 下の方法1 / 方法2 |
+| REST API サーバーを起動 | ✅ 必要 | `uv sync` → `uv run uvicorn axiara.api.main:app` |
+| 対話型 CLI を実行 | ✅ 必要 | `uv sync` → `uv run axiara` |
+| 開発 / テスト実行 | ✅ 必要 | `uv sync` → `uv run pytest` |
 
 ## 🧰 技術スタック
 

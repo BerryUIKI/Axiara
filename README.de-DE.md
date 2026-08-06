@@ -74,12 +74,40 @@ Wenn ja, aktualisieren Sie mich auf die neueste Version (behalten Sie meine vorh
 
 Egal welche Methode: Sobald die Einrichtung abgeschlossen ist, können Sie z. B. sagen: *"Erstellen Sie mir ein Angebot für [Artikel]."* — den Rest erledigt der Agent.
 
+
 ## 🏗️ Architektur
 
 <picture>
-  <source media="(prefers-color-scheme: dark)" srcset="assets/axiara-architecture-dark.svg" />
-  <img src="assets/axiara-architecture.svg" alt="Axiara architecture" style="max-width: 100%; height: auto; width: 1280px;" />
+  <source media="(prefers-color-scheme: dark)" srcset="assets/axiara-architecture-de-DE-dark.svg" />
+  <img src="assets/axiara-architecture-de-DE.svg" alt="Axiara architecture" style="max-width: 100%; height: auto; width: 1280px;" />
 </picture>
+
+## 🧩 Die vier Modi im Überblick
+
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="assets/axiara-modes-de-DE-dark.svg" />
+  <img src="assets/axiara-modes-de-DE.svg" alt="Axiara modes" style="max-width: 100%; height: auto; width: 1280px;" />
+</picture>
+
+## 🧭 Einrichtung — vier schnelle Entscheidungen
+
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="assets/axiara-setup-decision-de-DE-dark.svg" />
+  <img src="assets/axiara-setup-decision-de-DE.svg" alt="Axiara setup" style="max-width: 100%; height: auto; width: 1280px;" />
+</picture>
+
+### 💡 Brauchen Sie eine Python-Umgebung? (zuerst lesen)
+
+**In den meisten Fällen nicht.** Axiara ist ein „Arbeitsbereich" für KI-Agenten — Sie geben den Repository-Ordner einfach an Ihren KI-Assistenten (WorkBuddy, Claude usw.) weiter, der Agent übernimmt die Abhängigkeiten automatisch.
+
+Nur wenn Sie **selbst etwas ausführen** (statt es dem Agenten zu überlassen), brauchen Sie eine Python-Umgebung:
+
+| Was Sie tun möchten | .venv nötig? | Vorgehen |
+|------------|:---:|--------|
+| Dem KI-Agenten überlassen (empfohlen) | ❌ nein | siehe Weg 1 / Weg 2 unten |
+| REST-API-Server starten | ✅ ja | `uv sync` dann `uv run uvicorn axiara.api.main:app` |
+| Interaktive CLI ausführen | ✅ ja | `uv sync` dann `uv run axiara` |
+| Entwicklung / Tests | ✅ ja | `uv sync` dann `uv run pytest` |
 
 ## 🧰 Tech-Stack
 

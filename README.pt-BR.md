@@ -74,12 +74,40 @@ Se houver, atualize-me para a versão mais recente (mantenha meus dados existent
 
 De qualquer forma, após a inicialização você pode começar dizendo: *"Faça um orçamento de [item]."* — o agente faz o resto.
 
+
 ## 🏗️ Arquitetura
 
 <picture>
-  <source media="(prefers-color-scheme: dark)" srcset="assets/axiara-architecture-dark.svg" />
-  <img src="assets/axiara-architecture.svg" alt="Axiara architecture" style="max-width: 100%; height: auto; width: 1280px;" />
+  <source media="(prefers-color-scheme: dark)" srcset="assets/axiara-architecture-pt-BR-dark.svg" />
+  <img src="assets/axiara-architecture-pt-BR.svg" alt="Axiara architecture" style="max-width: 100%; height: auto; width: 1280px;" />
 </picture>
+
+## 🧩 Os quatro modos de relance
+
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="assets/axiara-modes-pt-BR-dark.svg" />
+  <img src="assets/axiara-modes-pt-BR.svg" alt="Axiara modes" style="max-width: 100%; height: auto; width: 1280px;" />
+</picture>
+
+## 🧭 Configuração — quatro escolhas rápidas
+
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="assets/axiara-setup-decision-pt-BR-dark.svg" />
+  <img src="assets/axiara-setup-decision-pt-BR.svg" alt="Axiara setup" style="max-width: 100%; height: auto; width: 1280px;" />
+</picture>
+
+### 💡 Precisa de um ambiente Python? (leia primeiro)
+
+**Na maioria dos casos, não.** Axiara é um «espaço de trabalho» para agentes de IA — basta entregar a pasta do repositório ao seu assistente de IA (WorkBuddy, Claude, etc.) e o agente cuida das dependências automaticamente.
+
+Um ambiente Python só é necessário se você quiser **executar você mesmo** (em vez de delegar ao agente):
+
+| O que você quer fazer | Precisa de .venv? | Como |
+|------------|:---:|--------|
+| Delegar ao agente de IA (recomendado) | ❌ não | veja caminho 1 / caminho 2 abaixo |
+| Iniciar o servidor REST API | ✅ sim | `uv sync` e depois `uv run uvicorn axiara.api.main:app` |
+| Executar a CLI interativa | ✅ sim | `uv sync` e depois `uv run axiara` |
+| Desenvolvimento / testes | ✅ sim | `uv sync` e depois `uv run pytest` |
 
 ## 🧰 Pilha tecnológica
 
