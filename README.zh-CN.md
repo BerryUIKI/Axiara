@@ -100,11 +100,17 @@ Axiara 是一个**面向估值的 Agent 工作区**。它为 AI Agent 提供四�
 
 ## 🧩 四大模式一览
 
-<img src="assets/axiara-modes-zh.svg" alt="Axiara 四大模式" style="max-width: 100%; height: auto; width: 1280px;" />
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="assets/axiara-modes-zh-dark.svg" />
+  <img src="assets/axiara-modes-zh.svg" alt="Axiara 四大模式" style="max-width: 100%; height: auto; width: 1280px;" />
+</picture>
 
 ## 🧭 初始化 — 四个简单选择
 
-<img src="assets/axiara-setup-decision-zh.svg" alt="Axiara 初始化决策树" style="max-width: 100%; height: auto; width: 1280px;" />
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="assets/axiara-setup-decision-zh-dark.svg" />
+  <img src="assets/axiara-setup-decision-zh.svg" alt="Axiara 初始化决策树" style="max-width: 100%; height: auto; width: 1280px;" />
+</picture>
 
 ## 🧰 技术栈
 

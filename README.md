@@ -83,11 +83,17 @@ Either way, once setup finishes you can start with something like: *"Make me a q
 
 ## 🧩 The Four Modes at a Glance
 
-<img src="assets/axiara-modes.svg" alt="Axiara four modes" style="max-width: 100%; height: auto; width: 1280px;" />
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="assets/axiara-modes-dark.svg" />
+  <img src="assets/axiara-modes.svg" alt="Axiara four modes" style="max-width: 100%; height: auto; width: 1280px;" />
+</picture>
 
 ## 🧭 Setup — Four Quick Choices
 
-<img src="assets/axiara-setup-decision.svg" alt="Axiara setup decision tree" style="max-width: 100%; height: auto; width: 1280px;" />
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="assets/axiara-setup-decision-dark.svg" />
+  <img src="assets/axiara-setup-decision.svg" alt="Axiara setup decision tree" style="max-width: 100%; height: auto; width: 1280px;" />
+</picture>
 
 ## 🧰 Tech Stack
 
