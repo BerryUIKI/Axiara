@@ -46,7 +46,9 @@ def _archive_route(state: AgentState) -> str:
 def _quote_route(state: AgentState) -> str:
     """Entry routing for the quote graph: map user action to first node."""
     action = state.get("user_input", {}).get("action", "")
-    return "quote" if action == "quote" else "batch_fill"
+    if action == "batch_fill":
+        return "batch_fill"
+    return "quote"  # Default to quote (safer, read-only)
 
 def build_archive_graph() -> StateGraph:
     """Build the archive graph (Mode 1).
@@ -179,7 +181,7 @@ def build_review_graph() -> StateGraph:
 
     # Compile with checkpointer for interrupt/resume
     memory = MemorySaver()
-    return graph.compile()
+    return graph.compile(checkpointer=memory)
 
 
 # Pre-built graphs for reuse
