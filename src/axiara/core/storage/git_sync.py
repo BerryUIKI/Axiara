@@ -16,7 +16,7 @@ from __future__ import annotations
 
 import subprocess
 from dataclasses import dataclass
-from datetime import datetime
+from datetime import datetime, timezone
 from enum import Enum
 from pathlib import Path
 from typing import Any
@@ -274,13 +274,24 @@ class GitSyncManager:
             status = self.get_status()
 
             if status.uncommitted:
-                # Commit changes first
-                if message is None:
-                    message = f"Update data: {datetime.utcnow().isoformat()}"
+                # Only commit changes that were explicitly staged by the user.
+                # Per AGENTS.md: "Push only on explicit user action after editing."
+                staged_result = self._run_git("diff", "--cached", "--name-only", check=False)
+                staged_files = [f for f in staged_result.stdout.strip().split("\n") if f]
 
-                self._run_git("add", "-A")
+                if not staged_files:
+                    result["message"] = (
+                        f"{len(status.uncommitted)} uncommitted files detected. "
+                        "Use git add to stage files before push, then call push again. "
+                        "Auto-add-all is disabled for safety."
+                    )
+                    return result
+
+                if message is None:
+                    message = f"Update data: {datetime.now(timezone.utc).isoformat()}"
+
                 self._run_git("commit", "-m", message)
-                result["message"] = f"Committed {len(status.uncommitted)} files"
+                result["message"] = f"Committed {len(staged_files)} files"
 
             # Push changes
             push_result = self._run_git("push", check=False)

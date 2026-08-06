@@ -13,20 +13,10 @@ from __future__ import annotations
 
 import csv
 import json
-from enum import StrEnum
 from pathlib import Path
 from typing import Any
 
 import yaml
-
-
-class DataLayer(StrEnum):
-    """The three data layers plus user uploads."""
-
-    MAIN = "main"  # official price baseline — manual edit ONLY
-    LEARN = "learn"  # AI-learned reference
-    MARKET = "market"  # crawled market prices
-    UPLOADS = "uploads"  # user-provided tables/documents
 
 
 class StorageBackend:
@@ -68,7 +58,7 @@ class LocalStorage(StorageBackend):
 
 from axiara.core.storage.cache import SQLiteCache, get_cache
 from axiara.core.storage.manifest import ManifestManager, get_manifest_manager
-from axiara.core.storage.permissions import PermissionError, get_permission_manager
+from axiara.core.storage.permissions import DataLayer, PermissionError, get_permission_manager
 
 
 class FileStorageError(Exception):
@@ -104,7 +94,7 @@ class FileStorage(LocalStorage):
         super().__init__(root)
         self.enable_cache = enable_cache
         self.enable_manifest = enable_manifest
-        self._permission_manager = get_permission_manager() if enable_manifest else None
+        self._permission_manager = get_permission_manager()
         self._cache = get_cache() if enable_cache else None
         self._manifest = get_manifest_manager() if enable_manifest else None
 

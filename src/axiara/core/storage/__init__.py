@@ -8,7 +8,6 @@ rejects writes that are not allowed for a given layer.
 
 from __future__ import annotations
 
-from enum import StrEnum
 from pathlib import Path
 from typing import Any, Protocol
 
@@ -18,6 +17,7 @@ from axiara.core.storage.file_backend import FileStorage, create_file_storage
 from axiara.core.storage.git_sync import GitSyncManager, get_git_sync_manager
 from axiara.core.storage.manifest import ManifestManager, get_manifest_manager
 from axiara.core.storage.permissions import (
+    DataLayer,
     PermissionError,
     PermissionManager,
     get_permission_manager,
@@ -40,15 +40,6 @@ __all__ = [
     "GitSyncManager",
     "get_git_sync_manager",
 ]
-
-
-class DataLayer(StrEnum):
-    """The three data layers plus user uploads."""
-
-    MAIN = "main"  # official price baseline — manual edit ONLY
-    LEARN = "learn"  # AI-learned reference
-    MARKET = "market"  # crawled market prices
-    UPLOADS = "uploads"  # user-provided tables/documents
 
 
 class StorageBackend(Protocol):

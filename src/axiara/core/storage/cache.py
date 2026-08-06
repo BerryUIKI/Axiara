@@ -17,21 +17,13 @@ from __future__ import annotations
 import hashlib
 import json
 import sqlite3
-from datetime import datetime
-from enum import StrEnum
+from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any
 
 import pandas as pd
 
-
-class DataLayer(StrEnum):
-    """The three data layers plus user uploads."""
-
-    MAIN = "main"  # official price baseline — manual edit ONLY
-    LEARN = "learn"  # AI-learned reference
-    MARKET = "market"  # crawled market prices
-    UPLOADS = "uploads"  # user-provided tables/documents
+from axiara.core.storage.permissions import DataLayer
 
 
 class CacheError(Exception):
@@ -132,6 +124,8 @@ class SQLiteCache:
         if self._conn is None:
             self._conn = sqlite3.connect(str(self.db_path))
             self._conn.row_factory = sqlite3.Row
+            # Enable WAL mode for concurrent read safety with FastAPI
+            self._conn.execute("PRAGMA journal_mode=WAL;")
         return self._conn
 
     def _get_table_name(self, layer: DataLayer) -> str:
@@ -251,7 +245,7 @@ class SQLiteCache:
             conn.execute("DELETE FROM cache_metadata WHERE file_path = ?", (str(file_path),))
 
             # Insert new rows
-            now = datetime.utcnow().isoformat()
+            now = datetime.now(timezone.utc).isoformat()
             row_count = 0
 
             for _, row in df.iterrows():
