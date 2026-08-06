@@ -1,0 +1,116 @@
+<svg viewBox="0 0 1280 660" width="100%" xmlns="http://www.w3.org/2000/svg" role="img">
+<title>Axiara four modes</title>
+<desc>Four modes: Archive (Mode 1), Query (Mode 2), Quote (Mode 3), Review (Mode 4) — each with input, process and output</desc>
+<defs>
+<marker id="arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+<path d="M2 1L8 5L2 9" fill="none" stroke="context-stroke" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+</marker>
+</defs>
+
+<!-- Header -->
+<rect x="40" y="20" width="1200" height="56" rx="12" fill="#04342C" stroke="#5DCAA5" stroke-width="1"/>
+<text x="640" y="48" font-size="28" font-weight="600" fill="#E1F5EE" text-anchor="middle">Four Modes — What Axiara Does</text>
+<text x="640" y="68" font-size="14" fill="#9FE1CB" text-anchor="middle">Agents choose a mode per task; each mode is a capability &amp; permission boundary</text>
+
+<!-- ============ Mode 1 — Archive ============ -->
+<rect x="40" y="92" width="280" height="56" rx="10" fill="#173404" stroke="#97C459" stroke-width="1"/>
+<text x="180" y="118" font-size="22" font-weight="600" fill="#C0DD97" text-anchor="middle">Mode 1 — Archive</text>
+<text x="180" y="140" font-size="14" fill="#97C459" text-anchor="middle">official price entry · learn · crawl</text>
+
+<text x="180" y="166" font-size="14" font-weight="600" fill="#9E9D98" text-anchor="middle">INPUT</text>
+<rect x="40" y="176" width="280" height="88" rx="10" fill="#0E2402" stroke="#618D3A" stroke-width="1"/>
+<text x="180" y="200" font-size="16" fill="#C0DD97" text-anchor="middle">Price lists · documents</text>
+<text x="180" y="226" font-size="16" fill="#C0DD97" text-anchor="middle">historical quotes</text>
+<text x="180" y="252" font-size="16" fill="#97C459" text-anchor="middle">URLs to crawl</text>
+
+<line x1="180" y1="270" x2="180" y2="292" stroke="#9E9D98" stroke-width="1.5" marker-end="url(#arrow)"/>
+<text x="180" y="310" font-size="14" font-weight="600" fill="#9E9D98" text-anchor="middle">PROCESS</text>
+<rect x="40" y="320" width="280" height="112" rx="10" fill="#173404" stroke="#97C459" stroke-width="1"/>
+<text x="180" y="344" font-size="16" fill="#C0DD97" text-anchor="middle">Manual entry (versioned,</text>
+<text x="180" y="370" font-size="16" fill="#C0DD97" text-anchor="middle">rollback-able)</text>
+<text x="180" y="396" font-size="16" fill="#97C459" text-anchor="middle">AI learning from docs</text>
+<text x="180" y="422" font-size="16" fill="#97C459" text-anchor="middle">Market crawl, on demand</text>
+
+<line x1="180" y1="438" x2="180" y2="460" stroke="#9E9D98" stroke-width="1.5" marker-end="url(#arrow)"/>
+<text x="180" y="478" font-size="14" font-weight="600" fill="#9E9D98" text-anchor="middle">OUTPUT</text>
+<rect x="40" y="488" width="280" height="88" rx="10" fill="#0E2402" stroke="#618D3A" stroke-width="1"/>
+<text x="180" y="512" font-size="16" fill="#C0DD97" text-anchor="middle">main_db · learn_db</text>
+<text x="180" y="538" font-size="16" fill="#97C459" text-anchor="middle">market_db (confirm first)</text>
+
+<!-- ============ Mode 2 — Query ============ -->
+<rect x="340" y="92" width="280" height="56" rx="10" fill="#26215C" stroke="#AFA9EC" stroke-width="1"/>
+<text x="480" y="118" font-size="22" font-weight="600" fill="#CECBF6" text-anchor="middle">Mode 2 — Query</text>
+<text x="480" y="140" font-size="14" fill="#AFA9EC" text-anchor="middle">single-item detail lookup</text>
+
+<text x="480" y="166" font-size="14" font-weight="600" fill="#9E9D98" text-anchor="middle">INPUT</text>
+<rect x="340" y="176" width="280" height="88" rx="10" fill="#1C1848" stroke="#7A71C9" stroke-width="1"/>
+<text x="480" y="200" font-size="16" fill="#CECBF6" text-anchor="middle">One material / product</text>
+<text x="480" y="226" font-size="16" fill="#CECBF6" text-anchor="middle">name (+ quantity / unit)</text>
+<text x="480" y="252" font-size="16" fill="#AFA9EC" text-anchor="middle">specs / notes to match</text>
+
+<line x1="480" y1="270" x2="480" y2="292" stroke="#9E9D98" stroke-width="1.5" marker-end="url(#arrow)"/>
+<text x="480" y="310" font-size="14" font-weight="600" fill="#9E9D98" text-anchor="middle">PROCESS</text>
+<rect x="340" y="320" width="280" height="112" rx="10" fill="#26215C" stroke="#AFA9EC" stroke-width="1"/>
+<text x="480" y="344" font-size="16" fill="#CECBF6" text-anchor="middle">Read main_db cost first</text>
+<text x="480" y="370" font-size="16" fill="#CECBF6" text-anchor="middle">(highest weight)</text>
+<text x="480" y="396" font-size="16" fill="#AFA9EC" text-anchor="middle">Overlay market_db</text>
+<text x="480" y="422" font-size="16" fill="#AFA9EC" text-anchor="middle">floating price range</text>
+
+<line x1="480" y1="438" x2="480" y2="460" stroke="#9E9D98" stroke-width="1.5" marker-end="url(#arrow)"/>
+<text x="480" y="478" font-size="14" font-weight="600" fill="#9E9D98" text-anchor="middle">OUTPUT</text>
+<rect x="340" y="488" width="280" height="88" rx="10" fill="#1C1848" stroke="#7A71C9" stroke-width="1"/>
+<text x="480" y="512" font-size="16" fill="#CECBF6" text-anchor="middle">Standard cost + market</text>
+<text x="480" y="538" font-size="16" fill="#AFA9EC" text-anchor="middle">reference + process notes</text>
+
+<!-- ============ Mode 3 — Quote ============ -->
+<rect x="640" y="92" width="280" height="56" rx="10" fill="#412402" stroke="#EF9F27" stroke-width="1"/>
+<text x="780" y="118" font-size="22" font-weight="600" fill="#FAC775" text-anchor="middle">Mode 3 — Quote</text>
+<text x="780" y="140" font-size="14" fill="#EF9F27" text-anchor="middle">batch BOM backfill · smart quote</text>
+
+<text x="780" y="166" font-size="14" font-weight="600" fill="#9E9D98" text-anchor="middle">INPUT</text>
+<rect x="640" y="176" width="280" height="88" rx="10" fill="#2F1B02" stroke="#B97B2A" stroke-width="1"/>
+<text x="780" y="200" font-size="16" fill="#FAC775" text-anchor="middle">BOM / material list</text>
+<text x="780" y="226" font-size="16" fill="#FAC775" text-anchor="middle">constraints (default /</text>
+<text x="780" y="252" font-size="16" fill="#EF9F27" text-anchor="middle">project)</text>
+
+<line x1="780" y1="270" x2="780" y2="292" stroke="#9E9D98" stroke-width="1.5" marker-end="url(#arrow)"/>
+<text x="780" y="310" font-size="14" font-weight="600" fill="#9E9D98" text-anchor="middle">PROCESS</text>
+<rect x="640" y="320" width="280" height="112" rx="10" fill="#412402" stroke="#EF9F27" stroke-width="1"/>
+<text x="780" y="344" font-size="16" fill="#FAC775" text-anchor="middle">Cost calculation</text>
+<text x="780" y="370" font-size="16" fill="#FAC775" text-anchor="middle">Three-tier pricing</text>
+<text x="780" y="396" font-size="16" fill="#EF9F27" text-anchor="middle">(low / mid / high)</text>
+<text x="780" y="422" font-size="16" fill="#EF9F27" text-anchor="middle">Template adaptation</text>
+
+<line x1="780" y1="438" x2="780" y2="460" stroke="#9E9D98" stroke-width="1.5" marker-end="url(#arrow)"/>
+<text x="780" y="478" font-size="14" font-weight="600" fill="#9E9D98" text-anchor="middle">OUTPUT</text>
+<rect x="640" y="488" width="280" height="88" rx="10" fill="#2F1B02" stroke="#B97B2A" stroke-width="1"/>
+<text x="780" y="512" font-size="16" fill="#FAC775" text-anchor="middle">Quotation to output/</text>
+<text x="780" y="538" font-size="16" fill="#EF9F27" text-anchor="middle">(default or user template)</text>
+
+<!-- ============ Mode 4 — Review ============ -->
+<rect x="940" y="92" width="280" height="56" rx="10" fill="#04342C" stroke="#5DCAA5" stroke-width="1"/>
+<text x="1080" y="118" font-size="22" font-weight="600" fill="#E1F5EE" text-anchor="middle">Mode 4 — Review</text>
+<text x="1080" y="140" font-size="14" fill="#9FE1CB" text-anchor="middle">cross-validate user tables</text>
+
+<text x="1080" y="166" font-size="14" font-weight="600" fill="#9E9D98" text-anchor="middle">INPUT</text>
+<rect x="940" y="176" width="280" height="88" rx="10" fill="#04241C" stroke="#3E9C7D" stroke-width="1"/>
+<text x="1080" y="200" font-size="16" fill="#E1F5EE" text-anchor="middle">User's own cost /</text>
+<text x="1080" y="226" font-size="16" fill="#E1F5EE" text-anchor="middle">quote table</text>
+<text x="1080" y="252" font-size="16" fill="#9FE1CB" text-anchor="middle">with notes</text>
+
+<line x1="1080" y1="270" x2="1080" y2="292" stroke="#9E9D98" stroke-width="1.5" marker-end="url(#arrow)"/>
+<text x="1080" y="310" font-size="14" font-weight="600" fill="#9E9D98" text-anchor="middle">PROCESS</text>
+<rect x="940" y="320" width="280" height="112" rx="10" fill="#04342C" stroke="#5DCAA5" stroke-width="1"/>
+<text x="1080" y="344" font-size="16" fill="#E1F5EE" text-anchor="middle">Cross-validate vs</text>
+<text x="1080" y="370" font-size="16" fill="#E1F5EE" text-anchor="middle">main_db + market_db</text>
+<text x="1080" y="396" font-size="16" fill="#9FE1CB" text-anchor="middle">Flag abnormal prices</text>
+<text x="1080" y="422" font-size="16" fill="#9FE1CB" text-anchor="middle">(too high / too low)</text>
+
+<line x1="1080" y1="438" x2="1080" y2="460" stroke="#9E9D98" stroke-width="1.5" marker-end="url(#arrow)"/>
+<text x="1080" y="478" font-size="14" font-weight="600" fill="#9E9D98" text-anchor="middle">OUTPUT</text>
+<rect x="940" y="488" width="280" height="88" rx="10" fill="#04241C" stroke="#3E9C7D" stroke-width="1"/>
+<text x="1080" y="512" font-size="16" fill="#E1F5EE" text-anchor="middle">Anomaly flags +</text>
+<text x="1080" y="538" font-size="16" fill="#9FE1CB" text-anchor="middle">adjustment suggestions</text>
+
+<text x="640" y="616" font-size="14" fill="#9E9D98" text-anchor="middle">Never writes the official baseline — learned &amp; market data enter only after confirmation</text>
+</svg>

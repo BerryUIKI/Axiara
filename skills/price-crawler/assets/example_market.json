@@ -1,0 +1,100 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Axiara Market Price Data",
+  "description": "Normalized market price data fetched by crawler",
+  "type": "object",
+  "required": ["metadata", "prices"],
+  "properties": {
+    "metadata": {
+      "type": "object",
+      "required": ["source", "fetched_at", "material", "currency"],
+      "properties": {
+        "source": {
+          "type": "string",
+          "description": "Source ID from registry",
+          "examples": ["smm", "mofcom-cif", "indexmundi"]
+        },
+        "fetched_at": {
+          "type": "string",
+          "format": "date-time",
+          "description": "UTC timestamp of fetch"
+        },
+        "material": {
+          "type": "string",
+          "description": "Material/commodity name"
+        },
+        "currency": {
+          "type": "string",
+          "description": "ISO 4217 currency code",
+          "examples": ["CNY", "USD", "EUR"]
+        },
+        "notes": {
+          "type": "string",
+          "description": "Additional metadata"
+        }
+      }
+    },
+    "prices": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["name", "unit", "unit_price", "effective_date", "source", "url", "fetched_at", "confidence"],
+        "properties": {
+          "name": {
+            "type": "string",
+            "description": "Canonical commodity name (normalized)"
+          },
+          "spec": {
+            "type": "string",
+            "description": "Specification string"
+          },
+          "unit": {
+            "type": "string",
+            "description": "Canonical unit (normalized)",
+            "examples": ["kg", "ton", "m"]
+          },
+          "unit_price": {
+            "type": "number",
+            "description": "Price per unit (numeric, positive)"
+          },
+          "currency": {
+            "type": "string",
+            "description": "ISO 4217 currency code"
+          },
+          "effective_date": {
+            "type": "string",
+            "format": "date",
+            "description": "Date the price is valid (YYYY-MM-DD)"
+          },
+          "note": {
+            "type": "string",
+            "description": "Free-form notes"
+          },
+          "source": {
+            "type": "string",
+            "description": "Source ID from registry"
+          },
+          "url": {
+            "type": "string",
+            "format": "uri",
+            "description": "Direct URL of the page the price was read from"
+          },
+          "fetched_at": {
+            "type": "string",
+            "format": "date-time",
+            "description": "UTC timestamp of the fetch"
+          },
+          "confidence": {
+            "type": "string",
+            "enum": ["high", "medium", "low"],
+            "description": "Confidence level of the price data"
+          },
+          "raw": {
+            "type": "string",
+            "description": "Raw text as displayed on the page (for audit)"
+          }
+        }
+      }
+    }
+  }
+}

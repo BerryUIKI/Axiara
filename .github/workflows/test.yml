@@ -1,0 +1,46 @@
+name: Test
+
+on:
+  push:
+    branches: [main, dev]
+  pull_request:
+    branches: [main, dev]
+
+jobs:
+  # Job name MUST stay "continuous-integration": the main branch protection
+  # requires a status check with exactly this name (see PLAN.md Repository
+  # State). Without a matrix, GitHub reports the check as the bare job name.
+  continuous-integration:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install uv
+        uses: astral-sh/setup-uv@v3
+        with:
+          enable-cache: true
+
+      - name: Set up Python 3.12
+        run: uv python install 3.12
+
+      - name: Install dependencies
+        run: uv sync --dev
+
+      # Lint is currently advisory: the codebase carries 228 legacy ruff
+      # findings (unused imports, __all__ ordering, import sorting). CI must
+      # not block on them — re-enable (remove continue-on-error) after a
+      # dedicated lint-cleanup pass lands.
+      - name: Lint with ruff (advisory)
+        run: uv run ruff check src/ tests/
+        continue-on-error: true
+
+      - name: Test with pytest
+        run: uv run pytest
+
+      - name: Upload coverage to Codecov (optional)
+        if: false  # coverage upload requires pytest-cov; enable after adding it
+        uses: codecov/codecov-action@v4
+        with:
+          file: ./coverage.xml
+          fail_ci_if_error: false

@@ -1,0 +1,116 @@
+<svg viewBox="0 0 1280 660" width="100%" xmlns="http://www.w3.org/2000/svg" role="img">
+<title>Axiara 四大模式</title>
+<desc>四大模式：归档（一）、查询（二）、报价（三）、复核（四）——每个模式包含输入、处理、输出</desc>
+<defs>
+<marker id="arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+<path d="M2 1L8 5L2 9" fill="none" stroke="context-stroke" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+</marker>
+</defs>
+
+<!-- Header -->
+<rect x="40" y="20" width="1200" height="56" rx="12" fill="#E1F5EE" stroke="#1D9E75" stroke-width="1"/>
+<text x="640" y="48" font-size="28" font-weight="600" fill="#04342C" text-anchor="middle">四大模式 — Axiara 能做什么</text>
+<text x="640" y="68" font-size="14" fill="#0F6E56" text-anchor="middle">Agent 按任务自主选择模式；每个模式都是能力与权限边界</text>
+
+<!-- ============ 模式一 — 归档 ============ -->
+<rect x="40" y="92" width="280" height="56" rx="10" fill="#EAF3DE" stroke="#639922" stroke-width="1"/>
+<text x="180" y="118" font-size="22" font-weight="600" fill="#27500A" text-anchor="middle">模式一 — 归档</text>
+<text x="180" y="140" font-size="14" fill="#3B6D11" text-anchor="middle">官方价目录入 · 学习 · 抓取</text>
+
+<text x="180" y="166" font-size="14" font-weight="600" fill="#888780" text-anchor="middle">输入</text>
+<rect x="40" y="176" width="280" height="88" rx="10" fill="#F6F9EE" stroke="#A8C97E" stroke-width="1"/>
+<text x="180" y="200" font-size="16" fill="#27500A" text-anchor="middle">价目表 · 单据</text>
+<text x="180" y="226" font-size="16" fill="#27500A" text-anchor="middle">历史报价</text>
+<text x="180" y="252" font-size="16" fill="#3B6D11" text-anchor="middle">网页地址（抓取）</text>
+
+<line x1="180" y1="270" x2="180" y2="292" stroke="#888780" stroke-width="1.5" marker-end="url(#arrow)"/>
+<text x="180" y="310" font-size="14" font-weight="600" fill="#888780" text-anchor="middle">处理</text>
+<rect x="40" y="320" width="280" height="112" rx="10" fill="#EAF3DE" stroke="#639922" stroke-width="1"/>
+<text x="180" y="344" font-size="16" fill="#27500A" text-anchor="middle">人工录入（带版本、</text>
+<text x="180" y="370" font-size="16" fill="#27500A" text-anchor="middle">可回滚）</text>
+<text x="180" y="396" font-size="16" fill="#3B6D11" text-anchor="middle">从单据 AI 学习</text>
+<text x="180" y="422" font-size="16" fill="#3B6D11" text-anchor="middle">按需抓取行情</text>
+
+<line x1="180" y1="438" x2="180" y2="460" stroke="#888780" stroke-width="1.5" marker-end="url(#arrow)"/>
+<text x="180" y="478" font-size="14" font-weight="600" fill="#888780" text-anchor="middle">输出</text>
+<rect x="40" y="488" width="280" height="88" rx="10" fill="#F6F9EE" stroke="#A8C97E" stroke-width="1"/>
+<text x="180" y="512" font-size="16" fill="#27500A" text-anchor="middle">main_db · learn_db</text>
+<text x="180" y="538" font-size="16" fill="#3B6D11" text-anchor="middle">market_db（确认后写入）</text>
+
+<!-- ============ 模式二 — 查询 ============ -->
+<rect x="340" y="92" width="280" height="56" rx="10" fill="#EEEDFE" stroke="#7F77DD" stroke-width="1"/>
+<text x="480" y="118" font-size="22" font-weight="600" fill="#3C3489" text-anchor="middle">模式二 — 查询</text>
+<text x="480" y="140" font-size="14" fill="#534AB7" text-anchor="middle">单品详情查询</text>
+
+<text x="480" y="166" font-size="14" font-weight="600" fill="#888780" text-anchor="middle">输入</text>
+<rect x="340" y="176" width="280" height="88" rx="10" fill="#F7F6FE" stroke="#B3ADEB" stroke-width="1"/>
+<text x="480" y="200" font-size="16" fill="#3C3489" text-anchor="middle">某个材料 / 产品</text>
+<text x="480" y="226" font-size="16" fill="#3C3489" text-anchor="middle">名称（+ 数量 / 单位）</text>
+<text x="480" y="252" font-size="16" fill="#534AB7" text-anchor="middle">规格 / 备注匹配</text>
+
+<line x1="480" y1="270" x2="480" y2="292" stroke="#888780" stroke-width="1.5" marker-end="url(#arrow)"/>
+<text x="480" y="310" font-size="14" font-weight="600" fill="#888780" text-anchor="middle">处理</text>
+<rect x="340" y="320" width="280" height="112" rx="10" fill="#EEEDFE" stroke="#7F77DD" stroke-width="1"/>
+<text x="480" y="344" font-size="16" fill="#3C3489" text-anchor="middle">先读 main_db 成本</text>
+<text x="480" y="370" font-size="16" fill="#3C3489" text-anchor="middle">（最高权重）</text>
+<text x="480" y="396" font-size="16" fill="#534AB7" text-anchor="middle">叠加 market_db</text>
+<text x="480" y="422" font-size="16" fill="#534AB7" text-anchor="middle">浮动价格区间</text>
+
+<line x1="480" y1="438" x2="480" y2="460" stroke="#888780" stroke-width="1.5" marker-end="url(#arrow)"/>
+<text x="480" y="478" font-size="14" font-weight="600" fill="#888780" text-anchor="middle">输出</text>
+<rect x="340" y="488" width="280" height="88" rx="10" fill="#F7F6FE" stroke="#B3ADEB" stroke-width="1"/>
+<text x="480" y="512" font-size="16" fill="#3C3489" text-anchor="middle">标准成本 + 市场</text>
+<text x="480" y="538" font-size="16" fill="#534AB7" text-anchor="middle">参考价 + 工艺备注</text>
+
+<!-- ============ 模式三 — 报价 ============ -->
+<rect x="640" y="92" width="280" height="56" rx="10" fill="#FAEEDA" stroke="#BA7517" stroke-width="1"/>
+<text x="780" y="118" font-size="22" font-weight="600" fill="#633806" text-anchor="middle">模式三 — 报价</text>
+<text x="780" y="140" font-size="14" fill="#854F0B" text-anchor="middle">BOM 批量回填 · 智能报价</text>
+
+<text x="780" y="166" font-size="14" font-weight="600" fill="#888780" text-anchor="middle">输入</text>
+<rect x="640" y="176" width="280" height="88" rx="10" fill="#FDF6EA" stroke="#D6A96B" stroke-width="1"/>
+<text x="780" y="200" font-size="16" fill="#633806" text-anchor="middle">BOM / 物料清单</text>
+<text x="780" y="226" font-size="16" fill="#633806" text-anchor="middle">约束（默认 /</text>
+<text x="780" y="252" font-size="16" fill="#854F0B" text-anchor="middle">项目）</text>
+
+<line x1="780" y1="270" x2="780" y2="292" stroke="#888780" stroke-width="1.5" marker-end="url(#arrow)"/>
+<text x="780" y="310" font-size="14" font-weight="600" fill="#888780" text-anchor="middle">处理</text>
+<rect x="640" y="320" width="280" height="112" rx="10" fill="#FAEEDA" stroke="#BA7517" stroke-width="1"/>
+<text x="780" y="344" font-size="16" fill="#633806" text-anchor="middle">成本核算</text>
+<text x="780" y="370" font-size="16" fill="#633806" text-anchor="middle">三档定价</text>
+<text x="780" y="396" font-size="16" fill="#854F0B" text-anchor="middle">（低 / 中 / 高）</text>
+<text x="780" y="422" font-size="16" fill="#854F0B" text-anchor="middle">模板自适应</text>
+
+<line x1="780" y1="438" x2="780" y2="460" stroke="#888780" stroke-width="1.5" marker-end="url(#arrow)"/>
+<text x="780" y="478" font-size="14" font-weight="600" fill="#888780" text-anchor="middle">输出</text>
+<rect x="640" y="488" width="280" height="88" rx="10" fill="#FDF6EA" stroke="#D6A96B" stroke-width="1"/>
+<text x="780" y="512" font-size="16" fill="#633806" text-anchor="middle">报价单到 output/</text>
+<text x="780" y="538" font-size="16" fill="#854F0B" text-anchor="middle">（默认或用户模板）</text>
+
+<!-- ============ 模式四 — 复核 ============ -->
+<rect x="940" y="92" width="280" height="56" rx="10" fill="#E1F5EE" stroke="#1D9E75" stroke-width="1"/>
+<text x="1080" y="118" font-size="22" font-weight="600" fill="#04342C" text-anchor="middle">模式四 — 复核</text>
+<text x="1080" y="140" font-size="14" fill="#0F6E56" text-anchor="middle">交叉校验用户表格</text>
+
+<text x="1080" y="166" font-size="14" font-weight="600" fill="#888780" text-anchor="middle">输入</text>
+<rect x="940" y="176" width="280" height="88" rx="10" fill="#EFFAF6" stroke="#6EC6A6" stroke-width="1"/>
+<text x="1080" y="200" font-size="16" fill="#04342C" text-anchor="middle">用户自己的成本 /</text>
+<text x="1080" y="226" font-size="16" fill="#04342C" text-anchor="middle">报价表格</text>
+<text x="1080" y="252" font-size="16" fill="#0F6E56" text-anchor="middle">（含备注）</text>
+
+<line x1="1080" y1="270" x2="1080" y2="292" stroke="#888780" stroke-width="1.5" marker-end="url(#arrow)"/>
+<text x="1080" y="310" font-size="14" font-weight="600" fill="#888780" text-anchor="middle">处理</text>
+<rect x="940" y="320" width="280" height="112" rx="10" fill="#E1F5EE" stroke="#1D9E75" stroke-width="1"/>
+<text x="1080" y="344" font-size="16" fill="#04342C" text-anchor="middle">对照 main_db +</text>
+<text x="1080" y="370" font-size="16" fill="#04342C" text-anchor="middle">market_db 交叉校验</text>
+<text x="1080" y="396" font-size="16" fill="#0F6E56" text-anchor="middle">标记异常价格</text>
+<text x="1080" y="422" font-size="16" fill="#0F6E56" text-anchor="middle">（偏高 / 偏低）</text>
+
+<line x1="1080" y1="438" x2="1080" y2="460" stroke="#888780" stroke-width="1.5" marker-end="url(#arrow)"/>
+<text x="1080" y="478" font-size="14" font-weight="600" fill="#888780" text-anchor="middle">输出</text>
+<rect x="940" y="488" width="280" height="88" rx="10" fill="#EFFAF6" stroke="#6EC6A6" stroke-width="1"/>
+<text x="1080" y="512" font-size="16" fill="#04342C" text-anchor="middle">异常标记 +</text>
+<text x="1080" y="538" font-size="16" fill="#0F6E56" text-anchor="middle">调整建议</text>
+
+<text x="640" y="616" font-size="14" fill="#888780" text-anchor="middle">永远不写官方基准库 — 学习与行情数据只在确认后进入</text>
+</svg>

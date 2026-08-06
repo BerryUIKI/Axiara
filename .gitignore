@@ -16,7 +16,7 @@ env/
 
 # uv
 .uv/
-uv.lock
+# uv.lock IS committed (reproducible builds, CI cache matching for setup-uv)
 
 # Testing
 .pytest_cache/
@@ -55,3 +55,8 @@ data/tmp/
 
 # Axiara runtime data (never committed; the skeleton lives in .data.template/)
 .data/
+
+# Runtime outputs (generated reports/artifacts — never committed)
+output/*.json
+output/*.html
+!output/.gitkeep

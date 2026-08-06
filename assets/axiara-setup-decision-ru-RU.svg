@@ -1,0 +1,83 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 700" width="100%" role="img">
+<title>Axiara setup decision tree</title>
+<desc>Onboarding choices: language → storage &amp; sync → data source → dev environment</desc>
+<defs>
+<marker id="arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+<path d="M2 1L8 5L2 9" fill="none" stroke="context-stroke" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+</marker>
+</defs>
+
+
+<rect x="40" y="20" width="1200" height="56" rx="12" fill="#E1F5EE" stroke="#1D9E75" stroke-width="1" />
+<text x="640" y="55" font-size="28" font-weight="600" fill="#04342C" text-anchor="middle">Настройка Axiara — четыре быстрых выбора</text>
+
+
+<text x="640" y="100" font-size="22" font-weight="600" fill="#04342C" text-anchor="middle">1 · Язык интерфейса</text>
+<rect x="40" y="112" width="1200" height="64" rx="10" fill="#F6F9EE" stroke="#A8C97E" stroke-width="1" />
+<text x="640" y="138" font-size="16" fill="#27500A" text-anchor="middle">Русский · English · Français · Deutsch · Español</text>
+<text x="640" y="162" font-size="16" fill="#3B6D11" text-anchor="middle">简体中文 · 繁體中文 · 日本語 · 한국어 · Português</text>
+<line x1="640" y1="180" x2="640" y2="202" stroke="#888780" stroke-width="1.5" marker-end="url(#arrow)" />
+
+
+<text x="640" y="224" font-size="22" font-weight="600" fill="#04342C" text-anchor="middle">2 · Хранение и синхронизация — нужна ли синхронизация команды?</text>
+
+<line x1="640" y1="236" x2="230" y2="262" stroke="#888780" stroke-width="1.5" />
+<line x1="640" y1="236" x2="640" y2="262" stroke="#888780" stroke-width="1.5" />
+<line x1="640" y1="236" x2="1050" y2="262" stroke="#888780" stroke-width="1.5" />
+
+<rect x="40" y="266" width="380" height="96" rx="10" fill="#EAF3DE" stroke="#639922" stroke-width="1" />
+<text x="230" y="294" font-size="20" font-weight="600" fill="#27500A" text-anchor="middle">Нет — личное</text>
+<text x="230" y="324" font-size="16" fill="#3B6D11" text-anchor="middle">SQLite · без настройки</text>
+<text x="230" y="348" font-size="16" fill="#3B6D11" text-anchor="middle">однофайловая база</text>
+
+<rect x="450" y="266" width="380" height="96" rx="10" fill="#EEEDFE" stroke="#7F77DD" stroke-width="1" />
+<text x="640" y="294" font-size="20" font-weight="600" fill="#3C3489" text-anchor="middle">Да — текст + Git</text>
+<text x="640" y="324" font-size="16" fill="#534AB7" text-anchor="middle">CSV-файлы, синхронизация через git</text>
+<text x="640" y="348" font-size="16" fill="#534AB7" text-anchor="middle">без сервера · локальный кэш</text>
+
+<rect x="860" y="266" width="380" height="96" rx="10" fill="#FAEEDA" stroke="#BA7517" stroke-width="1" />
+<text x="1050" y="294" font-size="20" font-weight="600" fill="#633806" text-anchor="middle">Да — SQL-сервер</text>
+<text x="1050" y="324" font-size="16" fill="#854F0B" text-anchor="middle">MySQL · MariaDB ·</text>
+<text x="1050" y="348" font-size="16" fill="#854F0B" text-anchor="middle">PostgreSQL (DSN)</text>
+
+<line x1="230" y1="366" x2="230" y2="388" stroke="#888780" stroke-width="1.5" marker-end="url(#arrow)" />
+<line x1="640" y1="366" x2="640" y2="388" stroke="#888780" stroke-width="1.5" marker-end="url(#arrow)" />
+<line x1="1050" y1="366" x2="1050" y2="388" stroke="#888780" stroke-width="1.5" marker-end="url(#arrow)" />
+
+
+<text x="640" y="410" font-size="22" font-weight="600" fill="#04342C" text-anchor="middle">3 · Источник данных</text>
+
+<line x1="230" y1="420" x2="230" y2="442" stroke="#888780" stroke-width="1.5" marker-end="url(#arrow)" />
+<line x1="640" y1="420" x2="640" y2="442" stroke="#888780" stroke-width="1.5" marker-end="url(#arrow)" />
+<line x1="1050" y1="420" x2="1050" y2="442" stroke="#888780" stroke-width="1.5" marker-end="url(#arrow)" />
+
+<rect x="40" y="446" width="380" height="76" rx="10" fill="#F6F9EE" stroke="#A8C97E" stroke-width="1" />
+<text x="230" y="474" font-size="20" font-weight="600" fill="#27500A" text-anchor="middle">Локальные файлы</text>
+<text x="230" y="502" font-size="16" fill="#3B6D11" text-anchor="middle">импорт прайс-листов (Excel / CSV)</text>
+
+<rect x="450" y="446" width="380" height="76" rx="10" fill="#F7F6FE" stroke="#B3ADEB" stroke-width="1" />
+<text x="640" y="474" font-size="20" font-weight="600" fill="#3C3489" text-anchor="middle">Репозиторий команды</text>
+<text x="640" y="502" font-size="16" fill="#534AB7" text-anchor="middle">URL репозитория → клонировать в store/</text>
+
+<rect x="860" y="446" width="380" height="76" rx="10" fill="#FDF6EA" stroke="#D6A96B" stroke-width="1" />
+<text x="1050" y="474" font-size="20" font-weight="600" fill="#633806" text-anchor="middle">Данных пока нет</text>
+<text x="1050" y="502" font-size="16" fill="#854F0B" text-anchor="middle">начать пустым, получить позже</text>
+
+<line x1="230" y1="526" x2="230" y2="548" stroke="#888780" stroke-width="1.5" marker-end="url(#arrow)" />
+<line x1="640" y1="526" x2="640" y2="548" stroke="#888780" stroke-width="1.5" marker-end="url(#arrow)" />
+<line x1="1050" y1="526" x2="1050" y2="548" stroke="#888780" stroke-width="1.5" marker-end="url(#arrow)" />
+
+
+<text x="640" y="570" font-size="22" font-weight="600" fill="#04342C" text-anchor="middle">4 · Среда разработки (необязательно)</text>
+
+<line x1="360" y1="582" x2="360" y2="604" stroke="#888780" stroke-width="1.5" marker-end="url(#arrow)" />
+<line x1="960" y1="582" x2="960" y2="604" stroke="#888780" stroke-width="1.5" marker-end="url(#arrow)" />
+
+<rect x="80" y="608" width="560" height="64" rx="10" fill="#E1F5EE" stroke="#1D9E75" stroke-width="1" />
+<text x="360" y="634" font-size="18" font-weight="600" fill="#04342C" text-anchor="middle">Только агент (рекомендуется, без настройки)</text>
+<text x="360" y="658" font-size="14" fill="#0F6E56" text-anchor="middle">ваш ИИ-агент всё сделает сам</text>
+
+<rect x="680" y="608" width="560" height="64" rx="10" fill="#FAEEDA" stroke="#BA7517" stroke-width="1" />
+<text x="960" y="634" font-size="18" font-weight="600" fill="#633806" text-anchor="middle">Со средой разработки</text>
+<text x="960" y="658" font-size="14" fill="#854F0B" text-anchor="middle">uv sync → REST API · CLI · тесты</text>
+</svg>

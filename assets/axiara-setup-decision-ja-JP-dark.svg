@@ -1,0 +1,83 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 700" width="100%" role="img">
+<title>Axiara setup decision tree</title>
+<desc>Onboarding choices: language → storage &amp; sync → data source → dev environment</desc>
+<defs>
+<marker id="arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+<path d="M2 1L8 5L2 9" fill="none" stroke="context-stroke" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+</marker>
+</defs>
+
+
+<rect x="40" y="20" width="1200" height="56" rx="12" fill="#04342C" stroke="#5DCAA5" stroke-width="1" />
+<text x="640" y="55" font-size="28" font-weight="600" fill="#E1F5EE" text-anchor="middle">Axiara 初期設定 — 4つの選択肢</text>
+
+
+<text x="640" y="100" font-size="22" font-weight="600" fill="#E1F5EE" text-anchor="middle">1 · 表示言語</text>
+<rect x="40" y="112" width="1200" height="64" rx="10" fill="#0E2402" stroke="#618D3A" stroke-width="1" />
+<text x="640" y="138" font-size="16" fill="#C0DD97" text-anchor="middle">日本語 · 简体中文 · 繁體中文 · English · 한국어</text>
+<text x="640" y="162" font-size="16" fill="#97C459" text-anchor="middle">Français · Deutsch · Español · Português · Русский</text>
+<line x1="640" y1="180" x2="640" y2="202" stroke="#9E9D98" stroke-width="1.5" marker-end="url(#arrow)" />
+
+
+<text x="640" y="224" font-size="22" font-weight="600" fill="#E1F5EE" text-anchor="middle">2 · 保存と同期 — チーム同期は必要ですか？</text>
+
+<line x1="640" y1="236" x2="230" y2="262" stroke="#9E9D98" stroke-width="1.5" />
+<line x1="640" y1="236" x2="640" y2="262" stroke="#9E9D98" stroke-width="1.5" />
+<line x1="640" y1="236" x2="1050" y2="262" stroke="#9E9D98" stroke-width="1.5" />
+
+<rect x="40" y="266" width="380" height="96" rx="10" fill="#173404" stroke="#97C459" stroke-width="1" />
+<text x="230" y="294" font-size="20" font-weight="600" fill="#C0DD97" text-anchor="middle">不要 — 個人利用</text>
+<text x="230" y="324" font-size="16" fill="#97C459" text-anchor="middle">SQLite · 設定不要</text>
+<text x="230" y="348" font-size="16" fill="#97C459" text-anchor="middle">単一ファイルDB</text>
+
+<rect x="450" y="266" width="380" height="96" rx="10" fill="#26215C" stroke="#AFA9EC" stroke-width="1" />
+<text x="640" y="294" font-size="20" font-weight="600" fill="#CECBF6" text-anchor="middle">必要 — テキスト + Git</text>
+<text x="640" y="324" font-size="16" fill="#AFA9EC" text-anchor="middle">CSV を git で同期</text>
+<text x="640" y="348" font-size="16" fill="#AFA9EC" text-anchor="middle">サーバ不要 · ローカルキャッシュ</text>
+
+<rect x="860" y="266" width="380" height="96" rx="10" fill="#412402" stroke="#EF9F27" stroke-width="1" />
+<text x="1050" y="294" font-size="20" font-weight="600" fill="#FAC775" text-anchor="middle">必要 — SQL サーバ</text>
+<text x="1050" y="324" font-size="16" fill="#EF9F27" text-anchor="middle">MySQL · MariaDB ·</text>
+<text x="1050" y="348" font-size="16" fill="#EF9F27" text-anchor="middle">PostgreSQL（DSN）</text>
+
+<line x1="230" y1="366" x2="230" y2="388" stroke="#9E9D98" stroke-width="1.5" marker-end="url(#arrow)" />
+<line x1="640" y1="366" x2="640" y2="388" stroke="#9E9D98" stroke-width="1.5" marker-end="url(#arrow)" />
+<line x1="1050" y1="366" x2="1050" y2="388" stroke="#9E9D98" stroke-width="1.5" marker-end="url(#arrow)" />
+
+
+<text x="640" y="410" font-size="22" font-weight="600" fill="#E1F5EE" text-anchor="middle">3 · データソース</text>
+
+<line x1="230" y1="420" x2="230" y2="442" stroke="#9E9D98" stroke-width="1.5" marker-end="url(#arrow)" />
+<line x1="640" y1="420" x2="640" y2="442" stroke="#9E9D98" stroke-width="1.5" marker-end="url(#arrow)" />
+<line x1="1050" y1="420" x2="1050" y2="442" stroke="#9E9D98" stroke-width="1.5" marker-end="url(#arrow)" />
+
+<rect x="40" y="446" width="380" height="76" rx="10" fill="#0E2402" stroke="#618D3A" stroke-width="1" />
+<text x="230" y="474" font-size="20" font-weight="600" fill="#C0DD97" text-anchor="middle">ローカルファイル</text>
+<text x="230" y="502" font-size="16" fill="#97C459" text-anchor="middle">価格表をインポート（Excel / CSV）</text>
+
+<rect x="450" y="446" width="380" height="76" rx="10" fill="#1C1848" stroke="#7A71C9" stroke-width="1" />
+<text x="640" y="474" font-size="20" font-weight="600" fill="#CECBF6" text-anchor="middle">チームリポジトリ</text>
+<text x="640" y="502" font-size="16" fill="#AFA9EC" text-anchor="middle">リポジトリURL → store/ にクローン</text>
+
+<rect x="860" y="446" width="380" height="76" rx="10" fill="#2F1B02" stroke="#B97B2A" stroke-width="1" />
+<text x="1050" y="474" font-size="20" font-weight="600" fill="#FAC775" text-anchor="middle">データなし</text>
+<text x="1050" y="502" font-size="16" fill="#EF9F27" text-anchor="middle">空で開始、後で取得</text>
+
+<line x1="230" y1="526" x2="230" y2="548" stroke="#9E9D98" stroke-width="1.5" marker-end="url(#arrow)" />
+<line x1="640" y1="526" x2="640" y2="548" stroke="#9E9D98" stroke-width="1.5" marker-end="url(#arrow)" />
+<line x1="1050" y1="526" x2="1050" y2="548" stroke="#9E9D98" stroke-width="1.5" marker-end="url(#arrow)" />
+
+
+<text x="640" y="570" font-size="22" font-weight="600" fill="#E1F5EE" text-anchor="middle">4 · 開発環境（任意）</text>
+
+<line x1="360" y1="582" x2="360" y2="604" stroke="#9E9D98" stroke-width="1.5" marker-end="url(#arrow)" />
+<line x1="960" y1="582" x2="960" y2="604" stroke="#9E9D98" stroke-width="1.5" marker-end="url(#arrow)" />
+
+<rect x="80" y="608" width="560" height="64" rx="10" fill="#04342C" stroke="#5DCAA5" stroke-width="1" />
+<text x="360" y="634" font-size="18" font-weight="600" fill="#E1F5EE" text-anchor="middle">Agent のみ（推奨、設定不要）</text>
+<text x="360" y="658" font-size="14" fill="#9FE1CB" text-anchor="middle">AI エージェントがすべて処理</text>
+
+<rect x="680" y="608" width="560" height="64" rx="10" fill="#412402" stroke="#EF9F27" stroke-width="1" />
+<text x="960" y="634" font-size="18" font-weight="600" fill="#FAC775" text-anchor="middle">開発環境あり</text>
+<text x="960" y="658" font-size="14" fill="#EF9F27" text-anchor="middle">uv sync → REST API · CLI · テスト</text>
+</svg>

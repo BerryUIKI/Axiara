@@ -1,0 +1,116 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 660" width="100%" role="img">
+<title>Axiara four modes</title>
+<desc>Four modes: Archive (Mode 1), Query (Mode 2), Quote (Mode 3), Review (Mode 4) — each with input, process and output</desc>
+<defs>
+<marker id="arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+<path d="M2 1L8 5L2 9" fill="none" stroke="context-stroke" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+</marker>
+</defs>
+
+
+<rect x="40" y="20" width="1200" height="56" rx="12" fill="#04342C" stroke="#5DCAA5" stroke-width="1" />
+<text x="640" y="48" font-size="28" font-weight="600" fill="#E1F5EE" text-anchor="middle">Cuatro modos — lo que hace Axiara</text>
+<text x="640" y="68" font-size="14" fill="#9FE1CB" text-anchor="middle">Los agentes eligen un modo por tarea; cada modo es un límite de capacidad y permisos</text>
+
+
+<rect x="40" y="92" width="280" height="56" rx="10" fill="#173404" stroke="#97C459" stroke-width="1" />
+<text x="180" y="118" font-size="22" font-weight="600" fill="#C0DD97" text-anchor="middle">Modo 1 — Archivo</text>
+<text x="180" y="140" font-size="14" fill="#97C459" text-anchor="middle">precios oficiales · aprender · rastrear</text>
+
+<text x="180" y="166" font-size="14" font-weight="600" fill="#9E9D98" text-anchor="middle">ENTRADA</text>
+<rect x="40" y="176" width="280" height="88" rx="10" fill="#0E2402" stroke="#618D3A" stroke-width="1" />
+<text x="180" y="200" font-size="16" fill="#C0DD97" text-anchor="middle">Listas de precios · documentos</text>
+<text x="180" y="226" font-size="16" fill="#C0DD97" text-anchor="middle">cotizaciones históricas</text>
+<text x="180" y="252" font-size="16" fill="#97C459" text-anchor="middle">URLs para rastrear</text>
+
+<line x1="180" y1="270" x2="180" y2="292" stroke="#9E9D98" stroke-width="1.5" marker-end="url(#arrow)" />
+<text x="180" y="310" font-size="14" font-weight="600" fill="#9E9D98" text-anchor="middle">PROCESO</text>
+<rect x="40" y="320" width="280" height="112" rx="10" fill="#173404" stroke="#97C459" stroke-width="1" />
+<text x="180" y="344" font-size="16" fill="#C0DD97" text-anchor="middle">Entrada manual (versionada,</text>
+<text x="180" y="370" font-size="16" fill="#C0DD97" text-anchor="middle">con reversión)</text>
+<text x="180" y="396" font-size="16" fill="#97C459" text-anchor="middle">Aprendizaje IA de documentos</text>
+<text x="180" y="422" font-size="16" fill="#97C459" text-anchor="middle">Rastreo de mercado, a demanda</text>
+
+<line x1="180" y1="438" x2="180" y2="460" stroke="#9E9D98" stroke-width="1.5" marker-end="url(#arrow)" />
+<text x="180" y="478" font-size="14" font-weight="600" fill="#9E9D98" text-anchor="middle">SALIDA</text>
+<rect x="40" y="488" width="280" height="88" rx="10" fill="#0E2402" stroke="#618D3A" stroke-width="1" />
+<text x="180" y="512" font-size="16" fill="#C0DD97" text-anchor="middle">main_db · learn_db</text>
+<text x="180" y="538" font-size="16" fill="#97C459" text-anchor="middle">market_db (confirmar antes)</text>
+
+
+<rect x="340" y="92" width="280" height="56" rx="10" fill="#26215C" stroke="#AFA9EC" stroke-width="1" />
+<text x="480" y="118" font-size="22" font-weight="600" fill="#CECBF6" text-anchor="middle">Modo 2 — Consulta</text>
+<text x="480" y="140" font-size="14" fill="#AFA9EC" text-anchor="middle">consulta de detalle de un ítem</text>
+
+<text x="480" y="166" font-size="14" font-weight="600" fill="#9E9D98" text-anchor="middle">ENTRADA</text>
+<rect x="340" y="176" width="280" height="88" rx="10" fill="#1C1848" stroke="#7A71C9" stroke-width="1" />
+<text x="480" y="200" font-size="16" fill="#CECBF6" text-anchor="middle">Un material / producto</text>
+<text x="480" y="226" font-size="16" fill="#CECBF6" text-anchor="middle">nombre (+ cantidad / unidad)</text>
+<text x="480" y="252" font-size="16" fill="#AFA9EC" text-anchor="middle">especificaciones / notas</text>
+
+<line x1="480" y1="270" x2="480" y2="292" stroke="#9E9D98" stroke-width="1.5" marker-end="url(#arrow)" />
+<text x="480" y="310" font-size="14" font-weight="600" fill="#9E9D98" text-anchor="middle">PROCESO</text>
+<rect x="340" y="320" width="280" height="112" rx="10" fill="#26215C" stroke="#AFA9EC" stroke-width="1" />
+<text x="480" y="344" font-size="16" fill="#CECBF6" text-anchor="middle">Leer primero costo de main_db</text>
+<text x="480" y="370" font-size="16" fill="#CECBF6" text-anchor="middle">(mayor peso)</text>
+<text x="480" y="396" font-size="16" fill="#AFA9EC" text-anchor="middle">Superponer market_db</text>
+<text x="480" y="422" font-size="16" fill="#AFA9EC" text-anchor="middle">rango de precio flotante</text>
+
+<line x1="480" y1="438" x2="480" y2="460" stroke="#9E9D98" stroke-width="1.5" marker-end="url(#arrow)" />
+<text x="480" y="478" font-size="14" font-weight="600" fill="#9E9D98" text-anchor="middle">SALIDA</text>
+<rect x="340" y="488" width="280" height="88" rx="10" fill="#1C1848" stroke="#7A71C9" stroke-width="1" />
+<text x="480" y="512" font-size="16" fill="#CECBF6" text-anchor="middle">Costo estándar + mercado</text>
+<text x="480" y="538" font-size="16" fill="#AFA9EC" text-anchor="middle">referencia + notas de proceso</text>
+
+
+<rect x="640" y="92" width="280" height="56" rx="10" fill="#412402" stroke="#EF9F27" stroke-width="1" />
+<text x="780" y="118" font-size="22" font-weight="600" fill="#FAC775" text-anchor="middle">Modo 3 — Cotización</text>
+<text x="780" y="140" font-size="14" fill="#EF9F27" text-anchor="middle">relleno BOM por lotes · cotización inteligente</text>
+
+<text x="780" y="166" font-size="14" font-weight="600" fill="#9E9D98" text-anchor="middle">ENTRADA</text>
+<rect x="640" y="176" width="280" height="88" rx="10" fill="#2F1B02" stroke="#B97B2A" stroke-width="1" />
+<text x="780" y="200" font-size="16" fill="#FAC775" text-anchor="middle">BOM / lista de materiales</text>
+<text x="780" y="226" font-size="16" fill="#FAC775" text-anchor="middle">restricciones (predeterminado /</text>
+<text x="780" y="252" font-size="16" fill="#EF9F27" text-anchor="middle">proyecto)</text>
+
+<line x1="780" y1="270" x2="780" y2="292" stroke="#9E9D98" stroke-width="1.5" marker-end="url(#arrow)" />
+<text x="780" y="310" font-size="14" font-weight="600" fill="#9E9D98" text-anchor="middle">PROCESO</text>
+<rect x="640" y="320" width="280" height="112" rx="10" fill="#412402" stroke="#EF9F27" stroke-width="1" />
+<text x="780" y="344" font-size="16" fill="#FAC775" text-anchor="middle">Cálculo de costos</text>
+<text x="780" y="370" font-size="16" fill="#FAC775" text-anchor="middle">Precios en tres niveles</text>
+<text x="780" y="396" font-size="16" fill="#EF9F27" text-anchor="middle">(bajo / medio / alto)</text>
+<text x="780" y="422" font-size="16" fill="#EF9F27" text-anchor="middle">Adaptación de plantilla</text>
+
+<line x1="780" y1="438" x2="780" y2="460" stroke="#9E9D98" stroke-width="1.5" marker-end="url(#arrow)" />
+<text x="780" y="478" font-size="14" font-weight="600" fill="#9E9D98" text-anchor="middle">SALIDA</text>
+<rect x="640" y="488" width="280" height="88" rx="10" fill="#2F1B02" stroke="#B97B2A" stroke-width="1" />
+<text x="780" y="512" font-size="16" fill="#FAC775" text-anchor="middle">Cotización a output/</text>
+<text x="780" y="538" font-size="16" fill="#EF9F27" text-anchor="middle">(plantilla predeterminada o de usuario)</text>
+
+
+<rect x="940" y="92" width="280" height="56" rx="10" fill="#04342C" stroke="#5DCAA5" stroke-width="1" />
+<text x="1080" y="118" font-size="22" font-weight="600" fill="#E1F5EE" text-anchor="middle">Modo 4 — Revisión</text>
+<text x="1080" y="140" font-size="14" fill="#9FE1CB" text-anchor="middle">validación cruzada de tablas del usuario</text>
+
+<text x="1080" y="166" font-size="14" font-weight="600" fill="#9E9D98" text-anchor="middle">ENTRADA</text>
+<rect x="940" y="176" width="280" height="88" rx="10" fill="#04241C" stroke="#3E9C7D" stroke-width="1" />
+<text x="1080" y="200" font-size="16" fill="#E1F5EE" text-anchor="middle">Costo propio /</text>
+<text x="1080" y="226" font-size="16" fill="#E1F5EE" text-anchor="middle">tabla de cotización</text>
+<text x="1080" y="252" font-size="16" fill="#9FE1CB" text-anchor="middle">(con notas)</text>
+
+<line x1="1080" y1="270" x2="1080" y2="292" stroke="#9E9D98" stroke-width="1.5" marker-end="url(#arrow)" />
+<text x="1080" y="310" font-size="14" font-weight="600" fill="#9E9D98" text-anchor="middle">PROCESO</text>
+<rect x="940" y="320" width="280" height="112" rx="10" fill="#04342C" stroke="#5DCAA5" stroke-width="1" />
+<text x="1080" y="344" font-size="16" fill="#E1F5EE" text-anchor="middle">Validar cruzado contra</text>
+<text x="1080" y="370" font-size="16" fill="#E1F5EE" text-anchor="middle">main_db + market_db</text>
+<text x="1080" y="396" font-size="16" fill="#9FE1CB" text-anchor="middle">Marcar precios anómalos</text>
+<text x="1080" y="422" font-size="16" fill="#9FE1CB" text-anchor="middle">(demasiado alto / bajo)</text>
+
+<line x1="1080" y1="438" x2="1080" y2="460" stroke="#9E9D98" stroke-width="1.5" marker-end="url(#arrow)" />
+<text x="1080" y="478" font-size="14" font-weight="600" fill="#9E9D98" text-anchor="middle">SALIDA</text>
+<rect x="940" y="488" width="280" height="88" rx="10" fill="#04241C" stroke="#3E9C7D" stroke-width="1" />
+<text x="1080" y="512" font-size="16" fill="#E1F5EE" text-anchor="middle">Marcas de anomalía +</text>
+<text x="1080" y="538" font-size="16" fill="#9FE1CB" text-anchor="middle">sugerencias de ajuste</text>
+
+<text x="640" y="616" font-size="14" fill="#9E9D98" text-anchor="middle">Nunca escribe la línea base oficial — los datos aprendidos y de mercado entran solo tras confirmación</text>
+</svg>

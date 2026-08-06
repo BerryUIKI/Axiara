@@ -22,6 +22,7 @@ Status: **v0.2 draft** — baseline confirmed via PM-led discussion (2026-08-04)
   - Sources: `main_db` + `learn_db` + `market_db` three-way cross-check.
   - Detects: price anomalies, missing processes, stale prices.
   - Permissions: may trigger crawler/learning to supplement data, produces correction suggestions — **cannot write main_db**, outputs pending-review list for human confirmation.
+  - Detection thresholds (tunable via `core/review/` `ReviewThresholds`, default): price deviation vs baseline ±25% → anomaly, ±50% → conflict (high); market staleness > 30 days; learn process rules without baseline coverage → missing process.
 
 ### Mode 2 — Single-item Detail Query
 - Input: one material/product name.
@@ -37,6 +38,7 @@ Status: **v0.2 draft** — baseline confirmed via PM-led discussion (2026-08-04)
 ### Mode 4 — Review (attached to query mode; post-hoc validation)
 - Input: user's own cost/quote table.
 - Logic: cross-validate against `main_db` + `market_db`, flag abnormal low/high prices and missing processes, output adjustment suggestion list.
+- Detection thresholds (default): deviation vs baseline ±25% → abnormal low/high; no baseline → ±20% market reference band check; rows with no baseline/market reference → unvalidatable warning.
 
 ## 2b. Quote Template (default vs user-provided)
 

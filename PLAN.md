@@ -35,32 +35,40 @@ Single source of truth for Axiara initialization. Update as decisions are made; 
 - **Sync triggers** — recommendation: pull on init / app startup / periodic (APScheduler); push only on explicit human action after editing. (Pending.)
 - **Conflict strategy** — recommendation: git text conflicts → Agent reports to human or auto-merges per rules. (Pending.)
 
+## Decisions D-SK1–11 (2026-08-05)
+
+Detailed skill/learning decisions live in `docs/skill-requirements.md` §5 (single source). Summary: platform scope & single-source skills (D-SK1/7) · crawler triggers & sources (D-SK2/3/4) · init create/join model (D-SK5) · training report + hub sync (D-SK6) · AI-friendly format (D-SK8) · upload flow & branch rules (D-SK9) · dynamic scale monitoring (D-SK10) · inactive-branch archiving (D-SK11).
+
 ## Repository State
 
 - [x] `git init` on `main` (2026-08-04)
-- [x] `README.md` — project overview
-- [x] `.gitignore` — Python / uv / FastAPI defaults
+- [x] `README.md` — project overview (+ 9 locales)
+- [x] `.gitignore` — Python / uv / FastAPI defaults (.workbuddy excluded)
+- [x] `LICENSE` — MIT (2026 Berry Wahlberg)
 - [x] Runtime data bootstrap — `.data.template/` skeleton (README + `local_config.example` + dirs), `scripts/init-data.sh`, `.data/` gitignored (2026-08-05)
 - [x] `AGENTS.md` — lean agent operating manual (2026-08-05)
 - [x] `docs/init.md` — agent-driven onboarding guide + data guide + data integrity (2026-08-05)
 - [x] Agent-driven init & anti-tampering design (D21) — `init-data.sh` CLI flags, docs integrity section, AGENTS.md rules (2026-08-05)
 - [x] Branch protection (2026-08-05) — `dev`: PR-only (enforce_admins, no force push/delete); `main`: PR-only + 1 review + required checks (`continuous-integration`, `pr-source-guard`) — **main PRs only from `dev` or `hotfix/*`** via `.github/workflows/pr-source-guard.yml`
-- [ ] Initial commit (awaiting confirmation)
+- [x] Initial commit `4542acb` (2026-08-04)
+- [x] Git remote — linked `https://github.com/BerryUIKI/Axiara.git`, `main` pushed (2026-08-05)
 
 ## Roadmap
 
-- [ ] **Runtime dir auto-bootstrap** — ensure `.data/` dirs exist at app startup (fold into scaffold step)
-- [ ] **`axiara init` CLI** — migrate the onboarding wizard from `scripts/init-data.sh` to Python (scaffold stage); keep the same question flow & config format
-- [ ] **Scaffold package** — `uv init`, `pyproject.toml`, `src/` layout, `axiara` package
-- [ ] **Business modes design** — 4 modes + 3-layer data permission model (draft at `docs/business-modes.md`, open questions pending) → fold into README as English overview once settled
-- [ ] **Storage layer** — file-first (CSV / JSON / YAML) + git-synced `store/`; SQLite as optional local cache; write-permission enforcement at this layer
-- [ ] **Costing engine** — multi-dimensional cost model, rules, calculation pipeline
-- [ ] **Price fetch agent** — LangGraph agent: crawl + normalize real-time market prices
-- [ ] **Task scheduler** — APScheduler jobs: periodic price fetch, scheduled quotation generation
-- [ ] **Quotation generator** — compose cost + price into quotations
-- [ ] **REST API** — FastAPI endpoints for external clients
+- [x] **Runtime dir auto-bootstrap** — ensure `.data/` dirs exist at app startup (fold into scaffold step)
+- [x] **`axiara init` CLI** — migrate the onboarding wizard from `scripts/init-data.sh` to Python (scaffold stage); keep the same question flow & config format
+- [x] **Scaffold package** — `uv init`, `pyproject.toml`, `src/` layout, `axiara` package
+- [x] **Business modes design** — 4 modes + 3-layer data permission model (draft at `docs/business-modes.md`, open questions pending) → fold into README as English overview once settled
+- [x] **Storage layer** — file-first (CSV / JSON / YAML) + git-synced `store/`; SQLite as optional local cache; write-permission enforcement at this layer
+- [x] **Costing engine** — multi-dimensional cost model, rules, calculation pipeline
+- [x] **Price fetch agent** — LangGraph agent: crawl + normalize real-time market prices
+- [ ] **Learning engine** — ingest historical quotes/invoices → clean → extract material/process/cost/pricing rules → `learn_db` (design: `docs/learning-plan.md`, phases 0–5)
+- [x] **Task scheduler** — APScheduler jobs: periodic price fetch, scheduled quotation generation
+- [x] **Quotation generator** — compose cost + price into quotations
+- [x] **Review engine** — anomaly detection: three-way cross-check (main/learn/market) + user cost-table validation (Mode 1.3 & Mode 4); tunable thresholds (`core/review/`, wired into `edit_review_node` / `user_review_agent_node`; read-only, never writes main_db)
+- [x] **REST API** — FastAPI endpoints for external clients
 - [ ] **Tests & CI** — unit/integration tests, CI pipeline
-- [ ] **Git remote** — create remote repo, link, push per PR-only workflow
+- [x] **Git remote** — create remote repo, link, push per PR-only workflow (remote not created yet)
 
 ## Execution Policy
 

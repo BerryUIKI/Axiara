@@ -1,0 +1,7 @@
+name,spec,unit,unit_price,currency,effective_date,note
+copper-wire,1.5mm²,kg,sixty-eight,CNY,2026-08-05,ERROR: unit_price must be numeric
+aluminum,,ton,-100,CNY,2026-08-05,ERROR: Missing spec and negative price
+steel-rebar,HRB400,ton,4200,RMB,08-05-2026,ERROR: Wrong currency (should be ISO code) and wrong date format
+,HRB400,ton,4200,CNY,2026-08-05,ERROR: Missing required field 'name'
+zinc,0#,ton,,CNY,2026-08-05,ERROR: Missing required field 'unit_price'
+nickel,1#,ton,135000,JPY,2026-08-05,OK but note: using JPY instead of CNY

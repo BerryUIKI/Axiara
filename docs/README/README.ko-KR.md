@@ -1,0 +1,215 @@
+<p align="center">
+  <picture>
+    <source media="(prefers-color-scheme: dark)" srcset="assets/axiara-lockup-dark.svg" />
+    <img src="assets/axiara-lockup.svg" alt="Axiara" width="320" />
+  </picture>
+</p>
+
+<p align="center">
+  <strong>멀티 에이전트 견적 코어</strong> — 자동화된 원가 계산과 실시간 시장 가격 인텔리전스. LangGraph 기반.
+</p>
+
+<p align="center">
+  <a href="#"><img src="https://img.shields.io/badge/python-3.12-blue" alt="Python 3.12" /></a>
+  <a href="#"><img src="https://img.shields.io/badge/framework-LangGraph-purple" alt="LangGraph" /></a>
+  <a href="#"><img src="https://img.shields.io/badge/api-FastAPI-teal" alt="FastAPI" /></a>
+  <a href="#"><img src="https://img.shields.io/badge/license-MIT-green" alt="License: MIT" /></a>
+  <a href="../README.md"><img src="https://img.shields.io/badge/lang-English-blue" alt="English" /></a>
+</p>
+
+---
+
+**이 문서 읽기:** [English](../README.md) · [简体中文](../README.zh-CN.md) · [繁體中文](README.zh-TW.md) · [日本語](README.ja-JP.md) · **한국어** · [Français](README.fr-FR.md) · [Deutsch](README.de-DE.md) · [Español](README.es-ES.md) · [Português](README.pt-BR.md) · [Русский](README.ru-RU.md)
+
+---
+
+Axiara는 **견적 업무를 위한 에이전트 워크스페이스**입니다. AI 에이전트에게 *아카이브*·*조회*·*일괄 견적*·*검토* 네 가지 명확한 능력을 제공하며, 3계층으로 분리되고 쓰기 권한이 엄격히 통제된 데이터 계층 위에서 동작합니다. 자동화된 에이전트가 공식 가격 기준 데이터를 오염시킬 수 없습니다.
+
+> **설계 철학:** Axiara는 고정된 흐름의 애플리케이션이 아닙니다. 에이전트는 워크스페이스 안에서 자율적으로 작업하며, 호출할 데이터와 스킬을 스스로 결정합니다. 네 가지 모드는 **능력 및 권한의 경계**이지 하드코딩된 UI 흐름이 아닙니다.
+
+## ✨ 주요 기능
+
+- **🔒 3계층 데이터 격리** — 공식 가격 기준(`main_db`)은 쓰기 보호: 수동 편집만 수정 가능. 크롤러와 AI 학습 결과물이 이를 덮어쓸 수 없습니다.
+- **🤖 자율 에이전트 워크스페이스** — LangGraph 기반: 에이전트가 작업에 따라 데이터와 스킬 호출을 자율 선택.
+- **📦 아카이브(모드 1)** — 공식 가격표 수동 입력(버전 관리·롤백 가능) + 과거 문서에서 AI 학습 + 온디맨드 시장 가격 크롤링.
+- **🔍 조회(모드 2)** — 단일 품목 조회: 공식 원가 + 시장 가격 범위 + 공정 메모.
+- **📊 일괄 견적(모드 3)** — Excel/BOM 자동 열 인식 및 백필, 제약 협상이 포함된 스마트 견적(기본 + 프로젝트 제약, 미지정 시 저/중/고 3단계 옵션).
+- **✅ 검토(모드 4)** — 사용자 견적표를 공식 기준 및 시장 데이터와 교차 검증, 이상치 표시 및 조정 제안.
+- **🧩 템플릿 적응형 견적** — 기본 견적 템플릿을 내장하고, 사용자 제공 템플릿에는 즉시 적응(오픈소스 / Fork 친화적).
+- **💾 플러그형 스토리지** — SQLite / PostgreSQL / MongoDB 백엔드 + CSV 가져오기/내보내기.
+- **🕐 온디맨드 크롤링** — 시장 데이터는 필요할 때 갱신. 무작정 스케줄링하지 않음.
+
+## 🚀 여기서 시작 — 기술 스킬 불필요
+
+코드를 읽을 필요도, 터미널을 만질 필요도, 기술을 이해할 필요도 없습니다. 편한 방법을 선택하세요.
+
+> 💡 팁: **axiara-workspace**라는 이름의 폴더를 먼저 만들고(바탕화면이나 문서에),
+> Axiara 관련 파일을 모두 이 폴더에 보관하면 파일을 잃어버리지 않습니다.
+
+### 방법 1 — 링크를 AI Agents에 전달 (가장 간단)
+> 💡 전제: 이 방법에는 **Git** 설치가 필요합니다(무료 — [여기서 다운로드](https://git-scm.com/downloads)). Git을 설치하고 싶지 않다면 아래 **방법 2**를 이용하세요.
+
+아래 코드 블록의 텍스트를 복사해서 AI 어시스턴트(Claude, ChatGPT 등)에 붙여넣으세요:
+
+```text
+Axiara를 설정해 주세요: git clone https://github.com/BerryUIKI/Axiara.git
+1. git clone으로 저장소를 가져온 다음, AGENTS.md를 읽고 docs/init.md의 절차에 따라 초기화하세요 — 한국어로 설정(저장 방식, 데이터 소스)을 안내해 주세요.
+2. 준비가 끝나면 무엇을 할 수 있는지 알려주세요.
+```
+
+그다음 물어보는 질문에 답하기만 하면 됩니다. 그게 전부입니다.
+
+### 방법 2 — 직접 다운로드한 후 AI Agents에 전달
+1. [Releases 페이지](https://github.com/BerryUIKI/Axiara/releases)에서 최신 압축 파일을 다운로드(또는 초록색 **Code** 버튼 → **Download ZIP**)하고 위의 axiara-workspace 폴더에 압축을 풉니다.
+2. AI 어시스턴트에서 그 폴더를 열고 "이 프로젝트를 초기화하고 설정을 안내해 주세요"라고 말합니다.
+3. 질문에 답하면 — 완료.
+
+### 업데이트 확인
+새 버전이 있는지 확인하고 싶나요? 아래 코드 블록을 AI 어시스턴트에 보내세요:
+
+```text
+Axiara에 새 버전이 있는지 확인해 주세요: https://github.com/BerryUIKI/Axiara
+새 버전이 있으면 최신 버전으로 업데이트해 주세요(기존 데이터는 유지하고 .data 디렉터리는 지우지 마세요).
+```
+
+어느 방법이든 초기화가 끝나면 "XX에 대한 견적을 만들어 줘"라고 바로 말할 수 있습니다 — 나머지는 에이전트가 처리합니다.
+
+
+## 🏗️ 아키텍처
+
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="assets/axiara-architecture-ko-KR-dark.svg" />
+  <img src="assets/axiara-architecture-ko-KR.svg" alt="Axiara architecture" style="max-width: 100%; height: auto; width: 1280px;" />
+</picture>
+
+## 🧩 네 가지 모드 개요
+
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="assets/axiara-modes-ko-KR-dark.svg" />
+  <img src="assets/axiara-modes-ko-KR.svg" alt="Axiara modes" style="max-width: 100%; height: auto; width: 1280px;" />
+</picture>
+
+## 🧭 초기 설정 — 네 가지 선택
+
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="assets/axiara-setup-decision-ko-KR-dark.svg" />
+  <img src="assets/axiara-setup-decision-ko-KR.svg" alt="Axiara setup" style="max-width: 100%; height: auto; width: 1280px;" />
+</picture>
+
+### 💡 Python 환경이 필요한가요? (먼저 확인)
+
+**대부분의 경우 필요하지 않습니다.** Axiara는 AI 에이전트용 '워크스페이스'입니다 — 저장소 폴더를 AI 어시스턴트(WorkBuddy, Claude 등)에게 넘기기만 하면 에이전트가 의존성을 자동 처리합니다.
+
+**직접 실행**(에이전트에 맡기지 않음)할 때만 Python 환경이 필요합니다:
+
+| 하려는 작업 | .venv 필요? | 방법 |
+|------------|:---:|--------|
+| AI 에이전트에 맡기기 (권장) | ❌ 불필요 | 아래 방법 1 / 방법 2 |
+| REST API 서버 실행 | ✅ 필요 | `uv sync` 후 `uv run uvicorn axiara.api.main:app` |
+| 대화형 CLI 실행 | ✅ 필요 | `uv sync` 후 `uv run axiara` |
+| 개발 / 테스트 실행 | ✅ 필요 | `uv sync` 후 `uv run pytest` |
+
+## 🧰 기술 스택
+
+| 계층 | 선택 |
+| --- | --- |
+| 언어 | Python 3.12 |
+| API 프레임워크 | FastAPI |
+| 에이전트 프레임워크 | LangGraph |
+| 스케줄러 | APScheduler(예약) |
+| 의존성 관리 | [uv](https://docs.astral.sh/uv/) |
+| 스토리지 | 개인: SQLite · 팀: CSV + git 동기화(SQLite 캐시) 또는 SQL 서버 |
+
+## 🧑‍💻 개발자 빠른 시작
+
+> 스캐폴딩 구축 중 — 아래 명령은 목표 사용 경험입니다.
+
+```bash
+# 의존성 설치
+uv sync
+
+# 워크스페이스 실행 (대화형 에이전트 셸)
+uv run axiara
+
+# REST API 실행
+uv run uvicorn axiara.api.main:app --reload
+```
+
+## 📁 저장소 구조
+
+```
+Axiara/
+├── AGENTS.md        # 에이전트 운영 매뉴얼 — 워크플로 및 하드 룰
+├── assets/          # 브랜드 자산 (로고, 록업, 아키텍처 다이어그램 — 라이트/다크)
+├── docs/            # 설계 및 아키텍처 문서 (business-modes, init, templates/)
+├── scripts/         # 운영 스크립트 (init-data.sh)
+├── .github/         # CI 및 릴리스 워크플로 (auto-release, PR source guard)
+├── .data.template/  # 런타임 데이터 스켈레톤 → .data/ 생성 (gitignore, 해당 README 참조)
+│
+# 계획 — 스캐폴딩 진행 중
+├── agents/          # 에이전트 정의 (LangGraph 그래프)
+├── data/            # 데이터 계층
+│   ├── main/        #   공식 가격 기준 (수동 편집만 쓰기 가능)
+│   ├── learn/       #   학습 참조 라이브러리
+│   ├── market/      #   크롤러 시세 라이브러리
+│   └── uploads/     #   사용자 제공 표/문서
+├── skills/          # 에이전트 스킬 팩 (아카이브/조회/견적/검토)
+├── output/          # 생성 산출물 (견적서, 검토 보고서)
+└── src/             # 핵심 라이브러리
+```
+
+## 🧩 스킬
+
+에이전트 스킬 팩(`skills/` 단일 소스, WorkBuddy/Codex/Claude 호환):
+
+| 스킬 | 목적 |
+| --- | --- |
+| **axiara-onboarding** | 워크스페이스 초기화(생성/참여) — 사전 입력 추론(언어별 통화, OS별 시간대), `workspace.config.yaml` 템플릿 |
+| **csv-data-import** | 가격표 검증 후 공식 베이스로 가져오기; SHA-256 매니페스트, 원장, 학습 경로 |
+| **price-crawler** | 원자재 시장 가격 크롤링 — robots 프로토콜, 7단계 파이프라인, 삽입 전 확인 |
+
+## 👥 다중 사용자 학습(허브 모델)
+
+각 Axiara 인스턴스는 자체 견적과 수정 사항에서 **개인 라이브러리**(로컬)로 학습합니다. 업로드는 수동이며 사용자 확인 후 진행됩니다. *"데이터 업로드"* / *"재업로드"* / *"데이터 제출"* 라고 말하면 에이전트가 날짜가 포함된 번들을 **중앙 라이브러리**(`learn_inbox/<user-id>/<yyyymmdd>/bundle.yaml`, 자신의 `user/<user-id>` 브랜치로 push)로 내보냅니다. **중앙 훈련 에이전트**가 모든 업로드를 검토하고 공개 규칙 변경을 제안하며, `learn_shared` 업데이트 전에 **관리자가 확인**합니다. 동적 규모 모니터링이 팀 성장에 따라 스토리지 개선을 제안합니다. [`docs/learn-sync.md`](docs/learn-sync.md) 참조.
+
+## 📚 문서
+
+- [비즈니스 모드 및 아키텍처](docs/business-modes.md) — 데이터 권한 모델, 4가지 모드, LangGraph 매핑
+- [PLAN.md](PLAN.md) — 로드맵의 단일 정보 소스
+- [docs/init.md](docs/init.md) — 최초 설정, 데이터 가이드 및 무결성
+- [docs/workspace-config.md](docs/workspace-config.md) — 생성/참여, 구성 템플릿
+- [docs/crawler-spec.md](docs/crawler-spec.md) · [docs/data-sources.md](docs/data-sources.md) — 크롤러 설계 및 소스 레지스트리
+- [docs/learning-plan.md](docs/learning-plan.md) · [docs/training-scenarios.md](docs/training-scenarios.md) — 학습 계획 및 사용자 시나리오
+- [docs/learn-sync.md](docs/learn-sync.md) · [docs/learn-sync-text.md](docs/learn-sync-text.md) · [docs/learn-sync-sql.md](docs/learn-sync-sql.md) — 다중 사용자 학습 허브
+- [docs/skill-requirements.md](docs/skill-requirements.md) — 스킬 백로그 및 결정 D-SK1–11
+- [docs/development-handoff.md](docs/development-handoff.md) — 외부 코딩 에이전트용 작업 브리프
+
+## 🗺️ 로드맵
+
+- [x] 워크스페이스 초기화 및 설계 결정
+- [x] 패키지 스캐폴딩 (`uv init`, `src/` 레이아웃)
+- [x] 스토리지 계층 (파일 우선: CSV + Git 동기화, SQLite 캐시, 권한 강제)
+- [x] 가격 조회 — 크롤러 엔진 (robots 프로토콜, 7단계 파이프라인, 확인 게이트)
+- [x] 원가 계산 엔진 (다차원 원가 모델)
+- [x] 견적 생성기 (기본 + 사용자 템플릿)
+- [x] 작업 스케줄러 (APScheduler, 온디맨드)
+- [x] 검토 엔진 (이상치 탐지)
+- [x] 다중 사용자 학습 허브 (업로드 흐름, 중앙 검토, 모니터링, 아카이빙)
+- [x] REST API
+- [ ] 테스트 및 CI 강화
+
+## 🤝 기여
+
+기여를 환영합니다. 먼저 [PLAN.md](PLAN.md)와 [CONTRIBUTING.md](CONTRIBUTING.md)를 읽고 PR-only 워크플로를 따르세요: **`main` / `dev`에 직접 푸시 금지**.
+
+## 📄 라이선스
+
+MIT — [LICENSE](LICENSE) 참조.
+
+---
+
+*LangGraph 기반. 프론트엔드 관리 대시보드(`Axiara-Web`)는 별도 저장소로 계획 중입니다.*
+
+---
+
+> **To AI agents**: If you are setting up this project, read `AGENTS.md` (operating manual) and strictly follow the setup flow in `docs/init.md`, then report back in the user's language.
