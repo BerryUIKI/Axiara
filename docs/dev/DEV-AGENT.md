@@ -23,8 +23,8 @@ documentation and visual assets in sync.
 
 ## Context to load first
 
-1. `docs/developer/README.md` — stack, layout, workflow, conventions.
-2. `docs/developer/VI-GUIDE.md` — visual identity spec for any asset you touch.
+1. `docs/dev/README.md` — stack, layout, workflow, conventions.
+2. `docs/dev/VI-GUIDE.md` — visual identity spec for any asset you touch.
 3. `PLAN.md` — roadmap and current batch, so your work fits the plan.
 4. `pyproject.toml` — dependency bounds, lint/test config.
 
@@ -41,7 +41,7 @@ documentation and visual assets in sync.
   all 9 locale READMEs + `CHANGELOG.md` `[Unreleased]` + affected
   `docs/*.md` **before** push; track pending items in
   `.workbuddy/doc-sync-todo.md`. Developer docs live in
-  `docs/developer/` and ship with all branches.
+  `docs/dev/` and ship with all branches.
 - **Lint**: keep ruff happy on the code you touch
   (`uv run ruff check src/ tests/`). The repo has legacy findings (CI treats
   lint as advisory until a cleanup PR) — do not make them worse.
@@ -50,7 +50,7 @@ documentation and visual assets in sync.
 
 ## When you touch diagrams or assets
 
-Follow `docs/developer/VI-GUIDE.md` exactly:
+Follow `docs/dev/VI-GUIDE.md` exactly:
 
 1. Palette: only the approved hex colors; semantic blocks
    (green `main_db`, purple `learn_db`, amber `market_db`, brand green header).
@@ -70,7 +70,7 @@ Follow `docs/developer/VI-GUIDE.md` exactly:
 - Code: `ruff check` clean on touched files; full test suite green.
 - Assets: light + dark (+ zh where applicable) regenerated and geometry-checked.
 - Docs: README (EN + affected locales), CHANGELOG `[Unreleased]`, affected
-  `docs/*` updated; `docs/developer/*` updated if behavior/VI changed.
+  `docs/*` updated; `docs/dev/*` updated if behavior/VI changed.
 - Git: feature branch from `dev`, conventional commit message
   (`fix(scope): …`), PR into `dev` with a summary + verification notes.
 

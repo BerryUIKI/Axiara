@@ -14,9 +14,9 @@ architecture, environment setup, coding conventions, the visual identity
 
 | Doc | Purpose |
 | --- | --- |
-| [`docs/developer/README.md`](README.md) | This index + dev environment setup, repo layout, workflow, conventions |
-| [`docs/developer/VI-GUIDE.md`](VI-GUIDE.md) | Visual identity system: palette, diagram style, typography, SVG specs |
-| [`docs/developer/DEV-AGENT.md`](DEV-AGENT.md) | Drop-in agent prompt for a *developer* agent working on this codebase |
+| [`docs/dev/README.md`](README.md) | This index + dev environment setup, repo layout, workflow, conventions |
+| [`docs/dev/VI-GUIDE.md`](VI-GUIDE.md) | Visual identity system: palette, diagram style, typography, SVG specs |
+| [`docs/dev/DEV-AGENT.md`](DEV-AGENT.md) | Drop-in agent prompt for a *developer* agent working on this codebase |
 
 ---
 
@@ -78,7 +78,7 @@ src/axiara/
 tests/            pytest suite (mirrors src/axiara/ layout)
 scripts/          init-data.sh, helper scripts
 assets/           SVG diagrams & logo (see VI-GUIDE.md)
-docs/developer/   THIS directory — developer docs (README.md, VI-GUIDE.md, DEV-AGENT.md)
+docs/dev/   THIS directory — developer docs (README.md, VI-GUIDE.md, DEV-AGENT.md)
 ```
 
 ## Workflow & conventions
@@ -95,7 +95,7 @@ docs/developer/   THIS directory — developer docs (README.md, VI-GUIDE.md, DEV
 4. **Tests**: keep `pytest` green. CI runs ruff (advisory until a cleanup PR
    lands) and the full suite on every push/PR to `dev`.
 5. **VI compliance**: any new/changed diagram must follow
-   `docs/developer/VI-GUIDE.md` (palette, font scale, 1280px width, dark
+   `docs/dev/VI-GUIDE.md` (palette, font scale, 1280px width, dark
    variants).
 
 ## Adding a diagram (quick checklist)
