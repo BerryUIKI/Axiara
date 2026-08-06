@@ -1,13 +1,13 @@
 """i18n_svg.py — regenerate localized diagram SVGs for all Axiara locales.
 
 Usage (from repo root):
-    python docs/dev/i18n_svg.py            # regenerate all locales from EN sources
-    python docs/dev/i18n_svg.py --locale de-DE   # only one locale
-    python docs/dev/i18n_svg.py --extract  # re-extract dicts from committed SVGs
+    python docs/developer/i18n_svg.py            # regenerate all locales from EN sources
+    python docs/developer/i18n_svg.py --locale de-DE   # only one locale
+    python docs/developer/i18n_svg.py --extract  # re-extract dicts from committed SVGs
 
 How it works:
 - EN light SVGs (assets/axiara-{kind}.svg) are the sources of truth.
-- docs/dev/i18n_dicts.py holds per-locale string maps (single source of
+- docs/developer/i18n_dicts.py holds per-locale string maps (single source of
   truth for translations; re-generate with --extract after hand-fixing files).
 - For each locale x kind: regex-replace <text>…</text> bodies in the EN svg
   via the dict, then ET-round-trip to match the committed SVG byte format.
@@ -16,8 +16,8 @@ How it works:
 - zh-CN (-zh) is a hand-written baseline (Chinese <title>/<desc>, distinct
   format) and is NOT managed by this generator.
 
-When translations change: edit docs/dev/i18n_dicts.py, then run
-`python docs/dev/i18n_svg.py` to regenerate all locale SVGs.
+When translations change: edit docs/developer/i18n_dicts.py, then run
+`python docs/developer/i18n_svg.py` to regenerate all locale SVGs.
 """
 import io
 import os
