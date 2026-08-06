@@ -36,10 +36,10 @@ jobs:
         continue-on-error: true
 
       - name: Test with pytest
-        run: uv run pytest --cov=src/axiara --cov-report=xml --cov-report=term
+        run: uv run pytest
 
       - name: Upload coverage to Codecov (optional)
-        if: github.event_name == 'push'
+        if: false  # coverage upload requires pytest-cov; enable after adding it
         uses: codecov/codecov-action@v4
         with:
           file: ./coverage.xml
