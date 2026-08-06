@@ -78,7 +78,7 @@ src/axiara/
 tests/            pytest suite (mirrors src/axiara/ layout)
 scripts/          init-data.sh, helper scripts
 assets/           SVG diagrams & logo (see VI-GUIDE.md)
-docs/developer/   THIS directory — developer docs (README.md, VI-GUIDE.md, DEV-AGENT.md)
+docs/developer/   THIS directory — developer docs (README.md, VI-GUIDE.md, DEV-AGENT.md) + scripts/ (i18n_svg.py, i18n_dicts.py)
 ```
 
 ## Workflow & conventions

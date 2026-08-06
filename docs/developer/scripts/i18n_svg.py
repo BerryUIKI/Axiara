@@ -1,14 +1,15 @@
 """i18n_svg.py — regenerate localized diagram SVGs for all Axiara locales.
 
 Usage (from repo root):
-    python docs/developer/i18n_svg.py            # regenerate all locales from EN sources
-    python docs/developer/i18n_svg.py --locale de-DE   # only one locale
-    python docs/developer/i18n_svg.py --extract  # re-extract dicts from committed SVGs
+    python docs/developer/scripts/i18n_svg.py            # regenerate all locales from EN sources
+    python docs/developer/scripts/i18n_svg.py --locale de-DE   # only one locale
+    python docs/developer/scripts/i18n_svg.py --extract  # re-extract dicts from committed SVGs
 
 How it works:
 - EN light SVGs (assets/axiara-{kind}.svg) are the sources of truth.
-- docs/developer/i18n_dicts.py holds per-locale string maps (single source of
-  truth for translations; re-generate with --extract after hand-fixing files).
+- docs/developer/scripts/i18n_dicts.py holds per-locale string maps (single
+  source of truth for translations; re-generate with --extract after
+  hand-fixing files).
 - For each locale x kind: regex-replace <text>…</text> bodies in the EN svg
   via the dict, then ET-round-trip to match the committed SVG byte format.
   The dark twin is derived via the VI palette map.
@@ -16,8 +17,8 @@ How it works:
 - zh-CN (-zh) is a hand-written baseline (Chinese <title>/<desc>, distinct
   format) and is NOT managed by this generator.
 
-When translations change: edit docs/developer/i18n_dicts.py, then run
-`python docs/developer/i18n_svg.py` to regenerate all locale SVGs.
+When translations change: edit docs/developer/scripts/i18n_dicts.py, then run
+`python docs/developer/scripts/i18n_svg.py` to regenerate all locale SVGs.
 """
 import io
 import os
@@ -26,7 +27,7 @@ import sys
 import argparse
 import xml.etree.ElementTree as ET
 
-BASE = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+BASE = os.path.dirname(os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__)))))
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))  # same dir as i18n_dicts.py
 import i18n_dicts  # noqa: E402
 
@@ -98,7 +99,7 @@ def extract_dicts():
         return [m.group(2) for m in _TEXT_RE.finditer(io.open(f, encoding="utf-8").read())]
 
     out = ["# Auto-extracted translation dicts. Regenerate via:",
-           "#   python scripts/dev/i18n_svg.py --extract",
+           "#   python docs/developer/scripts/i18n_svg.py --extract",
            "TRANSLATIONS = {"]
     for loc in LOCALES:
         out.append(f"    {loc!r}: {{")
@@ -111,7 +112,7 @@ def extract_dicts():
                 out.append(f"        {k!r}: {v!r},")
         out.append("    },")
     out.append("}")
-    dst = os.path.join(BASE, "scripts", "dev", "i18n_dicts.py")
+    dst = os.path.join(os.path.dirname(os.path.abspath(__file__)), "i18n_dicts.py")
     _write(dst, "\n".join(out) + "\n")
     print("i18n_dicts.py re-extracted")
 
