@@ -6,7 +6,7 @@ directly to `main` or `dev`**.
 ## Before you start
 
 - Read [PLAN.md](PLAN.md) for the roadmap and current batch — fit your work into it.
-- Read the **[developer documentation](docs/dev/README.md)** for the
+- Read the **[developer documentation](docs/developer/README.md)** for the
   full picture: environment setup, repo layout, coding conventions, the
   visual identity (VI) spec for diagrams, and the recommended workflow.
 - Check [CHANGELOG.md](CHANGELOG.md) — every PR into `dev` must add an entry
@@ -19,8 +19,8 @@ directly to `main` or `dev`**.
 | Cut a feature branch from `dev`, open a PR into `dev` | Never push directly to `main` / `dev` |
 | Keep `pytest` green (`uv run pytest`) | Never merge with failing tests |
 | Update docs before push (README + locales + CHANGELOG + affected `docs/*`) | Never push without syncing documentation |
-| Follow the VI spec when touching diagrams (`docs/dev/VI-GUIDE.md`) | Never introduce new palette colors or font sizes |
-| Update developer docs (`docs/dev/`) when behavior/VI changes | Never leave docs stale |
+| Follow the VI spec when touching diagrams (`docs/developer/VI-GUIDE.md`) | Never introduce new palette colors or font sizes |
+| Update developer docs (`docs/developer/`) when behavior/VI changes | Never leave docs stale |
 
 ## Development quickstart
 
@@ -31,5 +31,5 @@ uv run pytest          # full suite
 uv run ruff check src/ tests/   # lint
 ```
 
-See [docs/dev/README.md](docs/dev/README.md) for details and
+See [docs/developer/README.md](docs/developer/README.md) for details and
 Windows-specific troubleshooting.
