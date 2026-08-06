@@ -98,6 +98,14 @@ Axiara 是一个**面向估值的 Agent 工作区**。它为 AI Agent 提供四�
   <img src="assets/axiara-architecture.svg" alt="Axiara architecture" style="max-width: 100%; height: auto; width: 680px;" />
 </picture>
 
+## 🧩 四大模式一览
+
+<img src="assets/axiara-modes-zh.svg" alt="Axiara 四大模式" style="max-width: 100%; height: auto; width: 1280px;" />
+
+## 🧭 初始化 — 四个简单选择
+
+<img src="assets/axiara-setup-decision-zh.svg" alt="Axiara 初始化决策树" style="max-width: 100%; height: auto; width: 1280px;" />
+
 ## 🧰 技术栈
 
 | 层 | 选型 |
@@ -212,10 +220,10 @@ Agent 技能包（`skills/` 单一来源，兼容 WorkBuddy/Codex/Claude）：
 - [x] 成本核算引擎（多维成本模型）
 - [x] 报价生成器（默认 + 用户模板）
 - [x] 任务调度器（APScheduler，按需）
-- [ ] 复核引擎（异常检测）
+- [ ] 复核引擎（异常检测）— Agent 节点已搭骨架；核心校验待实现
 - [x] 多用户学习 hub（上传流程、中心审查、监控、归档）
 - [x] REST API
-- [ ] 测试与 CI 强化
+- [x] 测试与 CI — 206 个测试通过；CI 工作流（`test.yml`）在 push/PR 时全绿
 
 ## 🤝 贡献
 
