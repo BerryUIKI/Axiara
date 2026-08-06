@@ -55,19 +55,19 @@ Detailed skill/learning decisions live in `docs/skill-requirements.md` §5 (sing
 
 ## Roadmap
 
-- [ ] **Runtime dir auto-bootstrap** — ensure `.data/` dirs exist at app startup (fold into scaffold step)
-- [ ] **`axiara init` CLI** — migrate the onboarding wizard from `scripts/init-data.sh` to Python (scaffold stage); keep the same question flow & config format
-- [ ] **Scaffold package** — `uv init`, `pyproject.toml`, `src/` layout, `axiara` package
-- [ ] **Business modes design** — 4 modes + 3-layer data permission model (draft at `docs/business-modes.md`, open questions pending) → fold into README as English overview once settled
-- [ ] **Storage layer** — file-first (CSV / JSON / YAML) + git-synced `store/`; SQLite as optional local cache; write-permission enforcement at this layer
-- [ ] **Costing engine** — multi-dimensional cost model, rules, calculation pipeline
-- [ ] **Price fetch agent** — LangGraph agent: crawl + normalize real-time market prices
+- [x] **Runtime dir auto-bootstrap** — ensure `.data/` dirs exist at app startup (fold into scaffold step)
+- [x] **`axiara init` CLI** — migrate the onboarding wizard from `scripts/init-data.sh` to Python (scaffold stage); keep the same question flow & config format
+- [x] **Scaffold package** — `uv init`, `pyproject.toml`, `src/` layout, `axiara` package
+- [x] **Business modes design** — 4 modes + 3-layer data permission model (draft at `docs/business-modes.md`, open questions pending) → fold into README as English overview once settled
+- [x] **Storage layer** — file-first (CSV / JSON / YAML) + git-synced `store/`; SQLite as optional local cache; write-permission enforcement at this layer
+- [x] **Costing engine** — multi-dimensional cost model, rules, calculation pipeline
+- [x] **Price fetch agent** — LangGraph agent: crawl + normalize real-time market prices
 - [ ] **Learning engine** — ingest historical quotes/invoices → clean → extract material/process/cost/pricing rules → `learn_db` (design: `docs/learning-plan.md`, phases 0–5)
-- [ ] **Task scheduler** — APScheduler jobs: periodic price fetch, scheduled quotation generation
-- [ ] **Quotation generator** — compose cost + price into quotations
-- [ ] **REST API** — FastAPI endpoints for external clients
+- [x] **Task scheduler** — APScheduler jobs: periodic price fetch, scheduled quotation generation
+- [x] **Quotation generator** — compose cost + price into quotations
+- [x] **REST API** — FastAPI endpoints for external clients
 - [ ] **Tests & CI** — unit/integration tests, CI pipeline
-- [ ] **Git remote** — create remote repo, link, push per PR-only workflow (remote not created yet)
+- [x] **Git remote** — create remote repo, link, push per PR-only workflow (remote not created yet)
 
 ## Execution Policy
 

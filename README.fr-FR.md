@@ -162,12 +162,12 @@ Chaque instance d'Axiara apprend de ses propres devis et corrections dans une **
 - [x] Scaffolding du package (`uv init`, layout `src/`)
 - [x] Couche de stockage (fichiers d'abord : CSV + sync Git, cache SQLite, application des permissions)
 - [x] Agent de récupération de prix — moteur crawler (protocole robots, pipeline en 7 étapes, porte de confirmation)
-- [ ] Moteur de calcul des coûts (modèle de coûts multidimensionnel)
-- [ ] Générateur de devis (templates par défaut + utilisateur)
-- [ ] Planificateur de tâches (APScheduler, à la demande)
+- [x] Moteur de calcul des coûts (modèle de coûts multidimensionnel)
+- [x] Générateur de devis (templates par défaut + utilisateur)
+- [x] Planificateur de tâches (APScheduler, à la demande)
 - [ ] Moteur de vérification (détection d'anomalies)
 - [x] Hub d'apprentissage multi-utilisateur (flux d'envoi, revue centrale, monitoring, archivage)
-- [ ] API REST
+- [x] API REST
 - [ ] Tests & durcissement CI
 
 ## 🤝 Contribution

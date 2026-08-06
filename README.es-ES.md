@@ -162,12 +162,12 @@ Cada instancia de Axiara aprende de sus propias cotizaciones y correcciones en u
 - [x] Andamiaje del paquete (`uv init`, layout `src/`)
 - [x] Capa de almacenamiento (archivos primero: CSV + sync Git, caché SQLite, cumplimiento de permisos)
 - [x] Agente de recuperación de precios — motor crawler (protocolo robots, pipeline de 7 pasos, puerta de confirmación)
-- [ ] Motor de cálculo de costos (modelo de costos multidimensional)
-- [ ] Generador de cotizaciones (plantillas por defecto + usuario)
-- [ ] Programador de tareas (APScheduler, bajo demanda)
+- [x] Motor de cálculo de costos (modelo de costos multidimensional)
+- [x] Generador de cotizaciones (plantillas por defecto + usuario)
+- [x] Programador de tareas (APScheduler, bajo demanda)
 - [ ] Motor de revisión (detección de anomalías)
 - [x] Hub de aprendizaje multiusuario (flujo de subida, revisión central, monitoreo, archivado)
-- [ ] API REST
+- [x] API REST
 - [ ] Pruebas y refuerzo de CI
 
 ## 🤝 Contribuciones

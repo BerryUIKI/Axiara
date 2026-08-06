@@ -162,12 +162,12 @@ Cada instância do Axiara aprende com suas próprias cotações e correções em
 - [x] Estruturação do pacote (`uv init`, layout `src/`)
 - [x] Camada de armazenamento (arquivos primeiro: CSV + sync Git, cache SQLite, aplicação de permissões)
 - [x] Agente de captura de preços — mecanismo crawler (protocolo robots, pipeline de 7 etapas, porta de confirmação)
-- [ ] Mecanismo de cálculo de custos (modelo de custos multidimensional)
-- [ ] Gerador de cotações (modelos padrão + usuário)
-- [ ] Agendador de tarefas (APScheduler, sob demanda)
+- [x] Mecanismo de cálculo de custos (modelo de custos multidimensional)
+- [x] Gerador de cotações (modelos padrão + usuário)
+- [x] Agendador de tarefas (APScheduler, sob demanda)
 - [ ] Mecanismo de revisão (detecção de anomalias)
 - [x] Hub de aprendizado multiusuário (fluxo de envio, revisão central, monitoramento, arquivamento)
-- [ ] API REST
+- [x] API REST
 - [ ] Testes e reforço de CI
 
 ## 🤝 Contribuições
