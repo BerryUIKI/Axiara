@@ -70,14 +70,14 @@
 <!-- ============ Step 4 — Dev environment ============ -->
 <text x="640" y="570" font-size="22" font-weight="600" fill="#E1F5EE" text-anchor="middle">4 · Dev environment (optional)</text>
 
-<line x1="425" y1="582" x2="425" y2="604" stroke="#9E9D98" stroke-width="1.5" marker-end="url(#arrow)"/>
-<line x1="855" y1="582" x2="855" y2="604" stroke="#9E9D98" stroke-width="1.5" marker-end="url(#arrow)"/>
+<line x1="360" y1="582" x2="360" y2="604" stroke="#9E9D98" stroke-width="1.5" marker-end="url(#arrow)"/>
+<line x1="960" y1="582" x2="960" y2="604" stroke="#9E9D98" stroke-width="1.5" marker-end="url(#arrow)"/>
 
-<rect x="160" y="608" width="530" height="64" rx="10" fill="#04342C" stroke="#5DCAA5" stroke-width="1"/>
-<text x="425" y="634" font-size="18" font-weight="600" fill="#E1F5EE" text-anchor="middle">Agent-only (recommended, zero setup)</text>
-<text x="425" y="658" font-size="14" fill="#9FE1CB" text-anchor="middle">your AI agent handles everything</text>
+<rect x="80" y="608" width="560" height="64" rx="10" fill="#04342C" stroke="#5DCAA5" stroke-width="1"/>
+<text x="360" y="634" font-size="18" font-weight="600" fill="#E1F5EE" text-anchor="middle">Agent-only (recommended, zero setup)</text>
+<text x="360" y="658" font-size="14" fill="#9FE1CB" text-anchor="middle">your AI agent handles everything</text>
 
-<rect x="590" y="608" width="530" height="64" rx="10" fill="#412402" stroke="#EF9F27" stroke-width="1"/>
-<text x="855" y="634" font-size="18" font-weight="600" fill="#FAC775" text-anchor="middle">With dev environment</text>
-<text x="855" y="658" font-size="14" fill="#EF9F27" text-anchor="middle">uv sync → REST API · CLI · tests</text>
+<rect x="680" y="608" width="560" height="64" rx="10" fill="#412402" stroke="#EF9F27" stroke-width="1"/>
+<text x="960" y="634" font-size="18" font-weight="600" fill="#FAC775" text-anchor="middle">With dev environment</text>
+<text x="960" y="658" font-size="14" fill="#EF9F27" text-anchor="middle">uv sync → REST API · CLI · tests</text>
 </svg>
