@@ -1,5 +1,5 @@
 # Auto-extracted translation dicts. Regenerate via:
-#   python scripts/dev/i18n_svg.py --extract
+#   python docs/developer/scripts/i18n_svg.py --extract
 TRANSLATIONS = {
     'zh-TW': {
         # architecture
