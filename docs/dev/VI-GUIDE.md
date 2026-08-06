@@ -119,16 +119,16 @@ Locale suffix set: `zh` (zh-CN), `zh-TW`, `ja-JP`, `ko-KR`, `de-DE`, `es-ES`,
 | `axiara-setup-decision*.svg` | Onboarding decision tree (10 locales) |
 
 **Localization workflow** (repeatable, automated):
-`scripts/dev/i18n_svg.py` regenerates the 8 derived locales (all except
+`docs/dev/i18n_svg.py` regenerates the 8 derived locales (all except
 zh-CN, which is a hand-written baseline) from the EN sources:
 
 ```bash
-python scripts/dev/i18n_svg.py            # regenerate all managed locales
-python scripts/dev/i18n_svg.py --locale de-DE
-python scripts/dev/i18n_svg.py --extract  # re-derive i18n_dicts.py from committed SVGs
+python docs/dev/i18n_svg.py            # regenerate all managed locales
+python docs/dev/i18n_svg.py --locale de-DE
+python docs/dev/i18n_svg.py --extract  # re-derive i18n_dicts.py from committed SVGs
 ```
 
-- Translation strings live in `scripts/dev/i18n_dicts.py` — the single
+- Translation strings live in `docs/dev/i18n_dicts.py` — the single
   source of truth. Edit there, then run the generator.
 - The generator regex-replaces `<text>` bodies and ET-round-trips to match
   the committed byte format (no format churn); dark twins come from the §2
