@@ -74,12 +74,40 @@ Axiara 是一個**面向估值的 Agent 工作區**。它為 AI Agent 提供四�
 
 無論哪種方式，初始化完成後你都可以直接說："幫我對 XX 出一份報價"——剩下的交給 Agent。
 
+
 ## 🏗️ 架構
 
 <picture>
-  <source media="(prefers-color-scheme: dark)" srcset="assets/axiara-architecture-dark.svg" />
-  <img src="assets/axiara-architecture.svg" alt="Axiara architecture" style="max-width: 100%; height: auto; width: 1280px;" />
+  <source media="(prefers-color-scheme: dark)" srcset="assets/axiara-architecture-zh-TW-dark.svg" />
+  <img src="assets/axiara-architecture-zh-TW.svg" alt="Axiara architecture" style="max-width: 100%; height: auto; width: 1280px;" />
 </picture>
+
+## 🧩 四大模式一覽
+
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="assets/axiara-modes-zh-TW-dark.svg" />
+  <img src="assets/axiara-modes-zh-TW.svg" alt="Axiara modes" style="max-width: 100%; height: auto; width: 1280px;" />
+</picture>
+
+## 🧭 初始化 — 四個簡單選擇
+
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="assets/axiara-setup-decision-zh-TW-dark.svg" />
+  <img src="assets/axiara-setup-decision-zh-TW.svg" alt="Axiara setup" style="max-width: 100%; height: auto; width: 1280px;" />
+</picture>
+
+### 💡 需要配置 Python 環境嗎？（先看這裡）
+
+**絕大多數情況不需要。** Axiara 是給 AI Agent 使用的「工作區」——你只需把倉庫資料夾交給你的 AI 助手（WorkBuddy、Claude 等），Agent 會自動處理依賴，你零操作。
+
+只有當你要**自己動手運行**（而非交給 Agent）時，才需要 Python 環境：
+
+| 你想做什麼 | 需要 .venv？ | 怎麼做 |
+|------------|:---:|--------|
+| 交給 AI Agent 用（推薦） | ❌ 不用 | 直接看下面的方式一 / 方式二 |
+| 自己啟動 REST API 服務 | ✅ 需要 | `uv sync` 後 `uv run uvicorn axiara.api.main:app` |
+| 自己運行交互式 CLI | ✅ 需要 | `uv sync` 後 `uv run axiara` |
+| 開發 / 跑測試 | ✅ 需要 | `uv sync` 後 `uv run pytest` |
 
 ## 🧰 技術棧
 

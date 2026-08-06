@@ -95,6 +95,19 @@ Either way, once setup finishes you can start with something like: *"Make me a q
   <img src="assets/axiara-setup-decision.svg" alt="Axiara setup decision tree" style="max-width: 100%; height: auto; width: 1280px;" />
 </picture>
 
+### 💡 Do I need a Python environment? (read this first)
+
+**In most cases, no.** Axiara is a "workspace" for AI agents — you just hand the repository folder to your AI assistant (WorkBuddy, Claude, etc.), and the agent handles dependencies automatically. Zero effort from you.
+
+Only when you want to **run it yourself** (instead of delegating to an agent) do you need a Python environment:
+
+| What you want to do | Need .venv? | How |
+|------------|:---:|--------|
+| Hand it to an AI agent (recommended) | ❌ No | see Way 1 / Way 2 below |
+| Start the REST API server yourself | ✅ Yes | `uv sync` then `uv run uvicorn axiara.api.main:app` |
+| Run the interactive CLI yourself | ✅ Yes | `uv sync` then `uv run axiara` |
+| Development / run tests | ✅ Yes | `uv sync` then `uv run pytest` |
+
 ## 🧰 Tech Stack
 
 | Layer | Choice |

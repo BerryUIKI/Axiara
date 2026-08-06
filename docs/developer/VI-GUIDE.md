@@ -105,13 +105,24 @@ Locale READMEs (9 non-English) reuse the **English** diagrams; only
 
 ## 6. Asset inventory
 
+Every diagram ships in all 10 locales. Naming: `<name>.<locale>.svg` /
+`<name>.<locale>-dark.svg` (EN is the bare `<name>.svg`; zh-CN uses `-zh`).
+Locale suffix set: `zh` (zh-CN), `zh-TW`, `ja-JP`, `ko-KR`, `de-DE`, `es-ES`,
+`fr-FR`, `pt-BR`, `ru-RU`.
+
 | File | Description |
 | --- | --- |
 | `axiara-logo.svg` / `-dark.svg` | Logo mark |
 | `axiara-lockup.svg` / `-dark.svg` | Logo + wordmark |
-| `axiara-architecture.svg` / `-dark.svg` | Three data-layer architecture |
-| `axiara-modes.svg` / `-dark.svg` / `-zh.svg` / `-zh-dark.svg` | Four modes flow |
-| `axiara-setup-decision.svg` / `-dark.svg` / `-zh.svg` / `-zh-dark.svg` | Onboarding decision tree |
+| `axiara-architecture*.svg` | Three data-layer architecture (10 locales) |
+| `axiara-modes*.svg` | Four modes flow (10 locales) |
+| `axiara-setup-decision*.svg` | Onboarding decision tree (10 locales) |
+
+**Localization workflow** (repeatable): start from the EN light SVG, apply a
+per-locale string dict on `<text>` bodies (decode `&amp;` → `&` before
+matching — ElementTree parses entities), then generate the dark twin via the
+§2 palette mapping. Container geometry stays untouched — keep translations
+short enough to fit the boxes.
 
 ---
 

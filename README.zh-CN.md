@@ -94,8 +94,8 @@ Axiara 是一个**面向估值的 Agent 工作区**。它为 AI Agent 提供四�
 ## 🏗️ 架构
 
 <picture>
-  <source media="(prefers-color-scheme: dark)" srcset="assets/axiara-architecture-dark.svg" />
-  <img src="assets/axiara-architecture.svg" alt="Axiara architecture" style="max-width: 100%; height: auto; width: 1280px;" />
+  <source media="(prefers-color-scheme: dark)" srcset="assets/axiara-architecture-zh-dark.svg" />
+  <img src="assets/axiara-architecture-zh.svg" alt="Axiara 架构" style="max-width: 100%; height: auto; width: 1280px;" />
 </picture>
 
 ## 🧩 四大模式一览

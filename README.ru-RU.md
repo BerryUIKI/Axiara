@@ -74,12 +74,40 @@ Set up Axiara for me: git clone https://github.com/BerryUIKI/Axiara.git
 
 При любом способе после инициализации можно сразу сказать: *"Составьте мне смету на [товар]."* — остальное сделает агент.
 
+
 ## 🏗️ Архитектура
 
 <picture>
-  <source media="(prefers-color-scheme: dark)" srcset="assets/axiara-architecture-dark.svg" />
-  <img src="assets/axiara-architecture.svg" alt="Axiara architecture" style="max-width: 100%; height: auto; width: 1280px;" />
+  <source media="(prefers-color-scheme: dark)" srcset="assets/axiara-architecture-ru-RU-dark.svg" />
+  <img src="assets/axiara-architecture-ru-RU.svg" alt="Axiara architecture" style="max-width: 100%; height: auto; width: 1280px;" />
 </picture>
+
+## 🧩 Четыре режима — кратко
+
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="assets/axiara-modes-ru-RU-dark.svg" />
+  <img src="assets/axiara-modes-ru-RU.svg" alt="Axiara modes" style="max-width: 100%; height: auto; width: 1280px;" />
+</picture>
+
+## 🧭 Настройка — четыре быстрых выбора
+
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="assets/axiara-setup-decision-ru-RU-dark.svg" />
+  <img src="assets/axiara-setup-decision-ru-RU.svg" alt="Axiara setup" style="max-width: 100%; height: auto; width: 1280px;" />
+</picture>
+
+### 💡 Нужно ли окружение Python? (сначала прочтите)
+
+**В большинстве случаев нет.** Axiara — это «рабочее пространство» для ИИ-агентов: просто передайте папку репозитория своему ИИ-ассистенту (WorkBuddy, Claude и т.п.), и агент сам разберётся с зависимостями.
+
+Окружение Python нужно только если вы хотите **запускать всё сами** (а не делегировать агенту):
+
+| Что вы хотите сделать | Нужен .venv? | Как |
+|------------|:---:|--------|
+| Делегировать ИИ-агенту (рекомендуется) | ❌ нет | см. способ 1 / способ 2 ниже |
+| Запустить REST API-сервер | ✅ да | `uv sync`, затем `uv run uvicorn axiara.api.main:app` |
+| Запустить интерактивный CLI | ✅ да | `uv sync`, затем `uv run axiara` |
+| Разработка / тесты | ✅ да | `uv sync`, затем `uv run pytest` |
 
 ## 🧰 Технологический стек
 

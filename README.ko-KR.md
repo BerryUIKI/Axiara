@@ -74,12 +74,40 @@ Axiara에 새 버전이 있는지 확인해 주세요: https://github.com/BerryU
 
 어느 방법이든 초기화가 끝나면 "XX에 대한 견적을 만들어 줘"라고 바로 말할 수 있습니다 — 나머지는 에이전트가 처리합니다.
 
+
 ## 🏗️ 아키텍처
 
 <picture>
-  <source media="(prefers-color-scheme: dark)" srcset="assets/axiara-architecture-dark.svg" />
-  <img src="assets/axiara-architecture.svg" alt="Axiara architecture" style="max-width: 100%; height: auto; width: 1280px;" />
+  <source media="(prefers-color-scheme: dark)" srcset="assets/axiara-architecture-ko-KR-dark.svg" />
+  <img src="assets/axiara-architecture-ko-KR.svg" alt="Axiara architecture" style="max-width: 100%; height: auto; width: 1280px;" />
 </picture>
+
+## 🧩 네 가지 모드 개요
+
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="assets/axiara-modes-ko-KR-dark.svg" />
+  <img src="assets/axiara-modes-ko-KR.svg" alt="Axiara modes" style="max-width: 100%; height: auto; width: 1280px;" />
+</picture>
+
+## 🧭 초기 설정 — 네 가지 선택
+
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="assets/axiara-setup-decision-ko-KR-dark.svg" />
+  <img src="assets/axiara-setup-decision-ko-KR.svg" alt="Axiara setup" style="max-width: 100%; height: auto; width: 1280px;" />
+</picture>
+
+### 💡 Python 환경이 필요한가요? (먼저 확인)
+
+**대부분의 경우 필요하지 않습니다.** Axiara는 AI 에이전트용 '워크스페이스'입니다 — 저장소 폴더를 AI 어시스턴트(WorkBuddy, Claude 등)에게 넘기기만 하면 에이전트가 의존성을 자동 처리합니다.
+
+**직접 실행**(에이전트에 맡기지 않음)할 때만 Python 환경이 필요합니다:
+
+| 하려는 작업 | .venv 필요? | 방법 |
+|------------|:---:|--------|
+| AI 에이전트에 맡기기 (권장) | ❌ 불필요 | 아래 방법 1 / 방법 2 |
+| REST API 서버 실행 | ✅ 필요 | `uv sync` 후 `uv run uvicorn axiara.api.main:app` |
+| 대화형 CLI 실행 | ✅ 필요 | `uv sync` 후 `uv run axiara` |
+| 개발 / 테스트 실행 | ✅ 필요 | `uv sync` 후 `uv run pytest` |
 
 ## 🧰 기술 스택
 
