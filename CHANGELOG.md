@@ -11,6 +11,10 @@ Maintenance rule: **every PR merged into `dev` must add its entry under `Unrelea
 
 ## [Unreleased] — dev branch
 
+_No pending changes — re-opened on the next dev PR._
+
+## [0.1.1] - 2026-08-06
+
 ### Added
 
 - **Skills** (`skills/`): `axiara-onboarding` (create/join dual-path init, pre-filled inference), `csv-data-import` (template validation, manifest & ledger), `price-crawler` (robots-protocol, 7-step pipeline) + infrastructure (validation/verification scripts, YAML configs: sources/adapters/normalization/settings, references, assets, LICENSE).
