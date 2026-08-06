@@ -3,7 +3,7 @@
 from __future__ import annotations
 
 from dataclasses import dataclass, field
-from datetime import datetime
+from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any
 
@@ -19,7 +19,7 @@ class CrawlResult:
     rows: list[dict[str, Any]] = field(default_factory=list)
     raw_capture: str | None = None
     error: str | None = None
-    timestamp: str = field(default_factory=lambda: datetime.utcnow().isoformat())
+    timestamp: str = field(default_factory=lambda: datetime.now(timezone.utc).isoformat())
 
 
 class CrawlerPipeline:

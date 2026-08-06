@@ -5,7 +5,7 @@ from __future__ import annotations
 import hashlib
 import json
 from dataclasses import dataclass
-from datetime import datetime
+from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any
 
@@ -63,7 +63,7 @@ class Preparer:
                     cached = json.load(f)
                 # Check if cache is still valid (24h TTL)
                 cached_time = datetime.fromisoformat(cached["timestamp"])
-                if (datetime.utcnow() - cached_time).total_seconds() < 86400:
+                if (datetime.now(timezone.utc) - cached_time.replace(tzinfo=timezone.utc)).total_seconds() < 86400:
                     return cached.get("allowed", False)
             except Exception:
                 pass
@@ -85,7 +85,7 @@ class Preparer:
                 cache_file.write_text(
                     json.dumps(
                         {
-                            "timestamp": datetime.utcnow().isoformat(),
+                            "timestamp": datetime.now(timezone.utc).isoformat(),
                             "robots_url": robots_url,
                             "allowed": allowed,
                         }

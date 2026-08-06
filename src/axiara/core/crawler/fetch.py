@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+import time
 from dataclasses import dataclass
 from typing import Any
 
@@ -39,6 +40,20 @@ class Fetcher:
         self.retries = http_settings.get("retries", {})
         self.user_agent = http_settings.get("user_agent", "Axiara-PriceBot/0.1")
 
+        # Create a reusable httpx.Client with connection pooling
+        self._client = httpx.Client(
+            timeout=httpx.Timeout(
+                connect=self.timeout.get("connect", 10),
+                read=self.timeout.get("read", 30),
+            ),
+            headers={"User-Agent": self.user_agent},
+            follow_redirects=True,
+        )
+
+    def close(self) -> None:
+        """Close the underlying HTTP client."""
+        self._client.close()
+
     def fetch(self, url: str, method: str = "http") -> FetchResult:
         """Fetch a page.
 
@@ -59,48 +74,38 @@ class Fetcher:
 
         for attempt in range(max_attempts):
             try:
-                with httpx.Client(timeout=httpx.Timeout(
-                    connect=self.timeout.get("connect", 10),
-                    read=self.timeout.get("read", 30)
-                )) as client:
-                    response = client.get(
-                        url,
-                        headers={"User-Agent": self.user_agent},
-                        follow_redirects=True
+                response = self._client.get(url)
+
+                if response.status_code == 200:
+                    return FetchResult(
+                        url=url,
+                        success=True,
+                        status_code=response.status_code,
+                        content=response.text
                     )
+                elif response.status_code < 500:
+                    # Client error - don't retry
+                    return FetchResult(
+                        url=url,
+                        success=False,
+                        status_code=response.status_code,
+                        error=f"HTTP {response.status_code}"
+                    )
+                else:
+                    # Server error - retry
+                    if attempt < max_attempts - 1:
+                        time.sleep(backoffs[min(attempt, len(backoffs) - 1)])
+                        continue
 
-                    if response.status_code == 200:
-                        return FetchResult(
-                            url=url,
-                            success=True,
-                            status_code=response.status_code,
-                            content=response.text
-                        )
-                    elif response.status_code < 500:
-                        # Client error - don't retry
-                        return FetchResult(
-                            url=url,
-                            success=False,
-                            status_code=response.status_code,
-                            error=f"HTTP {response.status_code}"
-                        )
-                    else:
-                        # Server error - retry
-                        if attempt < max_attempts - 1:
-                            import time
-                            time.sleep(backoffs[min(attempt, len(backoffs) - 1)])
-                            continue
-
-                        return FetchResult(
-                            url=url,
-                            success=False,
-                            status_code=response.status_code,
-                            error=f"HTTP {response.status_code} after {max_attempts} retries"
-                        )
+                    return FetchResult(
+                        url=url,
+                        success=False,
+                        status_code=response.status_code,
+                        error=f"HTTP {response.status_code} after {max_attempts} retries"
+                    )
 
             except Exception as e:
                 if attempt < max_attempts - 1:
-                    import time
                     time.sleep(backoffs[min(attempt, len(backoffs) - 1)])
                     continue
 
