@@ -7,11 +7,11 @@ on:
     branches: [main, dev]
 
 jobs:
-  test:
+  # Job name MUST stay "continuous-integration": the main branch protection
+  # requires a status check with exactly this name (see PLAN.md Repository
+  # State). Without a matrix, GitHub reports the check as the bare job name.
+  continuous-integration:
     runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        python-version: ["3.12"]
 
     steps:
       - uses: actions/checkout@v4
@@ -21,8 +21,8 @@ jobs:
         with:
           enable-cache: true
 
-      - name: Set up Python ${{ matrix.python-version }}
-        run: uv python install ${{ matrix.python-version }}
+      - name: Set up Python 3.12
+        run: uv python install 3.12
 
       - name: Install dependencies
         run: uv sync --dev

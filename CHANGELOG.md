@@ -11,7 +11,9 @@ Maintenance rule: **every PR merged into `dev` must add its entry under `Unrelea
 
 ## [Unreleased] — dev branch
 
-_No pending changes — re-opened on the next dev PR._
+### Changed
+
+- **CI check-name fix** (this PR): `test.yml` job renamed `test` → `continuous-integration` (matrix removed, Python 3.12 pinned) so the reported status check matches the `main` branch-protection requirement exactly — previously the protection waited on a non-existent `continuous-integration` check while the actual `test (3.12)` passed, blocking release PRs.
 
 ## [0.1.1] - 2026-08-06
 
