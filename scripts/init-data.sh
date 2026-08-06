@@ -21,7 +21,8 @@
 #       [--default-currency CNY] \
 #       [--user-id AX-abcd-1234] \
 #       [--branch-strategy A|B] \
-#       [--enable-branch-archive true|false]
+#       [--enable-branch-archive true|false] \
+#       [--dev-env true|false]
 #
 # With no flags: creates dirs; writes a default config only if none exists
 # (existing config is never touched). With flags: writes config (backing up
@@ -40,7 +41,7 @@ cfg_get() {
 # defaults
 LANG_CFG=en; SYNC_MODE=none; BACKEND=sqlite; DATA_SOURCE=none
 REPO_URL=""; REPO_BRANCH=main; GIT_USER=""; GIT_EMAIL=""; DB_DSN=""; DEFAULT_CURRENCY=""
-USER_ID=""; BRANCH_STRATEGY="A"; ENABLE_BRANCH_ARCHIVE="false"
+USER_ID=""; BRANCH_STRATEGY="A"; ENABLE_BRANCH_ARCHIVE="false"; DEV_ENV="false"
 HAS_ARGS=0
 
 # Language to currency mapping (suggested defaults)
@@ -70,6 +71,7 @@ while [ $# -gt 0 ]; do
     --user-id)        USER_ID="$2"; HAS_ARGS=1; shift 2 ;;
     --branch-strategy) BRANCH_STRATEGY="$2"; HAS_ARGS=1; shift 2 ;;
     --enable-branch-archive) ENABLE_BRANCH_ARCHIVE="$2"; HAS_ARGS=1; shift 2 ;;
+    --dev-env)        DEV_ENV="$2"; HAS_ARGS=1; shift 2 ;;
     --non-interactive) : ;;  # no-op — the script is always non-interactive
     *) echo "error: unknown option: $1 (see header for usage)"; exit 1 ;;
   esac
@@ -88,6 +90,7 @@ if [ -f "$CONFIG_FILE" ]; then
   USER_ID="${USER_ID:-$(cfg_get user_id)}"
   BRANCH_STRATEGY="${BRANCH_STRATEGY:-$(cfg_get branch_strategy)}"; BRANCH_STRATEGY="${BRANCH_STRATEGY:-A}"
   ENABLE_BRANCH_ARCHIVE="${ENABLE_BRANCH_ARCHIVE:-$(cfg_get enable_branch_archive)}"; ENABLE_BRANCH_ARCHIVE="${ENABLE_BRANCH_ARCHIVE:-false}"
+  DEV_ENV="${DEV_ENV:-$(cfg_get dev_env)}"; DEV_ENV="${DEV_ENV:-false}"
 fi
 
 # Infer default currency from language if not specified
@@ -121,6 +124,10 @@ case "$ENABLE_BRANCH_ARCHIVE" in
   true|false) ;;
   *) echo "error: invalid --enable-branch-archive: $ENABLE_BRANCH_ARCHIVE (true|false)"; exit 1 ;;
 esac
+case "$DEV_ENV" in
+  true|false) ;;
+  *) echo "error: invalid --dev-env: $DEV_ENV (true|false)"; exit 1 ;;
+esac
 [ "$SYNC_MODE" = "sql" ] && [ -z "$DB_DSN" ] && echo "warning: sync_mode=sql but no --db-dsn provided"
 
 mkdir -p "$DATA_DIR"/store "$DATA_DIR"/cache "$DATA_DIR"/ledger "$DATA_DIR"/db_dump "$DATA_DIR"/local_config
@@ -148,6 +155,7 @@ app:
   user_id: "${USER_ID}"
   branch_strategy: "${BRANCH_STRATEGY}"
   enable_branch_archive: "${ENABLE_BRANCH_ARCHIVE}"
+  dev_env: "${DEV_ENV}"
 
 storage:
   db_dsn: "${DB_DSN}"
@@ -187,6 +195,8 @@ write_config() {
     echo "branch_strategy = ${BRANCH_STRATEGY}"
     echo "# Enable automatic archiving of inactive user branches"
     echo "enable_branch_archive = ${ENABLE_BRANCH_ARCHIVE}"
+    echo "# Dev environment configured: true = user can run REST API/CLI/tests locally"
+    echo "dev_env = ${DEV_ENV}"
     echo ""
     echo "[storage]"
     echo "# Connection string — only used when sync_mode = sql"

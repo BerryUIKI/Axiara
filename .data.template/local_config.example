@@ -23,6 +23,9 @@ sync_mode = none
 backend = sqlite
 # Data source: local_file | team_repo | none
 data_source = none
+# Dev environment: true = user set up .venv and can run REST API/CLI/tests locally;
+# false = agent-only usage (zero setup, recommended for non-developers)
+dev_env = false
 
 [storage]
 # Connection string — only used when sync_mode = sql

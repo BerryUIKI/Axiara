@@ -31,7 +31,11 @@ Data file format is **CSV by default** (Excel-editable, git-friendly). JSON/YAML
 1. **Language** — ask the user which language they want Axiara to output (quotations, ledgers, documents). Options: `en zh-CN zh-TW ja ko de fr es pt-BR ru`.
 2. **Storage & sync** — ask "do you need team sync?" (see decision tree above). If SQL server: also ask which (MySQL / MariaDB / PostgreSQL) and the connection string.
 3. **Data source** — ask where their data comes from: local files (price lists to import) / team repo (enter URL) / no data yet.
-4. Run the script with the answers:
+4. **Dev environment (optional)** — ask: *"Do you want to set up a Python environment for running Axiara yourself (REST API / CLI / tests), or will you use Axiara through me (your AI agent) only?"*
+   - **Agent-only (recommended, zero-setup)** — no `.venv` needed; the Agent handles everything. This is the default.
+   - **With dev environment** — the Agent runs `uv sync` so the user can later start the REST API (`uv run uvicorn axiara.api.main:app`), the CLI (`uv run axiara`), or run tests (`uv run pytest`).
+   - What the user gives up without it: they cannot start the REST API / CLI / tests by themselves; crawler fetching and Excel quote generation are done by the Agent on demand. Core Agent-workspace usage is unaffected either way.
+5. Run the script with the answers:
 
 ```bash
 bash scripts/init-data.sh \
@@ -91,6 +95,7 @@ language = en            # en | zh-CN | zh-TW | ja | ko | de | fr | es | pt-BR |
 sync_mode = none         # none (personal) | git (text+Git, CSV) | sql (SQL server)
 backend = sqlite         # sqlite | csv | mysql | mariadb | postgresql
 data_source = none       # local_file | team_repo | none
+dev_env = false          # true = user set up .venv (can run REST API/CLI/tests); false = agent-only
 
 [storage]
 db_dsn =                 # only when sync_mode = sql (postgresql:// or mysql://)
