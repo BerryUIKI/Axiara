@@ -19,7 +19,7 @@
 
 ---
 
-**阅读语言：** [English](README.md) · [简体中文](README.zh-CN.md) · [繁體中文](README.zh-TW.md) · [日本語](README.ja-JP.md) · [한국어](README.ko-KR.md) · [Français](README.fr-FR.md) · [Deutsch](README.de-DE.md) · [Español](README.es-ES.md) · [Português](README.pt-BR.md) · [Русский](README.ru-RU.md)
+**阅读语言：** [English](README.md) · **简体中文** · [繁體中文](docs/README/README.zh-TW.md) · [日本語](docs/README/README.ja-JP.md) · [한국어](docs/README/README.ko-KR.md) · [Français](docs/README/README.fr-FR.md) · [Deutsch](docs/README/README.de-DE.md) · [Español](docs/README/README.es-ES.md) · [Português](docs/README/README.pt-BR.md) · [Русский](docs/README/README.ru-RU.md)
 
 ---
 
