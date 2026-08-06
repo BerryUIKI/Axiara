@@ -12,19 +12,11 @@ from __future__ import annotations
 
 import hashlib
 import json
-from datetime import datetime
-from enum import StrEnum
+from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any
 
-
-class DataLayer(StrEnum):
-    """The three data layers plus user uploads."""
-
-    MAIN = "main"  # official price baseline — manual edit ONLY
-    LEARN = "learn"  # AI-learned reference
-    MARKET = "market"  # crawled market prices
-    UPLOADS = "uploads"  # user-provided tables/documents
+from axiara.core.storage.permissions import DataLayer
 
 
 class ManifestError(Exception):
@@ -186,7 +178,7 @@ class ManifestManager:
             size=stat.st_size,
             mtime=str(stat.st_mtime),
             layer=layer,
-            recorded_at=datetime.utcnow().isoformat(),
+            recorded_at=datetime.now(timezone.utc).isoformat(),
         )
 
         # Store in manifest
@@ -328,10 +320,10 @@ class ManifestManager:
         Returns:
             Snapshot identifier
         """
-        snapshot_id = name or datetime.utcnow().strftime("%Y%m%d-%H%M%S")
+        snapshot_id = name or datetime.now(timezone.utc).strftime("%Y%m%d-%H%M%S")
         snapshot_data = {
             "id": snapshot_id,
-            "created_at": datetime.utcnow().isoformat(),
+            "created_at": datetime.now(timezone.utc).isoformat(),
             "entries": dict(self._manifest["entries"]),
         }
 
