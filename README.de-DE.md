@@ -172,7 +172,7 @@ Jede Axiara-Instanz lernt aus eigenen Angeboten und Korrekturen in eine **persö
 
 ## 🤝 Beiträge
 
-Beiträge sind willkommen. Lesen Sie zuerst [PLAN.md](PLAN.md) und folgen Sie dem PR-only-Workflow: **niemals direkt auf `main` pushen**.
+Beiträge sind willkommen. Lesen Sie zuerst [PLAN.md](PLAN.md) und [CONTRIBUTING.md](CONTRIBUTING.md) und folgen Sie dem PR-only-Workflow: **niemals direkt auf `main` / `dev` pushen**.
 
 ## 📄 Lizenz
 

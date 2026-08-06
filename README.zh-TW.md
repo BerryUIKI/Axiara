@@ -172,7 +172,7 @@ Agent 技能包（`skills/` 單一來源，相容 WorkBuddy/Codex/Claude）：
 
 ## 🤝 貢獻
 
-歡迎貢獻。請先閱讀 [PLAN.md](PLAN.md)，並遵循 PR-only 工作流：**切勿直接推送 `main`**。
+歡迎貢獻。請先閱讀 [PLAN.md](PLAN.md) 與 [CONTRIBUTING.md](CONTRIBUTING.md)，並遵循 PR-only 工作流：**切勿直接推送 `main` / `dev`**。
 
 ## 📄 授權條款
 

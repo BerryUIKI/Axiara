@@ -172,7 +172,7 @@ Axiara/
 
 ## 🤝 기여
 
-기여를 환영합니다. 먼저 [PLAN.md](PLAN.md)를 읽고 PR-only 워크플로를 따르세요: **`main`에 직접 푸시 금지**.
+기여를 환영합니다. 먼저 [PLAN.md](PLAN.md)와 [CONTRIBUTING.md](CONTRIBUTING.md)를 읽고 PR-only 워크플로를 따르세요: **`main` / `dev`에 직접 푸시 금지**.
 
 ## 📄 라이선스
 
