@@ -122,10 +122,15 @@ Creates the five runtime dirs and seeds your private config (`.data/local_config
 
 - **Storage layer** (`src/axiara/core/storage/`) — file-first CSV/JSON/YAML + SQLite cache + SHA-256 manifest + **write-permission enforcement** (agents can never write the official baseline).
 - **Crawler engine** (`src/axiara/core/crawler/`) — 7-step pipeline (robots-protocol, user-confirmation gate).
+- **Costing engine** (`src/axiara/core/costing/`) — multi-dimensional cost model with unit conversion and confidence scoring (Batch 2).
+- **Quotation generator** (`src/axiara/core/quote/`) — three-tier pricing (low/mid/high) with constraint negotiation and learning feedback loop (Batch 2).
+- **LangGraph agents** (`src/axiara/agents/`) — 4 modes with state graphs, interrupt/resume, and MemorySaver checkpointing (Batch 3).
+- **REST API** (`src/axiara/api/`) — FastAPI endpoints for all 4 modes + health check (Batch 3).
+- **APScheduler jobs** (`src/axiara/scheduler/`) — weekly reminder, crawler refresh, scale health report, archive detection (Batch 3).
 - **Multi-user learning hub** (`src/axiara/core/learnsync/`) — user identity, bundle export (AI-friendly YAML), manual upload + review flow, dynamic scale monitoring, inactive-branch archiving.
 - **Skills** (`skills/`) — onboarding, csv-data-import, price-crawler (see below).
 - Init script: language→currency inference, `--default-currency`, `--user-id`, `--branch-strategy`, `--enable-branch-archive`, `workspace.config.yaml` export.
-- **112 tests passing**.
+- **206 tests passing**.
 
 ## 📁 Repository Layout
 
@@ -187,12 +192,12 @@ Each user's Axiara learns from its own quotes and corrections into a **personal 
 - [x] Package scaffolding (`uv init`, `src/` layout)
 - [x] Storage layer (file-first: CSV + git sync, SQLite cache, permission enforcement)
 - [x] Price fetch agent — crawler engine (robots-protocol, 7-step pipeline, confirm gate)
-- [ ] Costing engine (multi-dimensional cost model)
-- [ ] Quotation generator (default + user templates)
-- [ ] Task scheduler (APScheduler, on-demand)
+- [x] Costing engine (multi-dimensional cost model)
+- [x] Quotation generator (default + user templates)
+- [x] Task scheduler (APScheduler, on-demand)
 - [ ] Review engine (anomaly detection)
 - [x] Multi-user learning hub (upload flow, central review, monitoring, archiving)
-- [ ] REST API
+- [x] REST API
 - [ ] Tests & CI hardening
 
 ## 🤝 Contributing

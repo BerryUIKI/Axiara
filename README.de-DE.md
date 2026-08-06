@@ -162,12 +162,12 @@ Jede Axiara-Instanz lernt aus eigenen Angeboten und Korrekturen in eine **persö
 - [x] Paket-Gerüst (`uv init`, `src/`-Layout)
 - [x] Speicherebene (Datei-first: CSV + Git-Sync, SQLite-Cache, Berechtigungs-Erzwingung)
 - [x] Preisabruf — Crawler-Engine (Robots-Protokoll, 7-Schritte-Pipeline, Bestätigungs-Gate)
-- [ ] Kostenberechnungs-Engine (mehrdimensionales Kostenmodell)
-- [ ] Angebotsgenerator (Standard + Benutzervorlagen)
-- [ ] Aufgaben-Scheduler (APScheduler, On-Demand)
+- [x] Kostenberechnungs-Engine (mehrdimensionales Kostenmodell)
+- [x] Angebotsgenerator (Standard + Benutzervorlagen)
+- [x] Aufgaben-Scheduler (APScheduler, On-Demand)
 - [ ] Prüf-Engine (Anomalieerkennung)
 - [x] Multi-User-Lern-Hub (Upload-Flow, zentrale Prüfung, Monitoring, Archivierung)
-- [ ] REST-API
+- [x] REST-API
 - [ ] Tests & CI-Härtung
 
 ## 🤝 Beiträge
