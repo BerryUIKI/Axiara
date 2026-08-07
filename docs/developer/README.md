@@ -89,9 +89,10 @@ docs/developer/   THIS directory — developer docs (README.md, VI-GUIDE.md, DEV
    in the message. Prefer conventional prefixes: `fix(scope):`, `feat:`,
    `docs:`, `ci:`, `refactor:`.
 3. **Docs discipline (hard rule)**: any change that affects user-facing
-   behavior must update `README.md` (+ the 9 locale files), `CHANGELOG.md`
+   behavior must update `README.md` + `README.zh-CN.md`, `CHANGELOG.md`
    (`[Unreleased]` entry per PR), and any affected `docs/*.md` **before**
-   push. Track pending sync work in `.workbuddy/doc-sync-todo.md`.
+   push. Track pending sync work in `.workbuddy/doc-sync-todo.md`. Archived
+   locale READMEs in `docs/README/` are not force-synced.
 4. **Tests**: keep `pytest` green. CI runs ruff (advisory until a cleanup PR
    lands) and the full suite on every push/PR to `dev`.
 5. **VI compliance**: any new/changed diagram must follow
