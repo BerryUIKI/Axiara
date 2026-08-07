@@ -38,9 +38,10 @@ documentation and visual assets in sync.
   `uv run pytest` (or `.venv/.../python -m pytest tests/ -q` for speed).
   If a test legitimately changes behavior, update it in the same commit.
 - **Docs discipline (hard rule):** user-facing changes update `README.md` +
-  all 9 locale READMEs + `CHANGELOG.md` `[Unreleased]` + affected
+  `README.zh-CN.md` + `CHANGELOG.md` `[Unreleased]` + affected
   `docs/*.md` **before** push; track pending items in
-  `.workbuddy/doc-sync-todo.md`. Developer docs live in
+  `.workbuddy/doc-sync-todo.md`. Archived locale READMEs in `docs/README/`
+  are not force-synced. Developer docs live in
   `docs/developer/` and ship with all branches.
 - **Lint**: keep ruff happy on the code you touch
   (`uv run ruff check src/ tests/`). The repo has legacy findings (CI treats
